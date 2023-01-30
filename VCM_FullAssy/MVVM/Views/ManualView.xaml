@@ -1,0 +1,88 @@
+﻿<UserControl x:Class="VCM_FullAssy.MVVM.Views.ManualView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VCM_FullAssy.MVVM.Views"
+             xmlns:viewModels="clr-namespace:VCM_FullAssy.MVVM.ViewModels"
+             xmlns:controls="clr-namespace:TopUI.Controls;assembly=TopUI"
+             xmlns:define="clr-namespace:VCM_FullAssy.Define"
+             d:DataContext="{d:DesignInstance Type=viewModels:ManualViewModel}"
+             mc:Ignorable="d"
+             d:DesignWidth="800">
+
+    <DockPanel>
+        <controls:MotionInforPanel Grid.Row="0" DockPanel.Dock="Top"
+                                   SelectedAxis="{Binding SelectedAxis, Mode=OneWayToSource}"
+                                   DataUpdateCommand="{Binding SpeedDataUpdateCommand}"
+                                   MotionList="{Binding Source={x:Static define:CDef.AllAxis}, Path=AxisList, Mode=TwoWay}"/>
+
+        <controls:MotionCommandButtons Height="180" DockPanel.Dock="Top" Margin="0 10"
+                                       IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}"
+                                       Velocity="{Binding Speed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                       Position="{Binding Position, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                       ButtonCommand="{Binding MotionButtonCommand}"
+                                       SelectedAxis="{Binding SelectedAxis, Mode=TwoWay}" />
+
+        <Border BorderBrush="Silver" BorderThickness="1" CornerRadius="5">
+            <UniformGrid Columns="4"
+                         IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}">
+                <!--Tray Reset, Tray Unload BUTTONS-->
+                <Button Width="Auto" Height="Auto"
+                        Margin="5"
+                        Command="{Binding SubAutoButtonCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                        Content="{DynamicResource str_LoadVision}" Tag="SubUpperLoadVision"/>
+                
+                <Button Width="Auto" Height="Auto"
+                        Margin="5"
+                        Command="{Binding SubAutoButtonCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                        Content="{DynamicResource str_Pick}" Tag="SubAutoPick"/>
+                
+                <Button Width="Auto" Height="Auto"
+                        Margin="5"
+                        Command="{Binding SubAutoButtonCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                        Content="{DynamicResource str_UnderVision}" ContentStringFormat=" {0} 1" Tag="SubUnderVision"/>
+                
+                <Button Width="Auto" Height="Auto"
+                        Margin="5"
+                        Command="{Binding SubAutoButtonCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                        Content="{DynamicResource str_Place}" Tag="SubAutoPlace"/>
+                
+                <Button Width="Auto" Height="Auto"
+                        Margin="5"
+                        Command="{Binding SubAutoButtonCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                        Content="{DynamicResource str_UnLoadVision}" Tag="SubUpperUnloadVision"/>
+                
+                <Button Width="Auto" Height="Auto"
+                        Margin="5"
+                        Command="{Binding SubAutoButtonCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                        Content="Left Tray Change" Tag="SubLeftTrayChange"/>
+                
+                <Button Width="Auto" Height="Auto"
+                        Margin="5"
+                        Command="{Binding SubAutoButtonCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                        Content="Right Tray Change" Tag="SubRightTrayChange"/>
+                
+                <!--<Button Width="Auto" Height="Auto"
+                        Margin="5"
+                        Command="{Binding SubAutoButtonCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                        Content="Left Tray Load Position" Tag="SubLeftTrayLoadPos"/>
+                
+                <Button Width="Auto" Height="Auto"
+                        Margin="5"
+                        Command="{Binding SubAutoButtonCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                        Content="Right Tray Load Position" Tag="SubRightTrayLoadPos"/>-->
+            </UniformGrid>
+        </Border>
+
+    </DockPanel>
+</UserControl>

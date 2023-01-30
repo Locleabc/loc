@@ -1,0 +1,50 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style TargetType="{x:Type ListView}"
+           x:Key="ListViewVisionProcessHeader">
+        <Style.Setters>
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Border CornerRadius="5"
+                                Background="#fafbfc"
+                                BorderBrush="#d3d5d6"
+                                BorderThickness="1">
+                            <Label Content="{Binding DisplayName, Mode=OneWay}"
+                                   Foreground="#24292e"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   BorderBrush="Transparent"
+                                   BorderThickness="0"
+                                   FontWeight="Bold"
+                                   Margin="0 10"/>
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Style.Triggers >
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsMouseOver}"
+                                                        Value="True">
+                                            <Setter Property="Background"
+                                                    Value="#f3f4f6"/>
+                                            <Setter Property="Cursor" 
+                                                    Value="Hand"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+            
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        </Style.Setters>
+    </Style>
+</ResourceDictionary>

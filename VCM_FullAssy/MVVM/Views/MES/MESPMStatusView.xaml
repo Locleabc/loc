@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="VCM_FullAssy.MVVM.Views.MESPMStatusView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VCM_FullAssy.MVVM.Views"
+             xmlns:viewModels="clr-namespace:VCM_FullAssy.MVVM.ViewModels"
+             xmlns:mes="clr-namespace:TopCom.MES;assembly=TopCom"
+             xmlns:define="clr-namespace:VCM_FullAssy.Define"
+             d:DataContext="{d:DesignInstance Type=viewModels:MESPMStatusViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="130">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <Style TargetType="{x:Type Button}"
+                           BasedOn="{StaticResource {x:Type Button}}">
+                        <Setter Property="Margin"
+                                Value="0 3"/>
+
+                        <Setter Property="MinHeight"
+                                Value="50"/>
+                    </Style>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <StackPanel Orientation="Vertical"
+                IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}">
+        <Label Content="MES PM Status"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"
+               Margin="0 0 0 10"
+               Foreground="White"
+               FontWeight="SemiBold"
+               Background="Blue"/>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <Button Content="Không có kế hoạch sản xuất&#x0a;(생산 RUN이 없음)"
+                    Command="{Binding MESEquipEventChangeCommand}"
+                    CommandParameter="{x:Static mes:EPMStatus.LOAD_DOWN}"/>
+            <Button Content="Thay đổi model&#x0a;(모델 변경)"
+                    Command="{Binding MESEquipEventChangeCommand}"
+                    CommandParameter="{x:Static mes:EPMStatus.MODEL_CHANGE}"
+                    Grid.Row="1"/>
+            <Button Content="Bắt đầu trang bị khẩn cấp&#x0a;(BM START)"
+                    Command="{Binding MESEquipEventChangeCommand}"
+                    CommandParameter="{x:Static mes:EPMStatus.BM_START}"
+                    Grid.Row="2"/>
+            <Button Content="Hết nguyên vật liệu&#x0a;(자재없음)"
+                    Command="{Binding MESEquipEventChangeCommand}"
+                    CommandParameter="{x:Static mes:EPMStatus.MATR_DOWN}"
+                    Grid.Row="3"/>
+        </Grid>
+
+        <!--<Button Content="Save PD"
+                Command="{Binding SavePDCommand}"/>-->
+    </StackPanel>
+</UserControl>

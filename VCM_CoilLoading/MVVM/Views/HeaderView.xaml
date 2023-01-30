@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="VCM_CoilLoading.MVVM.Views.HeaderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VCM_CoilLoading.MVVM.Views"
+             xmlns:viewModels="clr-namespace:VCM_CoilLoading.MVVM.ViewModels"
+             xmlns:viewmodels="clr-namespace:VCM_CoilLoading.MVVM.ViewModels"
+             xmlns:define="clr-namespace:VCM_CoilLoading.Define"
+             d:DataContext="{d:DesignInstance Type=viewmodels:HeaderViewModel}"
+             mc:Ignorable="d"
+             d:DesignWidth="800">
+
+    <Border Background="#24292e"
+            CornerRadius="10 10 0 0">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="135"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="75"/>
+            </Grid.ColumnDefinitions>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Image Margin="10" Grid.RowSpan="2"
+                           Source="/TopUI;component/Resources/Images/topengineering.ico"/>
+
+            <Button Height="60"
+                    Width="60"
+                    Grid.RowSpan="2"
+                    Grid.Column="3"
+                    Style="{DynamicResource ButtonNakedStyle}"
+                    Command="{Binding ExitCommand}">
+                <Path Data="M 10 0 h -2 v 10 h 2 V 0 z m 4.83 2.17 l -1.42 1.42 C 14.99 4.86 16 6.81 16 9 c 0 3.87 -3.13 7 -7 7 s -7 -3.13 -7 -7 c 0 -2.19 1.01 -4.14 2.58 -5.42 L 3.17 2.17 C 1.23 3.82 0 6.26 0 9 c 0 4.97 4.03 9 9 9 s 9 -4.03 9 -9 c 0 -2.74 -1.23 -5.18 -3.17 -6.83"
+                      Fill="#6e0102"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      Stroke="#b2131a"
+                      StrokeThickness="0.5"
+                      RenderTransformOrigin="0.5, 0.5">
+                    <Path.RenderTransform>
+                        <ScaleTransform ScaleX="3" ScaleY="3"/>
+                    </Path.RenderTransform>
+                </Path>
+            </Button>
+
+            <Label Grid.Column="1"
+                   Grid.RowSpan="2"
+                   Content="{Binding Source={x:Static define:CDef.RootProcess}, Path=ModeToString, UpdateSourceTrigger=PropertyChanged}"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Foreground="White"
+                   FontSize="30"
+                   FontWeight="DemiBold"/>
+
+            <ContentControl Content="{Binding MESVM}"
+                            Visibility="{Binding Source={x:Static define:CDef.MainViewModel}, Path=InitVM.InitCompleted, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Grid.Column="2"
+                            Grid.RowSpan="2"
+                            Margin="20 3"/>
+        </Grid>
+    </Border>
+</UserControl>

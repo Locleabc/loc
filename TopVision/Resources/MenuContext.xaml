@@ -1,0 +1,76 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:algthms="clr-namespace:TopVision.Algorithms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ContextMenu x:Key="PreProcessContextMenu">
+        <!--<MenuItem Header="Align"
+                  CommandParameter="{x:Type algthms:Align}"/>-->
+        <MenuItem Header="To Gray"
+                  CommandParameter="{x:Type algthms:ColorConvertToGray}"/>
+
+        <Separator/>
+
+        <MenuItem Header="Bitwise"
+                  CommandParameter="{x:Type algthms:Bitwise}"/>
+        <MenuItem Header="Smooth"
+                  CommandParameter="{x:Type algthms:Smooth}"/>
+
+        <Separator/>
+
+        <MenuItem Header="Binarization"
+                  CommandParameter="{x:Type algthms:Binarization}"/>
+        <MenuItem Header="Adaptive Threshold"
+                  CommandParameter="{x:Type algthms:AdaptiveThreshold}"/>
+        <MenuItem Header="Canny Edge"
+                  CommandParameter="{x:Type algthms:CannyEdge}"/>
+        <MenuItem Header="Erode"
+                  CommandParameter="{x:Type algthms:Erode}"/>
+        <MenuItem Header="Dilate"
+                  CommandParameter="{x:Type algthms:Dilate}"/>
+        <MenuItem Header="Noise Filter"
+                  CommandParameter="{x:Type algthms:NoiseFilter}"/>
+
+        <Separator/>
+
+        <MenuItem Header="Masking"
+                  CommandParameter="{x:Type algthms:Masking}"/>
+        <MenuItem Header="Set Ignore Regions"
+                  CommandParameter="{x:Type algthms:SetIgnoreRegions}"/>
+        <MenuItem Header="Set Inspect Regions"
+                  CommandParameter="{x:Type algthms:SetInspectRegions}"/>
+        <MenuItem Header="Set Regions"
+                  CommandParameter="{x:Type algthms:SetRegions}"/>
+
+        <Separator/>
+
+        <MenuItem Header="Histogram"
+                  CommandParameter="{x:Type algthms:Histogram}"/>
+    </ContextMenu>
+
+    <ContextMenu x:Key="MainsProcessContextMenu">
+        <MenuItem Header="Single Template Matching"
+                  CommandParameter="{x:Type algthms:SingleTemplateMatching}"/>
+        <MenuItem Header="Muliple Template Matching"
+                  CommandParameter="{x:Type algthms:MultiTemplateMatching}"/>
+                  <MenuItem Header="Advanced Template Matching"
+                  CommandParameter="{x:Type algthms:AdvancedTemplateMatching}"/>
+        
+        <Separator/>
+
+        <MenuItem Header="Circular Object Detection"
+                  CommandParameter="{x:Type algthms:CircularObjectDetection}"/>
+        <MenuItem Header="Contour Detection"
+                  CommandParameter="{x:Type algthms:ContourDetection}"/>
+        <MenuItem Header="Circle Detection[Ball Inspection]"
+                  CommandParameter="{x:Type algthms:CircleDetection}"/>
+
+        <Separator/>
+
+        <MenuItem Header="Four Lines Detection"
+                  CommandParameter="{x:Type algthms:FourLinesDetection}"/>
+        <MenuItem Header="Boundary Line Angle Detection"
+                  CommandParameter="{x:Type algthms:BoundaryLineAngleDetection}"/>
+        <MenuItem Header="Direct Detection"
+                  CommandParameter="{x:Type algthms:DirectDetection}"/>
+        
+    </ContextMenu>
+</ResourceDictionary>

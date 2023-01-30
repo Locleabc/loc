@@ -1,0 +1,38 @@
+﻿<Window x:Class="LOC.MVVM.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LOC.MVVM.Views"
+        xmlns:ViewModel="clr-namespace:LOC.MVVM.ViewModels"
+        d:DataContext="{d:DesignInstance Type=ViewModel:MainViewModel}"
+        mc:Ignorable="d"
+        WindowState="Maximized"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        d:Height="1080" d:Width="1920"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing"
+        Title="MainView">
+        <Border>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="30*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+            <ContentControl Content="{Binding HeaderVM}"
+                            MouseLeftButtonDown="ContentControl_MouseLeftButtonDown"/>
+                
+            <ContentControl Content="{Binding ShowVM}"
+                        Grid.Row="1"/>
+                
+            <ContentControl Content="{Binding FooterVM}"
+                        Grid.Row="2"/>
+        </Grid>
+        
+    </Border>
+    
+</Window>

@@ -1,0 +1,88 @@
+﻿<Window x:Class="LOC.MVVM.Views.MessageView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LOC.MVVM.Views"
+        xmlns:viewmodel="clr-namespace:LOC.MVVM.ViewModels"
+        d:DataContext="{d:DesignInstance viewmodel:MessageViewModel}"
+        DataContextChanged="Window_DataContextChanged"
+        Closing="Window_Closing"
+        Visibility="{Binding IsVisibility, Mode=TwoWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Topmost="True"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Title="MessageView" Height="450" Width="800">
+    <Border CornerRadius="30"
+            BorderThickness="2"
+            BorderBrush="Gray"
+            Background="#f6f8fa">
+        <Grid Background="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="80"/>
+            </Grid.RowDefinitions>
+            <Border CornerRadius="30 30 0 0" 
+                    MouseLeftButtonDown="Border_MouseLeftButtonDown">
+                <Grid>
+                    <TextBlock HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Text="AAAA"/>
+                    <Button Style="{DynamicResource ButtonNakedStyle}"
+                            HorizontalAlignment="Right"
+                            VerticalContentAlignment="Center"
+                            HorizontalContentAlignment="Center"
+                            Command="{Binding CancelCommand}"
+                            IsEnabled="{Binding ConfirmMode}">
+                        <Grid Height="50"
+                              Width="50"
+                              Background="Transparent">
+                            <Path Data="M 3.72 3.72 a 0.75 0.75 0 0 1 1.06 0 L 8 6.94 l 3.22 -3.22 a 0.75 0.75 0 1 1 1.06 1.06 L 9.06 8 l 3.22 3.22 a 0.75 0.75 0 1 1 -1.06 1.06 L 8 9.06 l -3.22 3.22 a 0.75 0.75 0 0 1 -1.06 -1.06 L 6.94 8 L 3.72 4.78 a 0.75 0.75 0 0 1 0 -1.06 Z"
+                                  Fill="Black"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"/>
+                        </Grid>
+                    </Button>
+                </Grid>
+
+            </Border>
+
+
+            <Separator Grid.Row="1" 
+                       VerticalAlignment="Top"/>
+            <TextBlock VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Text="aaa"
+                       Grid.Row="1"/>
+            <Separator Grid.Row="1"
+                       VerticalAlignment="Bottom"/>
+            <Button Grid.Row="2"
+                    Width="200"
+                    Height="60"
+                    Margin="50 0"
+                    FontSize="25"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="{DynamicResource str_NoButton}"
+                    Command="{Binding CancelCommand}"
+                    IsEnabled="{Binding ConfirmMode}"/>
+            <Button Grid.Row="2"
+                    Width="200"
+                    Height="60"
+                    Margin="50 0"
+                    FontSize="25"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Content="{DynamicResource str_YesButton}"
+                    Style="{DynamicResource ButtonHighEmphasis}"
+                    Command="{Binding ConfirmCommand}"/>
+        </Grid>
+
+    </Border>
+
+</Window>

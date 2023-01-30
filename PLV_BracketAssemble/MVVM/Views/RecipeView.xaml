@@ -1,0 +1,205 @@
+﻿<UserControl x:Class="PLV_BracketAssemble.MVVM.Views.RecipeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PLV_BracketAssemble.MVVM.Views"
+             xmlns:viewModels="clr-namespace:PLV_BracketAssemble.MVVM.ViewModels"
+             xmlns:controls="clr-namespace:TopUI.Controls;assembly=TopUI"
+             xmlns:define="clr-namespace:PLV_BracketAssemble.Define"
+             d:DataContext="{d:DesignInstance Type=viewModels:RecipeViewModel}"
+             mc:Ignorable="d"
+             Loaded="RecipeView_Loaded"
+             d:DesignHeight="1095" d:DesignWidth="1800">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type ScrollViewer}">
+            <Style.Setters>
+                <Setter Property="VerticalScrollBarVisibility" Value="Visible"/>
+                <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
+            </Style.Setters>
+        </Style>
+
+        <Style TargetType="{x:Type StackPanel}">
+            <Style.Setters>
+                <Setter Property="IsEnabled" Value="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning, UpdateSourceTrigger=PropertyChanged}"/>
+            </Style.Setters>
+        </Style>
+
+        <Style TargetType="{x:Type TabItem}"
+               BasedOn="{StaticResource TabItemUnderMarkStyle}">
+            <Style.Setters>
+                <Setter Property="Width" Value="120"/>
+                <Setter Property="Height" Value="40"/>
+            </Style.Setters>
+        </Style>
+
+        <Style TargetType="{x:Type Label}"
+               x:Key="Label_header">
+
+            <Setter Property="VerticalContentAlignment"
+                    Value="Center"/>
+
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Center"/>
+
+            <Setter Property="BorderBrush"
+                    Value="Black"/>
+
+            <Setter Property="BorderThickness"
+                    Value="1"/>
+
+            <Setter Property="FontWeight"
+                    Value="SemiBold"/>
+
+            <Setter Property="Background"
+                    Value="#AAC0C0C0"/>
+
+            <Setter Property="FontSize"
+                    Value="16"/>
+        </Style>
+
+        <Style TargetType="GroupBox">
+            <Style.Triggers>
+                <Trigger Property="IsEnabled"
+                         Value="False">
+                    <Setter Property="Foreground"
+                            Value="#959DA5"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="590"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="660"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <ContentControl Content="{Binding Source={x:Static define:CDef.MainViewModel}, Path=MainContentVM.VisionAutoVM}"
+                        Grid.Column="1"
+                        IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning, UpdateSourceTrigger=PropertyChanged}"/>
+        
+        <TabControl x:Name="Recipe_MainTab"
+                Background="{x:Null}">
+            <TabItem Header="Global">
+                <Grid IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning, UpdateSourceTrigger=PropertyChanged}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <GroupBox Header="Recipe Change / Save / Load"
+                              Grid.Row="2"
+                              BorderThickness="2"
+                              FontWeight="Bold"
+                              FontSize="14">
+                        <ContentControl Content="{Binding RecipeChangeVM}"/>
+                    </GroupBox>
+
+                    
+                    <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <GroupBox Header="Sequence"
+                                      FontWeight="Bold">
+                                <UniformGrid Rows="5"
+                                             Columns="2">
+                                    <controls:OptionSelector Description="Skip Pre Align"
+                                                             Margin="10 0"
+                                                             IsOn="{Binding Source={x:Static define:CDef.GlobalRecipe},Path=SkipPreAlign,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                    <Grid/>
+                                    <controls:OptionSelector Margin="10 0"
+                                                             Description="Skip Under Vision"
+                                                             IsOn="{Binding Source={x:Static define:CDef.GlobalRecipe},Path=SkipUnderVision,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                    <Grid/>
+                                </UniformGrid>
+                            </GroupBox>
+                            
+                            <GroupBox Header="Image Save"
+                                      Grid.Row="1"
+                                      FontWeight="Bold">
+                                <UniformGrid Rows="5"
+                                             Columns="2">
+                                    <controls:OptionSelector Description="Save Image"
+                                                             Margin="10 0"
+                                                             Name="ImageSave_Option"
+                                                             IsOn="{Binding Source={x:Static define:CDef.GlobalRecipe},Path=ImageSave,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                <Grid/>
+                                <controls:OptionSelector Description="Save Input Image"
+                                                         Margin="10 0"
+                                                         Visibility="{Binding Source={x:Static define:CDef.GlobalRecipe},Path=ImageSave,Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                         IsOn="{Binding Source={x:Static define:CDef.GlobalRecipe},Path=SaveInputImage,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                <Grid/>
+                                <controls:OptionSelector Description="Save Process Image"
+                                                         Margin="10 0"
+                                                         Visibility="{Binding Source={x:Static define:CDef.GlobalRecipe},Path=ImageSave,Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                         IsOn="{Binding Source={x:Static define:CDef.GlobalRecipe},Path=SaveProcessImage,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                <Grid/>
+                                <controls:OptionSelector Description="Save Result Image"
+                                                         Margin="10 0"
+                                                         Visibility="{Binding Source={x:Static define:CDef.GlobalRecipe},Path=ImageSave,Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                         IsOn="{Binding Source={x:Static define:CDef.GlobalRecipe},Path=SaveResultImage,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                </UniformGrid>
+                            </GroupBox>
+                    </Grid>
+
+                    <GroupBox Header="Options"
+                              Grid.Column="2"
+                              FontWeight="Bold">
+                        <UniformGrid Rows="10"
+                                     Columns="2">
+                            <controls:OptionSelector Description="Use Vacuum Check"
+                                                     Margin="10 0"
+                                                     IsOn="{Binding Source={x:Static define:CDef.GlobalRecipe},Path=UseVacuumCheck,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                        </UniformGrid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            
+            <TabItem Header="Common">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="CommonRecipe_StackPanel">
+                        <!--Recipe will be auto generated in Code behind-->
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            
+            <TabItem Header="Tray">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="TrayRecipe_StackPanel">
+                        <!--Recipe will be auto generated in Code behind-->
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem Header="Head">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="HeadRecipe_StackPanel">
+                        <!--Recipe will be auto generated in Code behind-->
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem Header="Under Vision">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="UnderVisionRecipe_StackPanel">
+                        <!--Recipe will be auto generated in Code behind-->
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+
+        <ContentControl Content="{Binding ManualControlVM}"
+                        Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning, UpdateSourceTrigger=PropertyChanged}"/>
+    </Grid>
+</UserControl>

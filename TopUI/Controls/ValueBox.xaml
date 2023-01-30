@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="TopUI.Controls.ValueBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TopUI.Controls"
+             d:DataContext="{d:DesignInstance Type=local:ValueBox}"
+             mc:Ignorable="d"
+             Cursor="Hand"
+             Margin="5"
+             x:Name="root"
+             d:DesignHeight="56" d:DesignWidth="380">
+
+    <UserControl.Resources>
+        <Style TargetType="{x:Type local:ValueBox}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsEnabled, ElementName=root}"
+                             Value="False">
+                    <Setter Property="Foreground"
+                            Value="Silver"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock TextWrapping="Wrap"
+                   Text="{Binding Header}"
+                   Grid.Row="0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   FontWeight="Bold"
+                   FontSize="14"/>
+
+        <TextBlock TextWrapping="Wrap"
+                   Text="{Binding Description}"
+                   Grid.Row="1"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   FontSize="12"
+                   Grid.ColumnSpan="2"/>
+
+        <TextBox Grid.Column="1"
+                 HorizontalAlignment="Stretch"
+                 Text="{Binding Value, Mode=OneWay}"
+                 PreviewMouseDown="TextBox_PreviewMouseDown"
+                 Foreground="{Binding Foreground}"
+                 Cursor="Hand"/>
+    </Grid>
+</UserControl>

@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="TopUI.Controls.TrayCell"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" x:Name="root"
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="pack://application:,,,/TopUI;component/Themes/Generic.xaml"/>
+    </UserControl.Resources>
+
+    <Button Click="Button_Click"
+            MouseDoubleClick="Button_MouseDoubleClick"
+            Margin="-1">
+        <Button.Style>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid>
+                                <Rectangle Fill="{Binding Path=CellInfo.CellStatus, ElementName=root, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource CellStatusToColorConverter}}"
+                                           Stroke="{Binding BorderBrush}"
+                                           StrokeThickness="{Binding BorderThickness.Top}">
+                                    <Rectangle.Style>
+                                        <Style TargetType="Rectangle">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding CellInfo.CellShape, ElementName=root}"
+                                                             Value="Circle">
+                                                    <Setter Property="RadiusX"
+                                                            Value="{Binding ElementName=root, Path=ActualWidth, Converter={StaticResource PercentageConverter}, ConverterParameter=0.5}"/>
+                                                    
+                                                    <Setter Property="RadiusY"
+                                                            Value="{Binding ElementName=root, Path=ActualHeight, Converter={StaticResource PercentageConverter}, ConverterParameter=0.5}"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Rectangle.Style>
+                                </Rectangle>
+                                
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  Content="{Binding CellInfo.CellIndex, ElementName=root}"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Button.Style>
+    </Button>
+</UserControl>

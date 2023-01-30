@@ -1,0 +1,126 @@
+﻿<UserControl x:Class="VCM_CoilLoading.MVVM.Views.AutoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:VCM_CoilLoading.MVVM.Views"
+             xmlns:viewModels="clr-namespace:VCM_CoilLoading.MVVM.ViewModels"
+             xmlns:controls="clr-namespace:TopUI.Controls;assembly=TopUI"
+             xmlns:logging="clr-namespace:TopCom.LOG;assembly=TopCom"
+             xmlns:define="clr-namespace:VCM_CoilLoading.Define"
+             xmlns:UIDefine="clr-namespace:TopUI.Define;assembly=TopUI"
+             d:DataContext="{d:DesignInstance Type=viewModels:AutoViewModel}"
+             mc:Ignorable="d">
+
+    <DockPanel>
+        <ContentControl Content="{Binding WorkDataVM}"
+                        DockPanel.Dock="Top"
+                        Margin="0 0 0 0"
+                        Height="80"/>
+
+        <controls:LogDisplayer DockPanel.Dock="Bottom"
+                               Height="170"
+                               LogSource="{Binding Notification, Source={x:Static logging:UILog.Appender}}"/>
+
+        <UniformGrid DockPanel.Dock="Bottom"
+                     Height="70"
+                     Columns="5"
+                     IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}">
+            <Button Margin="5 5"
+                    Content="Reset Count Data"
+                    Command="{Binding ResetCountDataCommand}"/>
+
+            <Button Margin="5 5"
+                    Content="Reset Loading Tray"
+                    Command="{Binding ResetLoadingTrayCommand}"/>
+
+            <Button Margin="5 5"
+                    Content="Reset Unloading Tray"
+                    Command="{Binding ResetUnloadingTrayCommand}"/>
+
+            <Button Margin="5 5"
+                    Content="{DynamicResource str_LoadTrayChange}"
+                    Command="{Binding LoadingTrayChangeCommand}"/>
+
+            <Button Margin="5 5"
+                    Content="{DynamicResource str_UnloadTrayChange}"
+                    Command="{Binding UnloadingTrayChangeCommand}"/>
+        </UniformGrid>
+
+        <Grid Margin="0 3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            
+            <!--Height="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth, Converter={StaticResource PercentageConverter}, ConverterParameter=0.625}"-->
+            <Grid x:Name="TrayGrid"
+                  MinHeight="432"
+                  Height="515"
+                  Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{Binding Source={x:Static define:CDef.LoadingTray}, Path=ColumnCount, Converter={StaticResource ValueToGridLengthStarConverter}}"/>
+                    <ColumnDefinition Width="{Binding Source={x:Static define:CDef.UnloadingTray1}, Path=ColumnCount, Converter={StaticResource ValueToGridLengthStarConverter}}"/>
+                </Grid.ColumnDefinitions>
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <controls:Tray TrayInfo="{Binding Source={x:Static define:CDef.LoadingTray}}"
+                               Grid.RowSpan="2"
+                               IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}"
+                               Background="Black"
+                               BorderBrush="Gray"
+                               BorderThickness="1"/>
+
+                <controls:Tray TrayInfo="{Binding Source={x:Static define:CDef.UnloadingTray2}}"
+                               Grid.Column="1"
+                               IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}"
+                               Background="Black"
+                               BorderBrush="Gray"
+                               BorderThickness="1"/>
+
+                <controls:Tray TrayInfo="{Binding Source={x:Static define:CDef.UnloadingTray1}}"
+                               Grid.Column="1" Grid.Row="1"
+                               IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}"
+                               Background="Black"
+                               BorderBrush="Gray"
+                               BorderThickness="1"/>
+
+            </Grid>
+
+            <Grid Grid.Row="2"
+                  Margin="0 3 0 0">
+                <ItemsControl ItemsSource="{Binding Source={x:Static UIDefine:CColors.CellColor}}">
+                    <!-- ItemsPanelTemplate -->
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal">
+                            </StackPanel>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal"
+                                        Width="Auto">
+                                <Border Width="16"
+                                        Height="16"
+                                        CornerRadius="12.5"
+                                        Background="{Binding Value}"/>
+                                
+                                <Label Margin="0 0 4 0"
+                                       VerticalAlignment="Center"
+                                       Content="{Binding Key}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+        </Grid>
+    </DockPanel>
+</UserControl>

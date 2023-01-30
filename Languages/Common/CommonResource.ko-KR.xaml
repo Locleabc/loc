@@ -1,0 +1,136 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary>
+            <system:String x:Key="str_Hello">안녕하세요</system:String>
+
+            <system:String x:Key="str_Pick">픽업</system:String>
+            <system:String x:Key="str_Place">프레이스</system:String>
+            <system:String x:Key="str_LoadVision">로드 비젼</system:String>
+            <system:String x:Key="str_UnLoadVision">언로드 비젼</system:String>
+            <system:String x:Key="str_AlarmReset">알람 초기화</system:String>
+            <system:String x:Key="str_Home">홈 구동</system:String>
+            <system:String x:Key="str_ServoOn">모션 켜기</system:String>
+            <system:String x:Key="str_ServoOff">모션 끄기 </system:String>
+            <system:String x:Key="str_Stop">정지</system:String>
+            <system:String x:Key="str_JogPlus">조그 (+)</system:String>
+            <system:String x:Key="str_JogMinus">조그 (-)</system:String>
+            <system:String x:Key="str_IncPlus">Inc(+)</system:String>
+            <system:String x:Key="str_IncMinus">Inc(-)</system:String>
+            <system:String x:Key="str_MoveAbs">절대이동</system:String>
+            <system:String x:Key="str_PositionName">위치</system:String>
+            <system:String x:Key="str_VelocityName">속도</system:String>
+            <system:String x:Key="str_Velocity">속도 [mm/s]</system:String>
+            <system:String x:Key="str_Position">위치 [mm]</system:String>
+            <system:String x:Key="str_LoadTrayChange">로드 트레이 바꾸기</system:String>
+            <system:String x:Key="str_UnloadTrayChange">언로드 트레이 바꾸기</system:String>
+            <system:String x:Key="str_LoadTrayLOADPOS">로드 트레이 바꾸는 위치 이동</system:String>
+            <system:String x:Key="str_UnloadTrayLOADPOS">언로드 트레이 바꾸는 위치 이동</system:String>
+            <system:String x:Key="str_SelectedAxis">선택된 축</system:String>
+            <system:String x:Key="str_Auto">자동</system:String>
+            <system:String x:Key="str_Start">시작</system:String>
+            <system:String x:Key="str_Recipe">레시피</system:String>
+            <system:String x:Key="str_Statistic">통계</system:String>
+            <system:String x:Key="str_Manual">수동</system:String>
+            <system:String x:Key="str_MachineName">설비명</system:String>
+            <system:String x:Key="str_TowerLampRed">TowerLampRed</system:String>
+            <system:String x:Key="str_TowerLampYellow">TowerLampYellow</system:String>
+            <system:String x:Key="str_TowerLampGreen">TowerLampGreen</system:String>
+            <system:String x:Key="str_Buzzer1">Buzzer1</system:String>
+            <system:String x:Key="str_Buzzer2">Buzzer2</system:String>
+            <system:String x:Key="str_Ionizersol">Ionizersol</system:String>
+            <system:String x:Key="str_LightUpper">Light Upper</system:String>
+            <system:String x:Key="str_LightUnder">Light Under</system:String>
+            <system:String x:Key="str_StartLamp">Start Lamp</system:String>
+            <system:String x:Key="str_StopLamp">Stop Lamp</system:String>
+            <system:String x:Key="str_OkLamp">OK Lamp</system:String>
+            <system:String x:Key="str_HomeLamp">Home Lamp</system:String>
+            <system:String x:Key="str_Head1VAC">Head1 VAC</system:String>
+            <system:String x:Key="str_Head1Purge">Head1 Purge</system:String>
+            <system:String x:Key="str_Head2VAC">Head2 VAC</system:String>
+            <system:String x:Key="str_Head2Purge">Head2 Purge</system:String>
+            <system:String x:Key="str_UnderVision">하부 비젼</system:String>
+            <system:String x:Key="str_Common">공통</system:String>
+            <system:String x:Key="str_UpperVision">상부 비젼</system:String>
+            <system:String x:Key="str_Grab">획득</system:String>
+            <system:String x:Key="str_Inspect">처리</system:String>
+        </ResourceDictionary>
+
+        <!--// 20211015 Transalate Vision UI-->
+        <ResourceDictionary>
+            <system:String x:Key="str_InputImage">입력 영상</system:String>
+            <system:String x:Key="str_PreProcessedImage">전처리 영상</system:String>
+            <system:String x:Key="str_ResultImage">결과 영상</system:String>
+            <system:String x:Key="str_Threshold">한계</system:String>
+            <system:String x:Key="str_IgnoreSize">(작은) 무시 사이즈</system:String>
+            <system:String x:Key="str_OutputDisplayOption">결과 출력 옵션</system:String>
+            <system:String x:Key="str_DisplayROIbox">ROI 표시</system:String>
+            <system:String x:Key="str_DisplayResultText">결과열 표시</system:String>
+            <system:String x:Key="str_DisplayDetectedMask(s)">검사된 영역 표시</system:String>
+            <system:String x:Key="str_AdjustTheta">Theta 조절</system:String>
+            <system:String x:Key="str_UseSrcImage">Use Source Image</system:String>
+            <system:String x:Key="str_Height">높이</system:String>
+            <system:String x:Key="str_Width">넓이</system:String>
+            <system:String x:Key="str_DirectDetectionParameter">Direct Detection Parameter</system:String>
+            <system:String x:Key="str_MinimalPhaseDifference">Minimal Phase Difference</system:String>
+            <system:String x:Key="str_RotateDirection">Rotate Direction</system:String>
+            <system:String x:Key="str_TemplateImagePath">Template Image Path</system:String>
+            <system:String x:Key="str_RotatePoint">Rotate Point</system:String>
+            <system:String x:Key="str_Numberofcase(s)">Number of case(s)</system:String>
+            <system:String x:Key="str_CountourArea">Countour Area</system:String>
+            <system:String x:Key="str_CountourDetectionParameter">Countour Detection Parameter</system:String>
+            <system:String x:Key="str_CircleDetectionParameter">Circle Detection Parameter</system:String>
+            <system:String x:Key="str_FourLinesDetectionParameter">Four Lines Detection Parameter</system:String>
+            <system:String x:Key="str_BoundaryLineDetectionParameter">Boundary Line Detection Parameter</system:String>
+            <system:String x:Key="str_NumberofPointtoDetect">Number of Point to Detect</system:String>
+            <system:String x:Key="str_ReferenceAngle">Reference Angle</system:String>
+            <system:String x:Key="str_NeighbourhoodArea">Neighbourhood Area</system:String>
+            <system:String x:Key="str_AdaptiveThresholdParameter">Adaptive Threshold Parameter</system:String>
+            <system:String x:Key="str_Constant">Constant</system:String>
+            <system:String x:Key="str_BinarizationParameter">Binarization Parameter</system:String>
+            <system:String x:Key="str_BitwiseParameter">Bitwise Parameter</system:String>
+            <system:String x:Key="str_CannyEdgeParameter">Canny Edge Parameter</system:String>
+            <system:String x:Key="str_ApertureSize">Aperture Size</system:String>
+            <system:String x:Key="str_L2Gradient">L2Gradient</system:String>
+            <system:String x:Key="str_ColorConvertToGrayParameter">Color Convert To Gray Parameter</system:String>
+            <system:String x:Key="str_ErodeParameter">Erode Parameter</system:String>
+            <system:String x:Key="str_HistogramParameter">Histogram Parameter</system:String>
+            <system:String x:Key="str_SetIgnoreRegionsParameter">Set Ignore Regions Parameter</system:String>
+            <system:String x:Key="str_IgnoreRectRegions">Ignore Rect Regions</system:String>
+            <system:String x:Key="str_IgnoreCircleRegions">Ignore Circle Regions</system:String>
+            <system:String x:Key="str_SetInspectRegionsParameter">Set Inspect Regions Parameter</system:String>
+            <system:String x:Key="str_InspectRectRegions">Inspect Rect Regions</system:String>
+            <system:String x:Key="str_InspectCircleRegions">Inspect Circle Regions</system:String>
+            <system:String x:Key="str_SetRegionsParameter">Set Regions Parameter</system:String>
+            <system:String x:Key="str_SmoothParameter">Smooth Parameter</system:String>
+            <system:String x:Key="str_GaussianKernelSize">Gaussian Kernel Size</system:String>
+            <system:String x:Key="str_SigmaX">SigmaX</system:String>
+            <system:String x:Key="str_MultiTemplateMatchingParameter">Multi Template Matching Parameter</system:String>
+            <system:String x:Key="str_AdvancedTemplateMatchingParameter">Advanced Template Matching Parameter</system:String>
+            <system:String x:Key="str_TemplateCount">Template Count</system:String>
+            <system:String x:Key="str_ReferenceTemplateCount">Reference Template Count</system:String>
+            <system:String x:Key="str_SingleTemplateMatchingParameter">Single Template Matching Parameter</system:String>
+            <system:String x:Key="str_LoadImage">영상 가져오기</system:String>
+            <system:String x:Key="str_Save">저장</system:String>
+            <system:String x:Key="str_SaveImage">영상 저장</system:String>
+            <system:String x:Key="str_MainProcess">메인 프로세스</system:String>
+            <system:String x:Key="str_SiblingProcessors">공통 프로세스</system:String>
+        </ResourceDictionary>
+
+        <!--// 20211015 Transalate Notification-->
+        <ResourceDictionary>
+            <system:String x:Key="str_RemoveDummy">덤미 씨트 제거해주세요!</system:String>
+            <system:String x:Key="str_ChangeBothTray">양쪽 트레이 교체해주세요!</system:String>
+            <system:String x:Key="str_PushStartButton">그리고, \"START\" 버튼 누르세요!</system:String>
+            <system:String x:Key="str_Change">Change {param} please!</system:String>
+            <system:String x:Key="str_PushExitButton">프로그램 정시하시겠어요?</system:String>
+            <system:String x:Key="str_YesButton">예</system:String>
+            <system:String x:Key="str_NoButton">아니오</system:String>
+            <system:String x:Key="str_HomeDoneNotification">홈 구동 완료!</system:String>
+            <system:String x:Key="str_HomeWaring">홈 구동하 중. 기다려 주세요.</system:String>
+            <system:String x:Key="str_OnlyHomeButtonNoitfication">{param} 홈 구동하시겠어요?</system:String>
+        </ResourceDictionary>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

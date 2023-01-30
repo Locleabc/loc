@@ -1,0 +1,147 @@
+﻿<UserControl x:Class="VCM_FullAssy.MVVM.Views.VisionAutoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VCM_FullAssy.MVVM.Views"
+             xmlns:define="clr-namespace:VCM_FullAssy.Define"
+             xmlns:cvtVision="clr-namespace:TopVision.Converters;assembly=TopVision"
+             xmlns:uiCtrls="clr-namespace:TopUI.Controls;assembly=TopUI"
+             mc:Ignorable="d" 
+             xmlns:viewModels="clr-namespace:VCM_FullAssy.MVVM.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewModels:VisionAutoViewModel}"
+             d:DesignHeight="980" d:DesignWidth="490">
+
+    <UserControl.Resources>
+        <cvtVision:MatToImageSourceConverter x:Key="MatToImageSourceConverter"/>
+    </UserControl.Resources>
+
+    <Grid IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="90"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Source="{Binding OutputMat_TOP, Converter={StaticResource MatToImageSourceConverter}}"
+                   Name="ImageTop"/>
+
+            <uiCtrls:CenterLines Width="{Binding ActualWidth, ElementName=ImageTop}"
+                                 Height="{Binding ActualHeight, ElementName=ImageTop}"
+                                 PixelSize="6.9"/>
+
+            <StackPanel Grid.Column="1"
+                        VerticalAlignment="Center">
+                <Button Height="60"
+                        Margin="5"
+                        Command="{Binding LiveCommand}"
+                        CommandParameter="{x:Static define:EVisionArea.LOAD}">Live</Button>
+                
+                <Button Height="60"
+                        Margin="5"
+                        Command="{Binding GrabCommand}"
+                        CommandParameter="{x:Static define:EVisionArea.LOAD}"
+                        Content="{DynamicResource str_Grab}"/>
+                
+                <Button Height="60"
+                        Margin="5"
+                        Command="{Binding InspectCommand}"
+                        CommandParameter="{x:Static define:EVisionArea.LOAD}"
+                        Content="{DynamicResource str_Inspect}"/>
+                
+                <Button Height="60"
+                        Margin="5"
+                        Command="{Binding TeachCommand}"
+                        CommandParameter="{x:Static define:EVisionArea.LOAD}"
+                        Content="{DynamicResource str_Teach}"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1"
+              IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="90"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Source="{Binding OutputMat_BOT, Converter={StaticResource MatToImageSourceConverter}}"
+                   Name="ImageBot"/>
+
+            <uiCtrls:CenterLines Width="{Binding ActualWidth, ElementName=ImageBot}"
+                                 Height="{Binding ActualHeight, ElementName=ImageBot}"
+                                 PixelSize="6.9"/>
+            
+            <StackPanel Grid.Column="1"
+                        VerticalAlignment="Center">
+                <Button Height="60" Margin="5"
+                        Command="{Binding LiveCommand}"
+                        CommandParameter="{x:Static define:EVisionArea.UNDER}">Live</Button>
+                
+                <Button Height="60"
+                        Margin="5"
+                        Command="{Binding GrabCommand}"
+                        CommandParameter="{x:Static define:EVisionArea.UNDER}"
+                        Content="{DynamicResource str_Grab}"/>
+                
+                <Button Height="60"
+                        Margin="5"
+                        Command="{Binding InspectCommand}"
+                        CommandParameter="{x:Static define:EVisionArea.UNDER}"
+                        Content="{DynamicResource str_Inspect}"/>
+                
+                <Button Height="60"
+                        Margin="5"
+                        Command="{Binding TeachCommand}"
+                        CommandParameter="{x:Static define:EVisionArea.UNDER}"
+                        Content="{DynamicResource str_Teach}"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="90"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Source="{Binding OutputMat_BASE, Converter={StaticResource MatToImageSourceConverter}}"
+                   Name="ImageBase"/>
+
+            <uiCtrls:CenterLines Width="{Binding ActualWidth, ElementName=ImageBase}"
+                                 Height="{Binding ActualHeight, ElementName=ImageBase}"
+                                 PixelSize="6.9"/>
+            
+            <StackPanel Grid.Column="1"
+                        VerticalAlignment="Center">
+                <Button Height="60"
+                        Margin="5"
+                        Command="{Binding LiveCommand}"
+                        CommandParameter="{x:Static define:EVisionArea.UNLOAD}">Live</Button>
+                
+                <Button Height="60"
+                        Margin="5"
+                        Command="{Binding GrabCommand}"
+                        CommandParameter="{x:Static define:EVisionArea.UNLOAD}"
+                        Content="{DynamicResource str_Grab}"/>
+                
+                <Button Height="60"
+                        Margin="5"
+                        Command="{Binding InspectCommand}"
+                        CommandParameter="{x:Static define:EVisionArea.UNLOAD}"
+                        Content="{DynamicResource str_Inspect}"/>
+
+                <Button Height="60"
+                        Margin="5"
+                        Command="{Binding TeachCommand}"
+                        CommandParameter="{x:Static define:EVisionArea.UNLOAD}"
+                        Content="{DynamicResource str_Teach}"/>
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</UserControl>

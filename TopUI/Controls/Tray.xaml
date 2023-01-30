@@ -1,0 +1,117 @@
+﻿<UserControl x:Class="TopUI.Controls.Tray"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TopUI.Controls"
+             mc:Ignorable="d" x:Name="root"
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/TopUI;component/Themes/Generic.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Border Background="{Binding Background, ElementName=root}"
+            BorderBrush="{Binding BorderBrush, ElementName=root}"
+            BorderThickness="{Binding BorderThickness, ElementName=root}">
+        <ItemsControl ItemsSource="{Binding TrayInfo.Cells, ElementName=root, UpdateSourceTrigger=PropertyChanged}">
+            <ItemsControl.Style>
+                <Style TargetType="{x:Type ItemsControl}">
+                    <Style.Setters>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ItemsControl}">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="30"/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Button Margin="2"
+                                                Foreground="White"
+                                                Background="{Binding TrayInfo.IsEnable, ElementName=root, Converter={StaticResource BooleanToGreenRedBrushConverter}}"
+                                                Command="{Binding TrayInfo.ReverseEnableStatusCommand, ElementName=root}">
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}"
+                                                       BasedOn="{StaticResource {x:Type Button}}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding TrayInfo.IsEnable, ElementName=root}"
+                                                                     Value="False">
+                                                            <Setter Property="Content"
+                                                                    Value="Disable"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding TrayInfo.IsEnable, ElementName=root}"
+                                                                     Value="True">
+                                                            <Setter Property="Content"
+                                                                    Value="Enable"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+
+                                        <TextBlock Text="{Binding TrayInfo.Name, ElementName=root}"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   Grid.Column="1"
+                                                   Foreground="White"
+                                                   FontWeight="Bold"/>
+
+                                        <Button Margin="2"
+                                                Grid.Column="2"
+                                                Content="Reset"
+                                                Command="{Binding TrayInfo.ResetCommand, ElementName=root}"/>
+
+                                        <ItemsPresenter Grid.Row="1"
+                                                        Grid.ColumnSpan="3"
+                                                        Margin="-2">
+                                            <ItemsPresenter.Style>
+                                                <Style TargetType="{x:Type ItemsPresenter}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding TrayInfo.IsEnable, ElementName=root}"
+                                                                     Value="False">
+                                                            <Setter Property="Opacity"
+                                                                    Value="0.6"/>
+                                                            <Setter Property="Cursor"
+                                                                    Value="No"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding TrayInfo.IsEnable, ElementName=root}"
+                                                                     Value="True">
+                                                            <Setter Property="Opacity"
+                                                                    Value="1"/>
+                                                            <Setter Property="Cursor"
+                                                                    Value="Arrow"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </ItemsPresenter.Style>
+                                        </ItemsPresenter>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style.Setters>
+                </Style>
+            </ItemsControl.Style>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="{Binding TrayInfo.ColumnCount, ElementName=root}"
+                                 Rows="{Binding TrayInfo.RowCount, ElementName=root}"
+                                 Margin="{Binding TrayPadding, ElementName=root}">
+                    </UniformGrid>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+    </Border>
+    
+</UserControl>

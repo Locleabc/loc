@@ -1,0 +1,193 @@
+﻿<Window x:Class="TopUI.Controls.ValueEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        x:Name="root"
+        WindowStyle="None" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Height="420" Width="500" FontWeight="Bold">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/TopUI;component/Themes/Generic.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <DockPanel Background="DarkBlue">
+        <Label DockPanel.Dock="Top"
+               Height="35"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"
+               Content="{Binding TiltleString}"
+               FontSize="18" FontWeight="DemiBold"
+               Foreground="White"
+               MouseDown="HeaderLabel_MouseDown"/>
+
+        <Grid Background="Silver"
+              Margin="4">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+
+            <TextBox Style="{StaticResource TextBoxWithNameLeftStyle}"
+                     Text="{Binding InputString, Mode=OneWay}"
+                     x:Name="NewValueTextBox" Grid.ColumnSpan="2"
+                     Margin="5" Background="Gray"/>
+
+            <StackPanel Grid.Row="1" Margin="5">
+                <TextBox Style="{StaticResource TextBoxWithNameLeftStyle}"
+                         Tag="OLD"
+                         Height="40"
+                         Background="Gray"
+                         Margin="0 2" Text="{Binding Data.Value, Mode=OneWay}"/>
+                
+                <TextBox Style="{StaticResource TextBoxWithNameLeftStyle}"
+                         Tag="MINIMUM"
+                         Height="40" Background="Gray"
+                         Margin="0 2"
+                         Text="{Binding Data.MinValue, Mode=OneWay}"/>
+                
+                <TextBox Style="{StaticResource TextBoxWithNameLeftStyle}"
+                         Tag="MAXIMUM"
+                         Height="40"
+                         Background="Gray"
+                         Margin="0 2"
+                         Text="{Binding Data.MaxValue, Mode=OneWay}"/>
+
+                
+                <TextBox Style="{StaticResource TextBoxWithNameLeftStyle}"
+                         Tag="NEW VALUE"
+                         Height="40"
+                         Background="Gray"
+                         Margin="0 8 0 0"
+                         Text="{Binding NewValue, Mode=OneWay}"/>
+                
+                <TextBox Style="{StaticResource TextBoxWithNameLeftStyle}"
+                         Tag="CURRENT"
+                         Height="40"
+                         Background="Gray"
+                         Margin="0 3"
+                         Text="{Binding Data.CurrentValue, Mode=OneWay}"
+                         PreviewMouseDown="CurrentValue_PreviewMouseDown"/>
+            </StackPanel>
+
+            <DockPanel Grid.Row="1"
+                       Grid.Column="1"
+                       Margin="5">
+
+                <UniformGrid Height="60"
+                             Columns="2"
+                             DockPanel.Dock="Top">
+                    <Button Content="CLEAR"
+                            Margin="2"
+                            Click="BigButton_Click"
+                            Tag="ClearButton"/>
+                    
+                    <Button FontSize="30"
+                            Content="←"
+                            Margin="2"
+                            Click="BigButton_Click"
+                            Tag="BackButton"/>
+                </UniformGrid>
+
+                <UniformGrid Columns="4" Rows="4">
+                    <Button Content="7"
+                            Margin="2"
+                            Click="NumberButton_Click"/>
+                    
+                    <Button Content="8"
+                            Margin="2"
+                            Click="NumberButton_Click"/>
+                    
+                    <Button Content="9"
+                            Margin="2"
+                            Click="NumberButton_Click"/>
+                    
+                    <Button Content="/"
+                            Margin="2"
+                            Click="OperandButton_Click"/>
+                    
+                    <Button Content="4"
+                            Margin="2"
+                            Click="NumberButton_Click"/>
+                    
+                    <Button Content="5"
+                            Margin="2"
+                            Click="NumberButton_Click"/>
+                    
+                    <Button Content="6"
+                            Margin="2"
+                            Click="NumberButton_Click"/>
+                    
+                    <Button Content="*"
+                            Margin="2"
+                            Click="OperandButton_Click"/>
+                    
+                    <Button Content="1"
+                            Margin="2"
+                            Click="NumberButton_Click"/>
+                    
+                    <Button Content="2"
+                            Margin="2"
+                            Click="NumberButton_Click"/>
+                    
+                    <Button Content="3"
+                            Margin="2"
+                            Click="NumberButton_Click"/>
+                    
+                    <Button Content="–"
+                            Margin="2"
+                            Click="OperandButton_Click"/>
+                    
+                    <Button Content="0"
+                            Margin="2"
+                            Click="NumberButton_Click"/>
+                    
+                    <Button Content="±"
+                            Margin="2"
+                            Click="SignButton_Click"/>
+                    
+                    <Button Content="."
+                            Margin="2"
+                            Click="NumberButton_Click"/>
+                    
+                    <Button Content="+"
+                            Margin="2" Click="OperandButton_Click"/>
+                </UniformGrid>
+                
+            </DockPanel>
+
+            <StackPanel Grid.Row="2"
+                        Grid.ColumnSpan="2"
+                        Margin="5 0 5 5"
+                Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+
+                <Button Content="APPLY"
+                        Margin="2 0"
+                        Width="150"
+                        Click="BigButton_Click"
+                        Tag="ApplyButton"/>
+                <Button Content="CLOSE"
+                        Margin="2 0"
+                        Width="150"
+                        Click="BigButton_Click"
+                        Tag="CloseButton"/>
+
+            </StackPanel>
+            
+        </Grid>
+    </DockPanel>
+</Window>

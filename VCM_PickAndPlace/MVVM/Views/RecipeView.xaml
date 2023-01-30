@@ -1,0 +1,360 @@
+﻿<UserControl x:Class="VCM_PickAndPlace.MVVM.Views.RecipeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VCM_PickAndPlace.MVVM.Views"
+             xmlns:viewModels="clr-namespace:VCM_PickAndPlace.MVVM.ViewModels"
+             xmlns:controls="clr-namespace:TopUI.Controls;assembly=TopUI"
+             xmlns:define="clr-namespace:VCM_PickAndPlace.Define"
+             d:DataContext="{d:DesignInstance Type=viewModels:RecipeViewModel}"
+             mc:Ignorable="d"
+             Loaded="RecipeView_Loaded"
+             d:DesignHeight="900" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type ScrollViewer}">
+            <Style.Setters>
+                <Setter Property="VerticalScrollBarVisibility" Value="Visible"/>
+                <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
+            </Style.Setters>
+        </Style>
+
+        <Style TargetType="{x:Type StackPanel}">
+            <Style.Setters>
+                <Setter Property="IsEnabled" Value="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning, UpdateSourceTrigger=PropertyChanged}"/>
+            </Style.Setters>
+        </Style>
+
+        <Style TargetType="{x:Type TabItem}"
+               BasedOn="{StaticResource TabItemUnderMarkStyle}">
+            <Style.Setters>
+                <Setter Property="Width" Value="80"/>
+            </Style.Setters>
+        </Style>
+    </UserControl.Resources>
+    
+    <TabControl x:Name="Recipe_MainTab"
+                Background="{x:Null}">
+        <TabItem Header="Global">
+            <Grid Margin="5"
+                  IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning, UpdateSourceTrigger=PropertyChanged}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel>
+                    <CheckBox Content="Skip Load Vision"
+                              IsChecked="{Binding Source={x:Static define:CDef.GlobalRecipe}, Path=SkipLoadVision, UpdateSourceTrigger=PropertyChanged}"
+                              Tag="Check to disable Upper Load Vision"/>
+
+                    <CheckBox Content="Skip Under Vision"
+                              IsChecked="{Binding Source={x:Static define:CDef.GlobalRecipe}, Path=SkipUnderVision, UpdateSourceTrigger=PropertyChanged}"
+                              Tag="Check to disable Under Vision"/>
+
+                    <CheckBox Content="Skip Unload Vision"
+                              IsChecked="{Binding Source={x:Static define:CDef.GlobalRecipe}, Path=SkipUnloadVision, UpdateSourceTrigger=PropertyChanged}"
+                              Tag="Check to disable Upper Unload Vision"/>
+
+                    <CheckBox Content="Skip Ball Inspect Vision"
+                              IsChecked="{Binding Source={x:Static define:CDef.GlobalRecipe}, Path=SkipBallInspect, UpdateSourceTrigger=PropertyChanged}"
+                              Tag="Check to disable Ball Inspect Vision"/>
+
+                    <CheckBox Content="Double Under Vision Check"
+                              IsChecked="{Binding Source={x:Static define:CDef.GlobalRecipe}, Path=DoubleUnderVisionCheck, UpdateSourceTrigger=PropertyChanged}"
+                              Tag="Check to check under vision twice"/>
+                </StackPanel>
+                
+                <Separator Grid.Row="1"
+                           Grid.ColumnSpan="2"/>
+
+                <StackPanel Grid.Row="2">
+                    <CheckBox Content="Image Save"
+                              IsChecked="{Binding Source={x:Static define:CDef.GlobalRecipe}, Path=ImageSave, UpdateSourceTrigger=PropertyChanged}"
+                              Tag="Check to save images while machine running"/>
+
+                    <Grid Visibility="{Binding Source={x:Static define:CDef.GlobalRecipe}, Path=ImageSave, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <CheckBox Content="Input Image"
+                                  Grid.Row="0"
+                                  IsChecked="{Binding Source={x:Static define:CDef.GlobalRecipe}, Path=SaveInputImage, UpdateSourceTrigger=PropertyChanged}"
+                                  Tag="Check to save input image"/>
+
+                        <CheckBox Content="Processed Image"
+                                  Grid.Row="1"
+                                  IsChecked="{Binding Source={x:Static define:CDef.GlobalRecipe}, Path=SaveProcessImage, UpdateSourceTrigger=PropertyChanged}"
+                                  Tag="Check to save pre-preprocessed image"/>
+
+                        <CheckBox Content="Result Image"
+                                  Grid.Row="2"
+                                  IsChecked="{Binding Source={x:Static define:CDef.GlobalRecipe}, Path=SaveResultImage, UpdateSourceTrigger=PropertyChanged}"
+                                  Tag="Check to save result image"/>
+                    </Grid>
+
+                    <controls:ValueBox Header="Image Save Day"
+                                       Visibility="{Binding Source={x:Static define:CDef.GlobalRecipe}, Path=ImageSave, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                       Description="If value ≤ 0, keep file forever"
+                                       Value="{Binding Source={x:Static define:CDef.GlobalRecipe}, Path=ImageSaveDay, Mode=TwoWay}"/>
+                </StackPanel>
+
+                <GroupBox Header="Recipe Change / Save / Load"
+                          Grid.Column="1"
+                          Grid.Row="2"
+                          BorderThickness="2"
+                          FontWeight="Bold"
+                          FontSize="14">
+                    <ContentControl Content="{Binding RecipeChangeVM}"/>
+                </GroupBox>
+
+                <StackPanel Grid.Column="1">
+                    <ComboBox ItemsSource="{Binding Source={x:Static define:CDef.Cultures}, Mode=OneWay}"
+                          Tag="Language"
+                          DisplayMemberPath="Name"
+                          Height="40"
+                          VerticalAlignment="Top"
+                          Margin="5 5 0 0"
+                          SelectedIndex="{Binding Source={x:Static define:CDef.GlobalRecipe}, Path=SelectedCulture, UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <CheckBox Content="MES Use"
+                              VerticalAlignment="Top"
+                              Tag="Check to enable MES"
+                              IsChecked="{Binding Source={x:Static define:CDef.GlobalRecipe}, Path=UseMES, UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <CheckBox Content="Use Vacuum Check"
+                              Grid.Row="1"
+                              VerticalAlignment="Top"
+                              Tag="Check to use Vacuum check"
+                              IsChecked="{Binding Source={x:Static define:CDef.GlobalRecipe}, Path=UseVacuumCheck, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+                
+                <Separator Grid.Row="3"
+                           Grid.ColumnSpan="2"/>
+
+                <ScrollViewer Grid.Row="4"
+                              Grid.ColumnSpan="2"
+                              VerticalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical">
+                        <TextBox Style="{StaticResource TextBoxWithLeftDescriptionStyle}"
+                                 Tag="LinkAgent Path"
+                                 Text="{Binding Source={x:Static define:CDef.GlobalRecipe}, Path=FileThatRunWithTheApplication,UpdateSourceTrigger=PropertyChanged}"
+                                 VerticalAlignment="Top"/>
+                    </StackPanel>
+                    
+                </ScrollViewer>
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="{DynamicResource str_Common}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+
+                <ScrollViewer>
+                    <StackPanel x:Name="CommonRecipe_StackPanel">
+                        <!--Recipe will be auto generated in Code behind-->
+                    </StackPanel>
+                </ScrollViewer>
+
+                <Separator Grid.Row="1"/>
+
+                <ScrollViewer Grid.Row="2">
+                    
+                </ScrollViewer>
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="Press"
+                 Visibility="{Binding Source={x:Static define:MachineInfor.IsUSPCutting}, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+
+                <ScrollViewer>
+                    <StackPanel x:Name="PressRecipe_StackPanel">
+
+                        <!--Recipe will be auto generated in Code behind-->
+
+                    </StackPanel>
+                </ScrollViewer>
+
+                <Separator Grid.Row="1"/>
+
+                <ScrollViewer Grid.Row="2">
+
+                </ScrollViewer>
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="Tray">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+
+                <ScrollViewer>
+                    <StackPanel x:Name="TrayRecipe_StackPanel">
+
+                        <!--Recipe will be auto generated in Code behind-->
+
+                    </StackPanel>
+                </ScrollViewer>
+
+                <Separator Grid.Row="1"/>
+
+                <ScrollViewer Grid.Row="2">
+
+                </ScrollViewer>
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="Transfer">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+
+                <ScrollViewer>
+                    <StackPanel x:Name="TransferRecipe_StackPanel">
+
+                        <!--Recipe will be auto generated in Code behind-->
+
+                    </StackPanel>
+                </ScrollViewer>
+
+                <Separator Grid.Row="1"/>
+
+                <ScrollViewer Grid.Row="2">
+
+                </ScrollViewer>
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="Head">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+
+                <ScrollViewer>
+                    <StackPanel x:Name="HeadRecipe_StackPanel">
+
+                        <!--Recipe will be auto generated in Code behind-->
+
+                    </StackPanel>
+                </ScrollViewer>
+
+                <Separator Grid.Row="1"/>
+
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <ScrollViewer>
+                        <StackPanel>
+                            <CheckBox Content="Place Touch Check enable"
+                                      IsChecked="{Binding Source={x:Static define:CDef.GlobalRecipe}, Path=UsePlaceTouchCheck, UpdateSourceTrigger=PropertyChanged}"
+                                      Tag="Check ZZ encode value while place Z Axis moving down"/>
+
+                            <controls:ValueBox Header="Place Touch Allow Gab [mm]"
+                                      Visibility="{Binding Source={x:Static define:CDef.GlobalRecipe}, Mode=OneWay, Path=UsePlaceTouchCheck, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                      Description="If Place Touch Detected in This Gab => Place OK"
+                                      Value="{Binding Source={x:Static define:CDef.GlobalRecipe}, Path=PlaceTouchAllowGap, Mode=TwoWay}"/>
+                            
+                            <controls:ValueBox Header="Place Touch Limit [mm]"
+                                      Visibility="{Binding Source={x:Static define:CDef.GlobalRecipe}, Mode=OneWay, Path=UsePlaceTouchCheck, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                      Description="Place Touch ZZ encode limit (over limit -> place NG)"
+                                      Value="{Binding Source={x:Static define:CDef.GlobalRecipe}, Path=PlaceTouchCheckLimit, Mode=TwoWay}"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="UpperVS">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+
+                <ScrollViewer>
+                    <StackPanel x:Name="UpperVisionRecipe_StackPanel">
+
+                        <!--Recipe will be auto generated in Code behind-->
+
+                    </StackPanel>
+                </ScrollViewer>
+
+                <Separator Grid.Row="1"/>
+
+                <ScrollViewer Grid.Row="2">
+                    <UniformGrid Columns="3"
+                                 VerticalAlignment="Top">
+                        <Button Margin="5"
+                                Height="50"
+                                Content="Top Camera Connect"
+                                Command="{Binding TopCameraConnectCommand}"/>
+                    </UniformGrid>
+                </ScrollViewer>
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="UnderVS">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+
+                <ScrollViewer>
+                    <StackPanel x:Name="UnderVisionRecipe_StackPanel">
+
+                        <!--Recipe will be auto generated in Code behind-->
+
+                    </StackPanel>
+                </ScrollViewer>
+
+                <Separator Grid.Row="1"/>
+
+                <ScrollViewer Grid.Row="2">
+                    <UniformGrid Columns="3"
+                                 VerticalAlignment="Top">
+                        <Button Margin="5"
+                                Height="50"
+                                Content="Bottom Camera Connect"
+                                Command="{Binding BottomCameraConnectCommand}"/>
+                    </UniformGrid>
+                </ScrollViewer>
+            </Grid>
+        </TabItem>
+    </TabControl>
+</UserControl>

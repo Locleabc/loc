@@ -1,0 +1,63 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:cvt="clr-namespace:TopUI.Converters">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/TopUI;component/Define/Color.Common.xaml"/>
+
+        <ResourceDictionary Source="pack://application:,,,/TopUI;component/Styles/ButtonCommonStyle.HighEmphasis.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/TopUI;component/Styles/ButtonCommonStyle.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/TopUI;component/Styles/ButtonNakedStyle.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/TopUI;component/Styles/ButtonGlassStyle.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/TopUI;component/Styles/CheckBoxCommonStyle.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/TopUI;component/Styles/ComboBoxCommonStyle.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/TopUI;component/Styles/ExpanderGithubLikeStyle.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/TopUI;component/Styles/RadioButtonLeftMarkStyle.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/TopUI;component/Styles/RadioButtonUnderMarkStyle.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/TopUI;component/Styles/TabControlImageBoxStyle.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/TopUI;component/Styles/TabItemImageBoxStyle.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/TopUI;component/Styles/TabItemLeftMarkStyle.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/TopUI;component/Styles/TabItemUnderMarkStyle.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/TopUI;component/Styles/TextBlockDemoStyle.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/TopUI;component/Styles/TextBoxWithNameLeftStyle.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/TopUI;component/Styles/TextBoxWithPlaceHolder.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/TopUI;component/Styles/ListBoxRecipeStyle.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/TopUI;component/Styles/TextBoxNoBorderStyle.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/TopUI;component/Styles/ButtonWithPathStyle.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/TopUI;component/Styles/RadioButtonWithPathUnderMaskStyle.xaml"/>
+        <ResourceDictionary Source="/TopUI;component/Resources/ResourcePathData.xaml"/>
+        <ResourceDictionary>
+            <cvt:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <cvt:CellStatusToColorConverter x:Key="CellStatusToColorConverter"/>
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <cvt:SOTACellStatusToColorConverter x:Key="SOTACellStatusToColorConverter"/>
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <cvt:TrayCellStatusListConverter x:Key="TrayCellStatusListConverter"/>
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <cvt:CommonButtonBooleanToHightLightColorConverter x:Key="CommonButtonBooleanToHightLightColorConverter"/>
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <cvt:PercentageConverter x:Key="PercentageConverter"/>
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <cvt:TextToTextForeground x:Key="TextToTextForeground"/>
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <cvt:BooleanReverseConverter x:Key="BooleanReverseConverter"/>
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <cvt:BooleanToGreenRedBrushConverter x:Key="BooleanToGreenRedBrushConverter"/>
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <cvt:ValueToGridLengthStarConverter x:Key="ValueToGridLengthStarConverter"/>
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <cvt:BooleanToButtonHightLightBrushConverter x:Key="BooleanToButtonHightLightBrushConverter"/>
+        </ResourceDictionary>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

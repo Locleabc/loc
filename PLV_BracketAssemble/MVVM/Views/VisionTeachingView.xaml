@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="PLV_BracketAssemble.MVVM.Views.VisionTeachingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PLV_BracketAssemble.MVVM.Views"
+             xmlns:viewModels="clr-namespace:PLV_BracketAssemble.MVVM.ViewModels"
+             xmlns:define="clr-namespace:PLV_BracketAssemble.Define"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=viewModels:VisionTeachingViewModel}"
+             d:DesignHeight="450" d:DesignWidth="1500">
+    <Grid IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning, UpdateSourceTrigger=PropertyChanged}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <DockPanel>
+            <Grid Height="50" DockPanel.Dock="Bottom">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button Content="{DynamicResource str_LoadImage}"
+                        Margin="5"
+                        Grid.Column="0"
+                        Command="{Binding LoadImageCommand}"/>
+
+                <Button Content="{DynamicResource str_Save}"
+                        Margin="5"
+                        Grid.Column="1"
+                        Command="{Binding ParentVM.SaveCommand}"/>
+
+                <Button Content="{DynamicResource str_SaveImage}"
+                        Margin="5"
+                        Grid.Column="2"
+                        Command="{Binding SaveImageCommand}"/>
+
+                <Button Content="{DynamicResource str_Inspect}"
+                        Margin="5"
+                        Grid.Column="3"
+                        Command="{Binding InspectCommand}"/>
+            </Grid>
+
+            <Separator BorderBrush="Silver"
+                       BorderThickness="1"
+                       DockPanel.Dock="Bottom"/>
+
+            <ContentControl Content="{Binding VisionProcessVM}"
+                            Height="Auto"/>
+            <!--<visionViews:VisionProcessView DataContext="{Binding VisionProcess}"
+                                       Height="Auto"/>-->
+
+        </DockPanel>
+
+        <!--
+        <ContentControl Grid.Column="1"
+                        Height="660"
+                        VerticalAlignment="Top"
+                        Content="{Binding Source={x:Static define:CDef.MainViewModel}, Path=VisionAutoVM}"/>
+        -->
+    </Grid>
+</UserControl>

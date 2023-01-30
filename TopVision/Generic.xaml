@@ -1,0 +1,169 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:algths="clr-namespace:TopVision.Algorithms"
+                    xmlns:cvtVision="clr-namespace:TopVision.Converters"
+                    xmlns:viewModels="clr-namespace:TopVision.ViewModels"
+                    xmlns:views="clr-namespace:TopVision.Views"
+                    xmlns:topVision="clr-namespace:TopVision"
+                    xmlns:System="clr-namespace:System;assembly=mscorlib"
+                    xmlns:paraViews="clr-namespace:TopVision.Views.ParameterViews">
+    
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Resources/Style/CCircleItemsControlStyle.xaml"/>
+        <ResourceDictionary Source="Resources/Style/CCircleContentControlStyle.xaml"/>
+        <ResourceDictionary Source="Resources/Style/CheckBoxWithLeftDescriptionStyle.xaml"/>
+        <ResourceDictionary Source="Resources/Style/CPointContentControlStyle.xaml"/>
+        <ResourceDictionary Source="Resources/Style/CRectangleContentControlStyle.xaml"/>
+        <ResourceDictionary Source="Resources/Style/CRectangleItemsControlStyle.xaml"/>
+        <ResourceDictionary Source="Resources/Style/ListViewVisionProcessHeader.xaml"/>
+        <ResourceDictionary Source="Resources/Style/TextBoxWithLeftDescriptionStyle.xaml"/>
+        <ResourceDictionary Source="Resources/Style/LabelParameterViewHeader.xaml"/>
+        <ResourceDictionary Source="Resources/Style/CArcRingContentControlStyle.xaml"/>
+
+        <ResourceDictionary Source="Resources/MenuContext.xaml"/>
+
+        <ResourceDictionary Source="Adorners/RectangleBorderThumbStyle.xaml"/>
+        <ResourceDictionary Source="Adorners/CircleBorderThumbStyle.xaml"/>
+        <ResourceDictionary Source="Adorners/ResizeThumbStyle.xaml"/>
+
+        <ResourceDictionary>
+            <ObjectDataProvider x:Key="ERotateDirectOptions" MethodName="GetValues"
+                                ObjectType="{x:Type System:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="topVision:ERotateDirect"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+        </ResourceDictionary>
+
+        <ResourceDictionary>
+            <ObjectDataProvider x:Key="EDetectionDirectionOptions" MethodName="GetValues"
+                                ObjectType="{x:Type System:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="topVision:EDetectionDirection"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+        </ResourceDictionary>
+
+        <ResourceDictionary>
+            <ObjectDataProvider x:Key="ESearchDirectOptions" MethodName="GetValues"
+                                ObjectType="{x:Type System:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="topVision:ESearchDirect"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+        </ResourceDictionary>
+    </ResourceDictionary.MergedDictionaries>
+
+    <cvtVision:MatToImageSourceConverter x:Key="MatToImageSourceConverter"/>
+
+    <DataTemplate DataType="{x:Type algths:BinarizationParameter}">
+        <paraViews:BinarizationParameterView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type algths:AdaptiveThresholdParameter}">
+        <paraViews:AdaptiveThresholdParameterView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type algths:BitwiseParameter}">
+        <paraViews:BitwiseParameterView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type algths:CannyEdgeParameter}">
+        <paraViews:CannyEdgeParameterView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type algths:ColorConvertToGrayParameter}">
+        <paraViews:ColorConvertToGrayParameterView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type algths:DirectDetectionParameter}">
+        <paraViews:DirectDetectionParameterView/>
+    </DataTemplate>
+
+    <!--<DataTemplate DataType="{x:Type algths:GenerateROIsParameter}">
+        <views:/>
+    </DataTemplate>-->
+
+    <DataTemplate DataType="{x:Type algths:HistogramParameter}">
+        <paraViews:HistogramParameterView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type algths:MaskingParameter}">
+        <paraViews:MaskingParameterView/>
+    </DataTemplate>
+
+    <!--<DataTemplate DataType="{x:Type algths:MultiContourCenterDetectionParameter}">
+        <views:/>
+    </DataTemplate>-->
+
+    <DataTemplate DataType="{x:Type algths:MultiTemplateMatchingParameter}">
+        <paraViews:MultiTemplateMatchingParameterView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type algths:SetInspectRegionsParameter}">
+        <paraViews:SetInspectRegionsParameterView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type algths:SetIgnoreRegionsParameter}">
+        <paraViews:SetIgnoreRegionsParameterView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type algths:SetRegionsParameter}">
+        <paraViews:SetRegionsParameterView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type algths:SingleTemplateMatchingParameter}">
+        <paraViews:SingleTemplateMatchingParameterView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type algths:SmoothParameter}">
+        <paraViews:SmoothParameterView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type algths:ErodeParameter}">
+        <paraViews:ErodeParameterView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type algths:DilateParameter}">
+        <paraViews:ErodeParameterView/>
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type algths:NoiseFilterParameter}">
+        <paraViews:NoiseFilterParameterView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type algths:ContourDetectionParameter}">
+        <paraViews:ContourDetectionParameterView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type algths:FourLinesDetectionParameter}">
+        <paraViews:FourLinesDetectionParameterView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type algths:BoundaryLineAngleDetectionParameter}">
+        <paraViews:BoundaryLineAngleDetectionParameterView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type algths:AdvancedTemplateMatchingParameter}">
+        <paraViews:AdvancedTemplateMatchingParameterView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type algths:CircularObjectDetectionParameter}">
+        <paraViews:CircularObjectDetectionParameterView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type algths:CircleDetectionParameter}">
+        <paraViews:CircleDetectionParameterView/>
+    </DataTemplate>
+
+    <!--<DataTemplate DataType="{x:Type algths:CircleDetectionParameter}">
+        <paraViews:CircleDetectionParameterView/>
+    </DataTemplate>-->
+
+    <DataTemplate DataType="{x:Type viewModels:VisionProcessViewModel}">
+        <views:VisionProcessView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewModels:TemplateMaskingViewModel}">
+        <views:TemplateMaskingView/>
+    </DataTemplate>
+</ResourceDictionary>

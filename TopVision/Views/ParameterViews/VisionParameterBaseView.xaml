@@ -1,0 +1,128 @@
+﻿<UserControl x:Class="TopVision.Views.ParameterViews.VisionParameterBaseView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:models="clr-namespace:TopVision.Models"
+             x:Name="root"
+             d:DataContext="{d:DesignInstance Type={x:Type models:VisionParameterBase}}"
+             mc:Ignorable="d" 
+             d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TopVision;component/Generic.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <StackPanel Orientation="Vertical"
+                Visibility="{Binding GlobalVisibility, ElementName=root}">
+        <CheckBox Content="{DynamicResource str_UseSrcImage}"
+                  Visibility="{Binding UseInputImageVisibility, ElementName=root}"
+                  IsChecked="{Binding IsUseInputImageAsInput}"
+                  Tag="Check to use original input image instead of processed image"/>
+        <TextBox Tag="{DynamicResource str_Threshold}"
+                 Visibility="{Binding ThresholdVisibility, ElementName=root}"
+                 FontSize="14"
+                 Margin="0 10"
+                 Text="{Binding Threshold, UpdateSourceTrigger=PropertyChanged}"
+                 Grid.Column="1"
+                 Style="{StaticResource TextBoxWithLeftDescriptionStyle}"/>
+        <Expander Header="ROIs"
+                  Visibility="{Binding ROIVisibility, ElementName=root}"
+                  IsExpanded="True">
+            <ItemsControl Style="{StaticResource CRectangleItemsControlStyle}"
+                          ItemsSource="{Binding ROIs}"
+                          Margin="20 0"/>
+        </Expander>
+
+        <TextBox Tag="{DynamicResource str_AdjustTheta}"
+                 Visibility="{Binding ThetaAdjustVisibility, ElementName=root}"
+                 FontSize="14"
+                 Margin="0 10"
+                 Text="{Binding ThetaAdjust, UpdateSourceTrigger=PropertyChanged}"
+                 Grid.Column="1"
+                 Style="{StaticResource TextBoxWithLeftDescriptionStyle}"
+                 ToolTip="Theta result will be multiplied by this value before apply to final result.&#10;The input value should be -1; 0; or 1"/>
+
+        <Expander Header="{DynamicResource str_OutputDisplayOption}"
+                  Visibility="{Binding OutputDisplayOptionVisibility, ElementName=root}"
+                  IsExpanded="True">
+            <StackPanel Orientation="Vertical">
+                <CheckBox Content="{DynamicResource str_DisplayROIbox}"
+                          FontSize="12"
+                          FontWeight="SemiBold"
+                          Margin="20 5"
+                          IsChecked="{Binding OutputMatOption.ShowROI}"/>
+                <CheckBox Content="{DynamicResource str_DisplayResultText}"
+                          FontSize="12"
+                          FontWeight="SemiBold"
+                          Margin="20 5"
+                          IsChecked="{Binding OutputMatOption.ShowResultString}"/>
+                <CheckBox Content="{DynamicResource str_DisplayDetectedMask(s)}"
+                          FontSize="12"
+                          FontWeight="SemiBold"
+                          Margin="20 5"
+                          IsChecked="{Binding OutputMatOption.ShowDetectedMask}"/>
+            </StackPanel>
+        </Expander>
+
+        <CheckBox Content="Use fixture ROI"
+                  Visibility="{Binding UseFixtureAlignVisibility, ElementName=root}"
+                  IsChecked="{Binding UseFixtureAlign}"
+                  Tag="ROI location will be adjust based on align result"/>
+
+        <StackPanel Visibility="{Binding OffsetLimitVisibility, ElementName=root}">
+            <CheckBox Content="Use Offset Limit"
+                      IsChecked="{Binding UseOffsetLimit}"
+                      Tag="If vision detected offset large than limit value, result will be judge as NG"/>
+
+            <Expander Header="Offset Limit"
+                      IsExpanded="True"
+                      Visibility="{Binding UseOffsetLimit, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Label Content="X [mm]"
+                       FontSize="12"
+                       FontWeight="SemiBold"
+                       HorizontalAlignment="Center"/>
+
+                    <Label Content="Y [mm]"
+                       Grid.Column="1"
+                       FontSize="12"
+                       FontWeight="SemiBold"
+                       HorizontalAlignment="Center"/>
+
+                    <Label Content="Theta [degree - &apos;°&apos;]"
+                       Grid.Column="2"
+                       FontSize="12"
+                       FontWeight="SemiBold"
+                       HorizontalAlignment="Center"/>
+
+                    <TextBox Grid.Row="1"
+                         Margin="5 2"
+                         Text="{Binding OffsetLimit.X, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Grid.Row="1"
+                         Grid.Column="1"
+                         Margin="5 2"
+                         Text="{Binding OffsetLimit.Y, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Grid.Row="1"
+                         Grid.Column="2"
+                         Margin="5 2"
+                         Text="{Binding OffsetLimit.Theta, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+            </Expander>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

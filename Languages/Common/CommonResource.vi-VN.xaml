@@ -1,0 +1,141 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary>
+            <system:String x:Key="str_Hello">Xin chào</system:String>
+            <system:String x:Key="str_Pick">Gắp</system:String>
+            <system:String x:Key="str_Place">Đặt</system:String>
+            <system:String x:Key="str_LoadVision">Vị trí PICK Camera</system:String>
+            <system:String x:Key="str_UnLoadVision">Vị trí chờ Camera</system:String>
+            <system:String x:Key="str_AlarmReset">Xóa lỗi Servo</system:String>
+            <system:String x:Key="str_Home">Khởi Tạo</system:String>
+            <system:String x:Key="str_ServoOn">Bật Servo</system:String>
+            <system:String x:Key="str_ServoOff">Tắt Servo</system:String>
+            <system:String x:Key="str_Stop">Dừng Máy</system:String>
+            <system:String x:Key="str_JogPlus">Di Chuyển(+)</system:String>
+            <system:String x:Key="str_JogMinus">Di Chuyển(-)</system:String>
+            <system:String x:Key="str_IncPlus">Tiến(+)</system:String>
+            <system:String x:Key="str_IncMinus">Lùi(-)</system:String>
+            <system:String x:Key="str_MoveAbs">Di Chuyển Abs</system:String>
+            <system:String x:Key="str_PositionName">Vị Trí</system:String>
+            <system:String x:Key="str_VelocityName">Vận Tốc</system:String>
+            <system:String x:Key="str_Velocity">Vận Tốc [mm/s]</system:String>
+            <system:String x:Key="str_Position">Vị Trí [mm]</system:String>
+            <system:String x:Key="str_LoadTrayChange">Vị Trí Đổi Load Tray</system:String>
+            <system:String x:Key="str_UnloadTrayChange">Vị Trí Đổi Unload Tray</system:String>
+            <system:String x:Key="str_LoadTrayLOADPOS">Vị Trí Load Tray</system:String>
+            <system:String x:Key="str_SelectedAxis">Trục</system:String>
+            <system:String x:Key="str_UnloadTrayLOADPOS">Vị Trí Unload Tray</system:String>
+            <system:String x:Key="str_Start">Bắt Đầu</system:String>
+            <system:String x:Key="str_Auto">Tự Động</system:String>
+            <system:String x:Key="str_Recipe">Cài Đặt</system:String>
+            <system:String x:Key="str_Statistic">Thống Kê</system:String>
+            <system:String x:Key="str_MachineName">Tên Máy</system:String>
+            <system:String x:Key="str_Manual">Thủ Công</system:String>
+            <system:String x:Key="str_TowerLampRed">Đèn báo Đỏ</system:String>
+            <system:String x:Key="str_TowerLampYellow">Đèn báo Vàng</system:String>
+            <system:String x:Key="str_TowerLampGreen">Đèn báo Xanh</system:String>
+            <system:String x:Key="str_Buzzer1">Chuông 1</system:String>
+            <system:String x:Key="str_Buzzer2">Chuông 2</system:String>
+            <system:String x:Key="str_Ionizersol">Khử ION</system:String>
+            <system:String x:Key="str_LightUpper">Đèn CamTop</system:String>
+            <system:String x:Key="str_LightUnder">Đèn CamBottom</system:String>
+            <system:String x:Key="str_StartLamp">Đèn SW Start</system:String>
+            <system:String x:Key="str_StopLamp">Đèn SW Stop</system:String>
+            <system:String x:Key="str_OkLamp">Đèn SW OK</system:String>
+            <system:String x:Key="str_HomeLamp">Đèn SW Home</system:String>
+            <system:String x:Key="str_Head1VAC">Khí hút Head1</system:String>
+            <system:String x:Key="str_Head1Purge">Khí thổi Head1</system:String>
+            <system:String x:Key="str_Head2VAC">Khí hút Head2</system:String>
+            <system:String x:Key="str_Head2Purge">Khí thổi Head2</system:String>
+            <system:String x:Key="str_Common">Tổng quan</system:String>
+            <system:String x:Key="str_UnderVision">CameraBottom</system:String>
+            <system:String x:Key="str_UpperVision">CameraTop</system:String>
+            <system:String x:Key="str_Grab">Chụp</system:String>
+            <system:String x:Key="str_Inspect">Kiểm tra</system:String>
+        </ResourceDictionary>
+
+        <!--20211011 Translate Vision UI-->
+        <ResourceDictionary>
+            <system:String x:Key="str_InputImage">Ảnh đầu vào</system:String>
+            <system:String x:Key="str_PreProcessedImage">Tiền xử lí Ảnh</system:String>
+            <system:String x:Key="str_ResultImage">Kết quả</system:String>
+            <system:String x:Key="str_Threshold">Ngưỡng</system:String>
+            <system:String x:Key="str_IgnoreSize">IgnoreSize</system:String>
+            <system:String x:Key="str_OutputDisplayOption">Tùy chọn hiển thị Output</system:String>
+            <system:String x:Key="str_DisplayROIbox">Hiển thị ROI</system:String>
+            <system:String x:Key="str_DisplayResultText">Hiển thị xâu kết quả</system:String>
+            <system:String x:Key="str_DisplayDetectedMask(s)">Đánh dấu vùng nhận diện</system:String>
+            <system:String x:Key="str_AdjustTheta">Điều chỉnh Theta</system:String>
+            <system:String x:Key="str_UseSrcImage">Use Source Image</system:String>
+            <system:String x:Key="str_Height">Chiều Rộng</system:String>
+            <system:String x:Key="str_Width">Chiều Dài</system:String>
+            <system:String x:Key="str_DirectDetectionParameter">Direct Detection Parameter</system:String>
+            <system:String x:Key="str_MinimalPhaseDifference">Minimal Phase Difference</system:String>
+            <system:String x:Key="str_RotateDirection">Hướng Xoay</system:String>
+            <system:String x:Key="str_TemplateImagePath">Thư mục ảnh mẫu</system:String>
+            <system:String x:Key="str_RotatePoint">Tọa độ Tâm xoay</system:String>
+            <system:String x:Key="str_Numberofcase(s)">Number of case(s)</system:String>
+            <system:String x:Key="str_CountourArea">Countour Area</system:String>
+            <system:String x:Key="str_CountourDetectionParameter">Countour Detection Parameter</system:String>
+            <system:String x:Key="str_CircleDetectionParameter">Circle Detection Parameter</system:String>
+            <system:String x:Key="str_FourLinesDetectionParameter">Four Lines Detection Parameter</system:String>
+            <system:String x:Key="str_BoundaryLineDetectionParameter">Boundary Line Detection Parameter</system:String>
+            <system:String x:Key="str_NumberofPointtoDetect">Number of Point to Detect</system:String>
+            <system:String x:Key="str_ReferenceAngle">Reference Angle</system:String>
+            <system:String x:Key="str_NeighbourhoodArea">Neighbourhood Area</system:String>
+            <system:String x:Key="str_AdaptiveThresholdParameter">Adaptive Threshold Parameter</system:String>
+            <system:String x:Key="str_Constant">Constant</system:String>
+            <system:String x:Key="str_BinarizationParameter">Binarization Parameter</system:String>
+            <system:String x:Key="str_BitwiseParameter">Bitwise Parameter</system:String>
+            <system:String x:Key="str_CannyEdgeParameter">Canny Edge Parameter</system:String>
+            <system:String x:Key="str_ApertureSize">Aperture Size</system:String>
+            <system:String x:Key="str_L2Gradient">L2Gradient</system:String>
+            <system:String x:Key="str_ColorConvertToGrayParameter">Color Convert To Gray Parameter</system:String>
+            <system:String x:Key="str_ErodeParameter">Erode Parameter</system:String>
+            <system:String x:Key="str_HistogramParameter">Histogram Parameter</system:String>
+            <system:String x:Key="str_SetIgnoreRegionsParameter">Set Ignore Regions Parameter</system:String>
+            <system:String x:Key="str_IgnoreRectRegions">Ignore Rect Regions</system:String>
+            <system:String x:Key="str_IgnoreCircleRegions">Ignore Circle Regions</system:String>
+            <system:String x:Key="str_SetInspectRegionsParameter">Set Inspect Regions Parameter</system:String>
+            <system:String x:Key="str_InspectRectRegions">Inspect Rect Regions</system:String>
+            <system:String x:Key="str_InspectCircleRegions">Inspect Circle Regions</system:String>
+            <system:String x:Key="str_SetRegionsParameter">Set Regions Parameter</system:String>
+            <system:String x:Key="str_SmoothParameter">Smooth Parameter</system:String>
+            <system:String x:Key="str_GaussianKernelSize">Gaussian Kernel Size</system:String>
+            <system:String x:Key="str_SigmaX">SigmaX</system:String>
+            <system:String x:Key="str_MultiTemplateMatchingParameter">Multi Template Matching Parameter</system:String>
+            <system:String x:Key="str_AdvancedTemplateMatchingParameter">Advanced Template Matching Parameter</system:String>
+            <system:String x:Key="str_TemplateCount">Template Count</system:String>
+            <system:String x:Key="str_ReferenceTemplateCount">Reference Template Count</system:String>
+            <system:String x:Key="str_SingleTemplateMatchingParameter">Single Template Matching Parameter</system:String>
+            <system:String x:Key="str_LoadImage">Load Ảnh</system:String>
+            <system:String x:Key="str_Save">Lưu</system:String>
+            <system:String x:Key="str_SaveImage">Lưu Ảnh</system:String>
+            <system:String x:Key="str_MainProcess">Main Process</system:String>
+            <system:String x:Key="str_SiblingProcessors">Sibling Processors</system:String>
+        </ResourceDictionary>
+
+        <!--// 20211015 Transalate Notification-->
+        <ResourceDictionary>
+            <system:String x:Key="str_RemoveDummy">Loại bỏ phoi ra khỏi Load Tray!</system:String>
+            <system:String x:Key="str_ChangeBothTray">Hãy thay đổi cả 2 Tray!</system:String>
+            <system:String x:Key="str_PushStartButton">Sau đó nhấn nút Start!</system:String>
+            <system:String x:Key="str_Change">Hãy thay đổi {param}!</system:String>
+            <system:String x:Key="str_PushExitButton">Bạn có muốn thoát khỏi chương trình không?</system:String>
+            <system:String x:Key="str_YesButton">Có</system:String>
+            <system:String x:Key="str_NoButton">Không</system:String>
+            <system:String x:Key="str_HomeDoneNotification">HOME máy thành công!</system:String>
+            <system:String x:Key="str_HomeWaring">Hãy HOME máy trước khi chạy!</system:String>
+            <system:String x:Key="str_OnlyHomeButtonNoitfication">Bạn có muốn Home {param}?</system:String>
+
+        </ResourceDictionary>
+    </ResourceDictionary.MergedDictionaries>
+    
+    
+    
+
+
+</ResourceDictionary>

@@ -1,0 +1,150 @@
+﻿<UserControl x:Class="PLV_BracketAssemble.MVVM.Views.RecipeChangeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PLV_BracketAssemble.MVVM.Views"
+             xmlns:vm="clr-namespace:PLV_BracketAssemble.MVVM.ViewModels"
+             xmlns:controls="clr-namespace:TopUI.Controls;assembly=TopUI"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance vm:RecipeChangeViewModel}"
+             d:DesignHeight="516" d:DesignWidth="400">
+
+    <Grid Margin="2 5 2 0">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <UniformGrid Grid.Row="1"
+                     Margin="2 0"
+                     Columns="3">
+            <Button Style="{StaticResource ButtonGlassStyle}"
+                    Content="Refresh"
+                    FontSize="14"
+                    Width="100"
+                    HorizontalAlignment="Left"
+                    Command="{Binding RefreshButtonCommand}"/>
+
+            <Button Style="{StaticResource ButtonGlassStyle}"
+                    Content="Change"
+                    FontSize="14"
+                    Width="100"
+                    HorizontalAlignment="Center"
+                    Command="{Binding ChangeButtonCommand}"/>
+
+            <Button Style="{StaticResource ButtonGlassStyle}"
+                    Content="Delete"
+                    FontSize="14"
+                    Width="100"
+                    HorizontalAlignment="Right"
+                    Command="{Binding DeleteButtonCommand}"/>
+        </UniformGrid>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid Margin="2 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="D:\TOP\TOPEQ\Recipe"
+                       Background="#FFDDDDDD"
+                       BorderBrush="Black"
+                       BorderThickness="1"
+                       VerticalContentAlignment="Center"
+                       HorizontalContentAlignment="Center"
+                       FontWeight="SemiBold"
+                       FontSize="16"/>
+
+                <Button Style="{StaticResource ButtonGlassStyle}"
+                        Grid.Column="1"
+                        Content="Open"
+                        Height="40"
+                        Margin="5 0 0 0"
+                        Command="{Binding OpenButtonCommand}"/>
+            </Grid>
+
+            <Border Margin="2 10 2 5"
+                    BorderBrush="Black"
+                    BorderThickness="1"
+                    Grid.Row="1">
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="-0.2 0"
+                                Orientation="Vertical">
+                        <controls:SingleRecipeInfo IsHeader="True"
+                                                   Margin="1 0"
+                                                   Height="40"/>
+
+                        <ListBox ItemsSource="{Binding ListRecipe}"
+                                 BorderThickness="0"
+                                 Style="{StaticResource ListBoxStyle}"
+                                 BorderBrush="Transparent"
+                                 SelectedItem="{Binding SelectedRecipeItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <controls:SingleRecipeInfo Recipe="{Binding}"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="{x:Type ListBoxItem}">
+                                    <Setter Property="Height"
+                                            Value="35"/>
+
+                                    <Setter Property="FontWeight"
+                                            Value="Normal"/>
+
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                           
+                                                <Border x:Name="Bd"
+                                                    Padding="{TemplateBinding Padding}">
+                                                    <ContentPresenter Margin="-4 -1"/>
+                                                </Border>
+
+                                                <ControlTemplate.Triggers>
+                                                    <MultiTrigger>
+                                                        <MultiTrigger.Conditions>
+                                                            <Condition Property="IsMouseOver" Value="True"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="Cursor" Value="Hand"/>
+                                                    </MultiTrigger>
+
+                                                    <MultiTrigger>
+                                                        <MultiTrigger.Conditions>
+                                                            <Condition Property="Selector.IsSelectionActive" Value="False"/>
+                                                            <Condition Property="IsSelected" Value="True"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="Background" TargetName="Bd" Value="#f9826c"/>
+                                                        <Setter Property="BorderBrush" TargetName="Bd" Value="#f9826c"/>
+                                                    </MultiTrigger>
+
+                                                    <MultiTrigger>
+                                                        <MultiTrigger.Conditions>
+                                                            <Condition Property="Selector.IsSelectionActive" Value="True"/>
+                                                            <Condition Property="IsSelected" Value="True"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="Background" TargetName="Bd" Value="#f9826c"/>
+                                                        <Setter Property="BorderBrush" TargetName="Bd" Value="#f9826c"/>
+                                                        <Setter Property="FontWeight" Value="SemiBold"/>
+                                                    </MultiTrigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                        </ListBox>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

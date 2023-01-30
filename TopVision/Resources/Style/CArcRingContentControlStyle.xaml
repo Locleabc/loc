@@ -1,0 +1,119 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style TargetType="{x:Type ContentControl}"
+           x:Key="CArcRingContentControlStyle">
+        <Style.Setters>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ContentControl}">
+                        <Grid Width="{TemplateBinding Width}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <!--<Label Content="Center X"
+                                   FontWeight="SemiBold"
+                                   HorizontalAlignment="Center"
+                                   HorizontalContentAlignment="Center"
+                                   Grid.Column="0"/>
+                            <Label Content="Center Y"
+                                   FontWeight="SemiBold"
+                                   HorizontalAlignment="Center"
+                                   HorizontalContentAlignment="Center"
+                                   Grid.Column="1"/>-->
+                            <Label Content="Inner Radius"
+                                   FontWeight="SemiBold"
+                                   HorizontalAlignment="Center"
+                                   HorizontalContentAlignment="Center"
+                                   Grid.Column="0"
+                                   Grid.Row="0"/>
+                            <Label Content="Outer Radius"
+                                   FontWeight="SemiBold"
+                                   HorizontalAlignment="Center"
+                                   HorizontalContentAlignment="Center"
+                                   Grid.Column="1"
+                                   Grid.Row="0"/>
+                            <Label Content="Start Angle"
+                                   FontWeight="SemiBold"
+                                   HorizontalAlignment="Center"
+                                   HorizontalContentAlignment="Center"
+                                   Grid.Column="0"
+                                   Grid.Row="2"/>
+                            <Label Content="Stop Angle"
+                                   FontWeight="SemiBold"
+                                   HorizontalAlignment="Center"
+                                   HorizontalContentAlignment="Center"
+                                   Grid.Column="1"
+                                   Grid.Row="2"/>
+
+                            <!--<TextBox Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content.Center.X, UpdateSourceTrigger=PropertyChanged}"
+                                     Height="30"
+                                     FontWeight="Regular"
+                                     VerticalAlignment="Center"
+                                     HorizontalContentAlignment="Center"
+                                     Margin="2 5 2 0"
+                                     Grid.Row="1"
+                                     Grid.Column="0"
+                                     IsReadOnly="True"/>
+
+                            <TextBox Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content.Center.Y, UpdateSourceTrigger=PropertyChanged}"
+                                     Height="30"
+                                     FontWeight="Regular"
+                                     VerticalAlignment="Center"
+                                     HorizontalContentAlignment="Center"
+                                     Margin="2 5 2 0"
+                                     Grid.Row="1"
+                                     Grid.Column="1"
+                                     IsReadOnly="True"/>-->
+
+                            <TextBox Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content.InnerRadius, UpdateSourceTrigger=PropertyChanged}"
+                                     Height="30"
+                                     FontWeight="Regular"
+                                     VerticalAlignment="Center"
+                                     HorizontalContentAlignment="Center"
+                                     Margin="2 5 2 0"
+                                     Grid.Row="1"
+                                     Grid.Column="0"/>
+
+                            <TextBox Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content.OuterRadius, UpdateSourceTrigger=PropertyChanged}"
+                                     Height="30"
+                                     FontWeight="Regular"
+                                     VerticalAlignment="Center"
+                                     HorizontalContentAlignment="Center"
+                                     Margin="2 5 2 0"
+                                     Grid.Row="1"
+                                     Grid.Column="1"/>
+
+                            <TextBox Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content.StartAngle, UpdateSourceTrigger=PropertyChanged}"
+                                     Height="30"
+                                     FontWeight="Regular"
+                                     VerticalAlignment="Center"
+                                     HorizontalContentAlignment="Center"
+                                     Margin="2 5 2 0"
+                                     Grid.Row="3"
+                                     Grid.Column="0"/>
+
+                            <TextBox Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content.EndAngle, UpdateSourceTrigger=PropertyChanged}"
+                                     Height="30"
+                                     FontWeight="Regular"
+                                     VerticalAlignment="Center"
+                                     HorizontalContentAlignment="Center"
+                                     Margin="2 5 2 0"
+                                     Grid.Row="3"
+                                     Grid.Column="1"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+    </Style>
+</ResourceDictionary>

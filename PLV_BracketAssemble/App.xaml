@@ -1,0 +1,91 @@
+﻿<Application x:Class="PLV_BracketAssemble.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewModels="clr-namespace:PLV_BracketAssemble.MVVM.ViewModels"
+             xmlns:views="clr-namespace:PLV_BracketAssemble.MVVM.Views">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/TopUI;component/Themes/Generic.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/TopVision;component/Generic.xaml"/>
+
+                <!-- Language setting, last Resource in incoming list will be display as default
+                    (in case, no culture setting in run time) -->
+                <ResourceDictionary Source="pack://application:,,,/TopLang;component/Generics/Language.ko-KR.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/TopLang;component/Generics/Language.vi-VN.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/TopLang;component/Generics/Language.zh.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/TopLang;component/Generics/Language.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- This application using "ViewModel-first approach"
+                 These lines behind define with view belong to which viewmodel -->
+            <DataTemplate DataType="{x:Type viewModels:HeaderViewModel}">
+                <views:HeaderView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:InitViewModel}">
+                <views:InitView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:AutoViewModel}">
+                <views:AutoView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:ManualViewModel}">
+                <views:ManualView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:IOViewModel}">
+                <views:IOView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:RecipeViewModel}">
+                <views:RecipeView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:VisionTeachingViewModel}">
+                <views:VisionTeachingView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:StatisticViewModel}">
+                <views:StatisticView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:FooterViewModel}">
+                <views:FooterView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:VisionAutoViewModel}">
+                <views:VisionAutoView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:LicenseActiveViewModel}">
+                <views:LicenseActiveView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:WorkDataViewModel}">
+                <views:WorkDataView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:RecipeChangeViewModel}">
+                <views:RecipeChangeView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:ManualControlMotionViewModel}">
+                <views:ManualControlMotionView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:TrayViewModel}">
+                <views:TrayView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:TerminateViewModel}">
+                <views:TerminateView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:MainContentViewModel}">
+                <views:MainContentView/>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

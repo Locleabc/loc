@@ -1,0 +1,294 @@
+﻿<UserControl x:Class="PLV_BracketAssemble.MVVM.Views.AutoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:PLV_BracketAssemble.MVVM.Views"
+             xmlns:viewModels="clr-namespace:PLV_BracketAssemble.MVVM.ViewModels"
+             xmlns:controls="clr-namespace:TopUI.Controls;assembly=TopUI"
+             xmlns:logging="clr-namespace:TopCom.LOG;assembly=TopCom"
+             xmlns:define="clr-namespace:PLV_BracketAssemble.Define"
+             xmlns:UIDefine="clr-namespace:TopUI.Define;assembly=TopUI"
+             d:DataContext="{d:DesignInstance Type=viewModels:AutoViewModel}"
+             d:Width="1778" d:Height="965"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style TargetType="Button"
+               BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="FontSize"
+                    Value="30"/>
+
+            <Setter Property="RenderTransformOrigin"
+                            Value="0.5, 0.5"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderThickness="1"
+                                BorderBrush="LightGray">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsPressed"
+                         Value="True">
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <ScaleTransform ScaleX="0.98"
+                                            ScaleY="0.98"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="590"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition />
+            <RowDefinition Height="250"/>
+        </Grid.RowDefinitions>
+        
+        <ContentControl Content="{Binding WorkDataVM}"
+                        Grid.ColumnSpan="2"/>
+        
+        <!--Tray-->
+        <ContentControl Content="{Binding InputTrayVM}"
+                        IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning, UpdateSourceTrigger=PropertyChanged}"
+                        Grid.Row="1"/>
+
+        <ContentControl Content="{Binding OutputTrayVM}"
+                        IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning, UpdateSourceTrigger=PropertyChanged}"
+                        Grid.Column="1"
+                        Grid.Row="1"/>
+        
+        <controls:LogDisplayer LogSource="{Binding Notification, Source={x:Static logging:UILog.Appender}}"
+                               Grid.Row="2"
+                               Grid.ColumnSpan="2"/>
+
+        <Grid Grid.Column="2"
+              Grid.RowSpan="3">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="660"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <ContentControl Content="{Binding Source={x:Static define:CDef.MainViewModel}, Path=MainContentVM.VisionAutoVM}"/>
+
+            <Border Grid.Row="1"
+                    BorderBrush="Black"
+                    BorderThickness="1"
+                    Margin="0 -1 0 0">
+                <!--<controls:AutoOperationButtons Visibility="{Binding InitVM.InitCompleted, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                               HomeCommand="{Binding HomeCommand}"
+                                               StartCommand="{Binding StartCommand}"
+                                               StopCommand="{Binding StopCommand}"
+                                               Orientation="Vertical"
+                                               ContainChangeButton="True"
+                                               ButtonWidth="590"
+                                               ButtonHeight="104"
+                                               FontSize="30"/>-->
+                <Grid Visibility="{Binding Source={x:Static define:CDef.MainViewModel}, Path=InitVM.InitCompleted, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="52"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Button Content="Picker Vacuum 1"
+                            Margin="2"
+                            FontSize="14"
+                            IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning, UpdateSourceTrigger=PropertyChanged}"
+                            Command="{Binding Source={x:Static define:CDef.MainViewModel},Path=MainContentVM.RecipeVM.ManualControlVM.ControlPickerButtonCommand}"
+                            CommandParameter="Picker1_Vacuum">
+                        <Button.Style>
+                            <Style TargetType="Button"
+                                   BasedOn="{StaticResource ButtonGlassStyle}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Source={x:Static define:CDef.IO},Path=Output.Picker1_Vac}"
+                                                 Value="True">
+                                        <Setter Property="Foreground"
+                                                Value="{StaticResource ColorButtonForegroud_HighLight}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Button Content="Picker Vacuum 2"
+                            Grid.Column="1"
+                            Margin="2"
+                            IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning, UpdateSourceTrigger=PropertyChanged}"
+                            Command="{Binding Source={x:Static define:CDef.MainViewModel},Path=MainContentVM.RecipeVM.ManualControlVM.ControlPickerButtonCommand}"
+                            CommandParameter="Picker2_Vacuum"
+                            FontSize="14">
+                        <Button.Style>
+                            <Style TargetType="Button"
+                                   BasedOn="{StaticResource ButtonGlassStyle}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Source={x:Static define:CDef.IO},Path=Output.Picker2_Vac}"
+                                                 Value="True">
+                                        <Setter Property="Foreground"
+                                                Value="{StaticResource ColorButtonForegroud_HighLight}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Button Command="{Binding HomeCommand}"
+                            Content="HOME"
+                            Grid.Row="1"
+                            Margin="0 0 2 2">
+                        <Button.Style>
+                            <Style TargetType="Button" 
+                                   BasedOn="{StaticResource {x:Type Button}}">
+                                <Setter Property="Background"
+                                        Value="#ffffba59"/>
+
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}"
+                                                    BorderThickness="1"
+                                                    BorderBrush="LightGray"
+                                                    CornerRadius="3">
+                                                <ContentPresenter HorizontalAlignment="Center"
+                                                                    VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver"
+                                                Value="True">
+                                        <Setter Property="Background"
+                                                Value="#ccffba59"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Button Command="{Binding ChangeCommand}"
+                            Content="CHANGE"
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            Margin="2 0 0 2">
+                        <Button.Style>
+                            <Style TargetType="Button"
+                                BasedOn="{StaticResource {x:Type Button}}">
+                                <Setter Property="Background"
+                                        Value="#cbc9c9"/>
+
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}"
+                                                    BorderThickness="1"
+                                                    BorderBrush="LightGray"
+                                                    CornerRadius="3">
+                                                <ContentPresenter HorizontalAlignment="Center"
+                                                                VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver"
+                                             Value="True">
+                                        <Setter Property="Background"
+                                                Value="#e2dede"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Button Command="{Binding StartCommand}"
+                            Content="START"
+                            Grid.Row="2"
+                            Margin="0 2 2 0">
+                        <Button.Style>
+                            <Style TargetType="Button"
+                                   BasedOn="{StaticResource {x:Type Button}}">
+                                <Setter Property="Background" Value="#ff87f5b5"/>
+
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}"
+                                                    BorderThickness="1"
+                                                    BorderBrush="LightGray"
+                                                    CornerRadius="3">
+                                                <ContentPresenter HorizontalAlignment="Center"
+                                                                VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver"
+                                             Value="True">
+                                        <Setter Property="Background"
+                                                Value="#cc87f5b5"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Button Command="{Binding StopCommand}"
+                            Grid.Column="1"
+                            Grid.Row="2"
+                            Content="STOP"
+                            Margin="2 2 0 0">
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                    <Setter Property="Background"
+                                            Value="#ffff8c8c"/>
+
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}"
+                                                        BorderThickness="1"
+                                                        BorderBrush="LightGray"
+                                                        CornerRadius="3">
+                                                    <ContentPresenter HorizontalAlignment="Center"
+                                                                  VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver"
+                                                 Value="True">
+                                            <Setter Property="Background"
+                                                    Value="#ccff8c8c"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

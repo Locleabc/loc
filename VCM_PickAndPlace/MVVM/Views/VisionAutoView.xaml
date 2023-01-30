@@ -1,0 +1,250 @@
+﻿<UserControl x:Class="VCM_PickAndPlace.MVVM.Views.VisionAutoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VCM_PickAndPlace.MVVM.Views"
+             xmlns:define="clr-namespace:VCM_PickAndPlace.Define"
+             xmlns:cvtVision="clr-namespace:TopVision.Converters;assembly=TopVision"
+             xmlns:uiCtrls="clr-namespace:TopUI.Controls;assembly=TopUI"
+             mc:Ignorable="d" 
+             x:Name="root"
+             xmlns:viewModels="clr-namespace:VCM_PickAndPlace.MVVM.ViewModels"
+             xmlns:controls="clr-namespace:VisionToolBox.Controls;assembly=VisionToolBox"
+             d:DataContext="{d:DesignInstance Type=viewModels:VisionAutoViewModel}"
+             d:DesignHeight="980" d:DesignWidth="490">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <cvtVision:MatToImageSourceConverter x:Key="MatToImageSourceConverter"/>
+                </ResourceDictionary>
+
+                <ResourceDictionary>
+                    <Style TargetType="{x:Type Label}">
+                        <Style.Setters>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Label}">
+                                        <TextBlock Text="{TemplateBinding Content}"
+                                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                   TextWrapping="Wrap"/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+
+                            <Setter Property="FontWeight"
+                                    Value="SemiBold"/>
+
+                            <Setter Property="HorizontalContentAlignment"
+                                    Value="Center"/>
+
+                            <Setter Property="VerticalContentAlignment"
+                                    Value="Center"/>
+
+                            <Setter Property="Foreground"
+                                    Value="DarkBlue"/>
+
+                            <Setter Property="FontSize"
+                                    Value="12"/>
+                        </Style.Setters>
+                    </Style>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="90"/>
+            </Grid.ColumnDefinitions>
+
+            <controls:ImageViewer DisplaySource="{Binding DataContext.OutputMat_TOP, ElementName=root, Converter={StaticResource MatToImageSourceConverter}}"
+                                  Name="ImageTop"/>
+
+            <uiCtrls:CenterLines Width="{Binding ActualWidth, ElementName=ImageTop}"
+                                 Height="{Binding ActualHeight, ElementName=ImageTop}"
+                                 PixelSize="6.9"/>
+
+            <StackPanel Grid.Column="1"
+                        VerticalAlignment="Center">
+                <Label Content="Load Vision"
+                       Height="40"/>
+
+                <Button Height="50"
+                        Margin="5"
+                        Background="{Binding IsLoadVisionLive, Converter={StaticResource CommonButtonBooleanToHightLightColorConverter}}"
+                        Command="{Binding LiveCommand}"
+                        CommandParameter="{x:Static define:EVisionArea.LOAD}">Live</Button>
+
+                <Button Height="50"
+                        Margin="5"
+                        Command="{Binding GrabCommand_Load}"
+                        Content="{DynamicResource str_Grab}"/>
+
+                <Button Height="50"
+                        Margin="5"
+                        Command="{Binding InspectCommand}"
+                        CommandParameter="{x:Static define:EVisionArea.LOAD}"
+                        Content="{DynamicResource str_Inspect}"/>
+
+                <Button Height="50"
+                        Margin="5"
+                        Command="{Binding TeachCommand}"
+                        CommandParameter="{x:Static define:EVisionArea.LOAD}"
+                        Content="{DynamicResource str_Teach}"/>
+            </StackPanel>
+        </Grid>
+
+        <Separator Grid.Row="1"
+                   Margin="10 0"
+                   Background="Silver"/>
+
+        <Grid Grid.Row="2"
+              IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="90"/>
+            </Grid.ColumnDefinitions>
+
+            <controls:ImageViewer DisplaySource="{Binding DataContext.OutputMat_BOT, ElementName=root, Converter={StaticResource MatToImageSourceConverter}}"
+                                  Name="ImageBot"/>
+
+            <uiCtrls:CenterLines Width="{Binding ActualWidth, ElementName=ImageBot}"
+                                 Height="{Binding ActualHeight, ElementName=ImageBot}"
+                                 PixelSize="6.9"/>
+            
+            <StackPanel Grid.Column="1"
+                        VerticalAlignment="Center">
+                <Label Content="Under Vision"
+                       Height="40"/>
+                
+                <Button Height="50" Margin="5"
+                        Background="{Binding IsUnderVisionLive, Converter={StaticResource CommonButtonBooleanToHightLightColorConverter}}"
+                        Command="{Binding LiveCommand}"
+                        CommandParameter="{x:Static define:EVisionArea.UNDER}">Live</Button>
+
+                <Button Height="50"
+                        Margin="5"
+                        Command="{Binding GrabCommand_Under}"
+                        Content="{DynamicResource str_Grab}"/>
+
+                <Button Height="50"
+                        Margin="5"
+                        Command="{Binding InspectCommand}"
+                        CommandParameter="{x:Static define:EVisionArea.UNDER}"
+                        Content="{DynamicResource str_Inspect}"/>
+
+                <Button Height="50"
+                        Margin="5"
+                        Command="{Binding TeachCommand}"
+                        CommandParameter="{x:Static define:EVisionArea.UNDER}"
+                        Content="{DynamicResource str_Teach}"/>
+            </StackPanel>
+        </Grid>
+
+        <Separator Grid.Row="3"
+                   Margin="10 0"
+                   Background="Silver"/>
+
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="90"/>
+            </Grid.ColumnDefinitions>
+
+            <controls:ImageViewer DisplaySource="{Binding DataContext.OutputMat_BASE, ElementName=root, Converter={StaticResource MatToImageSourceConverter}}"
+                                  Name="ImageBase"/>
+
+            <uiCtrls:CenterLines Width="{Binding ActualWidth, ElementName=ImageBase}"
+                                 Height="{Binding ActualHeight, ElementName=ImageBase}"
+                                 PixelSize="6.9"/>
+
+            <StackPanel Grid.Column="1"
+                        VerticalAlignment="Center">
+
+                <Grid Margin="5 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="16"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="16"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Style="{StaticResource ButtonNakedStyle}"
+                            Command="{Binding UnloadInspectProcessChangeCommand}"
+                            Grid.Column="0"
+                            Width="24"
+                            Height="24"
+                            Grid.Row="1">
+                        <Path Data="{StaticResource ExpandMorePath}"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              Fill="Gray">
+                            <Path.LayoutTransform>
+                                <RotateTransform Angle="90"></RotateTransform>
+                            </Path.LayoutTransform>
+                        </Path>
+                    </Button>
+
+                    <Label Grid.Column="1"
+                           Content="{Binding UnloadInspectCurrentProcessText}"
+                           Height="40"
+                           Width="50"/>
+
+                    <Button Style="{StaticResource ButtonNakedStyle}"
+                            Command="{Binding UnloadInspectProcessChangeCommand}"
+                            Grid.Column="2"
+                            Width="24"
+                            Height="24"
+                            Grid.Row="1">
+                        <Path Data="{StaticResource ExpandLessPath}"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              Fill="Gray">
+                            <Path.LayoutTransform>
+                                <RotateTransform Angle="90"></RotateTransform>
+                            </Path.LayoutTransform>
+                        </Path>
+                    </Button>
+                </Grid>
+                
+                <Button Height="50"
+                        Margin="5"
+                        Background="{Binding IsUnloadVisionLive, Converter={StaticResource CommonButtonBooleanToHightLightColorConverter}}"
+                        Command="{Binding LiveCommand}"
+                        CommandParameter="{Binding UnloadInspectCurrentProcess}">Live</Button>
+
+                <Button Height="50"
+                        Margin="5"
+                        Command="{Binding GrabCommand_Unload}"
+                        CommandParameter="{Binding UnloadInspectCurrentProcess}"
+                        Content="{DynamicResource str_Grab}"/>
+
+                <Button Height="50"
+                        Margin="5"
+                        Command="{Binding InspectCommand}"
+                        CommandParameter="{Binding UnloadInspectCurrentProcess}"
+                        Content="{DynamicResource str_Inspect}"/>
+
+                <Button Height="50"
+                        Margin="5"
+                        Command="{Binding TeachCommand}"
+                        CommandParameter="{Binding UnloadInspectCurrentProcess}"
+                        Content="{DynamicResource str_Teach}"/>
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</UserControl>

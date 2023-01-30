@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="TopUI.Controls.MotionInforPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TopUI.Controls"
+             mc:Ignorable="d" x:Name="root"
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/TopUI;component/Themes/Generic.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <!--SelectedItem="{Binding SelectedAxis, ElementName=root, Mode=OneWayToSource}" SelectedIndex="0"-->
+
+    <DataGrid ItemsSource="{Binding MotionList, ElementName=root, Mode=OneWay}"
+              SelectedItem="{Binding SelectedAxis, ElementName=root, Mode=OneWayToSource}"
+              ColumnWidth="*"
+              CanUserSortColumns="False"
+              MouseLeftButtonUp="DataGrid_MouseLeftButtonUp"
+              Background="Silver"
+              AutoGenerateColumns="False"
+              SelectionMode="Single"
+              SelectionUnit="FullRow"
+              SelectedIndex="0">
+
+        <DataGrid.RowStyle>
+            <Style TargetType="{x:Type DataGridRow}">
+                <Setter Property="MinHeight"
+                        Value="33"/>
+            </Style>
+        </DataGrid.RowStyle>
+
+        <DataGrid.CellStyle>
+            <Style TargetType="{x:Type DataGridCell}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type DataGridCell}">
+                            <Grid Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </DataGrid.CellStyle>
+
+        <DataGrid.Columns>
+            <DataGridTextColumn     Header="Index"
+                                    FontSize="12"
+                                    Binding="{Binding Index}"
+                                    IsReadOnly="True"/>
+            
+            <DataGridTextColumn     Header="Axis"
+                                    Binding="{Binding AxisName}"
+                                    IsReadOnly="True"/>
+            
+            <DataGridCheckBoxColumn Header="Connected"
+                                    Binding="{Binding Status.IsConnected, Mode=OneWay}"
+                                    IsReadOnly="True"/>
+            
+            <DataGridCheckBoxColumn Header="Motion On"
+                                    Binding="{Binding Status.IsMotionOn}"
+                                    IsReadOnly="True"/>
+            
+            <DataGridTextColumn     Header="Cmd Pos."
+                                    Binding="{Binding Status.CommandPosition, StringFormat={}{0:0.###}}"
+                                    IsReadOnly="True"/>
+            
+            <DataGridTextColumn     Header="Act Pos."
+                                    Binding="{Binding Status.ActualPosition, StringFormat={}{0:0.###}}"
+                                    IsReadOnly="True"/>
+            
+            <DataGridTextColumn     Header="Speed"
+                                    Binding="{Binding Speed, Mode=TwoWay}"
+                                    IsReadOnly="True"/>
+            
+            <DataGridCheckBoxColumn Header="Motion End"
+                                    Binding="{Binding Status.IsMotionDone}"
+                                    IsReadOnly="True"/>
+            
+            <DataGridCheckBoxColumn Header="Home End"
+                                    Binding="{Binding Status.IsHomeDone}"
+                                    IsReadOnly="True"/>
+            
+            <DataGridCheckBoxColumn Header="Alarm"
+                                    Binding="{Binding Status.AlarmStatus.IsAlarm}"
+                                    IsReadOnly="True"/>
+        </DataGrid.Columns>
+    </DataGrid>
+</UserControl>

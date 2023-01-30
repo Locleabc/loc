@@ -1,0 +1,80 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style TargetType="RadioButton"
+           x:Key="RadioButtonUnderMarkStyle">
+        <Style.Setters>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2"/>
+                            </Grid.RowDefinitions>
+
+                            <ContentPresenter Grid.Row="0"
+                                              Margin="10 0"/>
+
+                            <Border Grid.Row="1">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsChecked}" Value="True">
+                                                <Setter Property="Background"
+                                                        Value="#f9826c"/>
+                                                
+                                                <Setter Property="Visibility"
+                                                        Value="Visible"/>
+                                            </DataTrigger>
+                                            
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsMouseOver}"
+                                                         Value="True">
+                                                <Setter Property="Background"
+                                                        Value="#d1d5da"/>
+                                                
+                                                <Setter Property="Visibility"
+                                                        Value="Visible"/>
+                                            </DataTrigger>
+                                           
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsMouseOver}"
+                                                               Value="True"/>
+                                                    
+                                                    <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsChecked}"
+                                                               Value="True"/>
+                                                </MultiDataTrigger.Conditions>
+                                                
+                                                <MultiDataTrigger.Setters>
+                                                    <Setter Property="Background"
+                                                            Value="#f9826c"/>
+                                                </MultiDataTrigger.Setters>
+                                            </MultiDataTrigger>
+                                        </Style.Triggers>
+                                        
+                                        <Setter Property="Visibility"
+                                                Value="Hidden"/>
+                                    </Style>
+                                </Border.Style>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="FontSize"
+                    Value="14"/>
+            <!--<Setter Property="Background" Value="Red"/>-->
+        </Style.Setters>
+
+        <Style.Triggers>
+            <Trigger Property="IsChecked"
+                     Value="True">
+                <Setter Property="FontWeight"
+                        Value="Bold"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+</ResourceDictionary>

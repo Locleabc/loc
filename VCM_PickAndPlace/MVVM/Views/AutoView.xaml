@@ -1,0 +1,195 @@
+﻿<UserControl x:Class="VCM_PickAndPlace.MVVM.Views.AutoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:VCM_PickAndPlace.MVVM.Views"
+             xmlns:viewModels="clr-namespace:VCM_PickAndPlace.MVVM.ViewModels"
+             xmlns:controls="clr-namespace:TopUI.Controls;assembly=TopUI"
+             xmlns:logging="clr-namespace:TopCom.LOG;assembly=TopCom"
+             xmlns:define="clr-namespace:VCM_PickAndPlace.Define"
+             xmlns:UIDefine="clr-namespace:TopUI.Define;assembly=TopUI"
+             d:DataContext="{d:DesignInstance Type=viewModels:AutoViewModel}"
+             mc:Ignorable="d"
+             d:Height="909" d:Width="648">
+
+    <DockPanel>
+        <ContentControl Content="{Binding WorkDataVM}"
+                        DockPanel.Dock="Top"
+                        Height="80"/>
+
+        <controls:LogDisplayer DockPanel.Dock="Bottom"
+                               Height="170"
+                               LogSource="{Binding Notification, Source={x:Static logging:UILog.Appender}}"/>
+
+        <UniformGrid DockPanel.Dock="Bottom"
+                     Height="60"
+                     Columns="5"
+                     IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}">
+            <Button Margin="3 3"
+                    Content="Reset Count Data"
+                    Command="{Binding ResetCountDataCommand}"/>
+
+            <Button Margin="3 3"
+                    Content="Reset Loading Tray"
+                    Command="{Binding ResetLoadingTrayCommand}"/>
+
+            <Button Margin="3 3"
+                    Content="Reset Unloading Tray"
+                    Command="{Binding ResetUnloadingTrayCommand}"/>
+
+            <Button Margin="3 3"
+                    Content="{DynamicResource str_LoadTrayChange}"
+                    Command="{Binding LoadingTrayChangeCommand}"/>
+
+            <Button Margin="3 3"
+                    Content="{DynamicResource str_UnloadTrayChange}"
+                    Command="{Binding UnloadingTrayChangeCommand}"/>
+        </UniformGrid>
+
+        <Grid Margin="0 5 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            
+            <!--Height="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth, Converter={StaticResource PercentageConverter}, ConverterParameter=0.625}"-->
+            <Grid x:Name="TrayGrid"
+                  Height="560"
+                  Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+                <ItemsControl ItemsSource="{Binding Source={x:Static define:CDef.LoadingTrays}}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="1">
+                                <UniformGrid.LayoutTransform>
+                                    <TransformGroup>
+                                        <RotateTransform Angle="180"/>
+                                        <ScaleTransform ScaleX="-1"/>
+                                    </TransformGroup>
+                                </UniformGrid.LayoutTransform>
+                            </UniformGrid>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <controls:Tray TrayInfo="{Binding .}"
+                                           IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}"
+                                           Background="Black"
+                                           BorderBrush="Gray"
+                                           BorderThickness="1">
+                                <controls:Tray.LayoutTransform>
+                                    <TransformGroup>
+                                        <RotateTransform Angle="180"/>
+                                        <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                                        <SkewTransform AngleY="0" AngleX="0"/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </controls:Tray.LayoutTransform>
+                            </controls:Tray>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                
+                <ItemsControl ItemsSource="{Binding Source={x:Static define:CDef.UnloadingTrays}}"
+                              Grid.Column="1">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="1">
+                                <UniformGrid.LayoutTransform>
+                                    <TransformGroup>
+                                        <RotateTransform Angle="180"/>
+                                        <ScaleTransform ScaleX="-1"/>
+                                    </TransformGroup>
+                                </UniformGrid.LayoutTransform>
+                            </UniformGrid>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <controls:Tray TrayInfo="{Binding .}"
+                                           IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}"
+                                           Background="Black"
+                                           BorderBrush="Gray"
+                                           BorderThickness="1">
+                                <controls:Tray.LayoutTransform>
+                                    <TransformGroup>
+                                        <RotateTransform Angle="180"/>
+                                        <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                                        <SkewTransform AngleY="0" AngleX="0"/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </controls:Tray.LayoutTransform>
+                            </controls:Tray>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <!--<controls:Tray TrayInfo="{Binding Source={x:Static define:CDef.LoadingTray2}}"
+                               IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}"
+                               Background="Black"
+                               BorderBrush="Gray"
+                               BorderThickness="1"/>
+
+                <controls:Tray TrayInfo="{Binding Source={x:Static define:CDef.LoadingTray1}}"
+                               Grid.Row="1"
+                               IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}"
+                               Background="Black"
+                               BorderBrush="Gray"
+                               BorderThickness="1"/>-->
+
+                <!--<controls:Tray TrayInfo="{Binding Source={x:Static define:CDef.UnloadingTray2}}"
+                               Grid.Column="1"
+                               IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}"
+                               Background="Black"
+                               BorderBrush="Gray"
+                               BorderThickness="1"/>
+
+                <controls:Tray TrayInfo="{Binding Source={x:Static define:CDef.UnloadingTray1}}"
+                               Grid.Column="1" Grid.Row="1"
+                               IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}"
+                               Background="Black"
+                               BorderBrush="Gray"
+                               BorderThickness="1"/>-->
+
+            </Grid>
+
+            <Grid Grid.Row="2"
+                  Margin="0 5">
+                <ItemsControl ItemsSource="{Binding Source={x:Static UIDefine:CColors.CellColor}}">
+                    <!-- ItemsPanelTemplate -->
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="10">
+                            </UniformGrid>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Height="25"
+                                    Margin="1"
+                                    MinWidth="50"
+                                    CornerRadius="0"
+                                    Background="{Binding Value}">
+                                <TextBlock HorizontalAlignment="Center"
+                                           Margin="2 0"
+                                           TextWrapping="Wrap"
+                                           VerticalAlignment="Center"
+                                           Text="{Binding Key}"
+                                           Foreground="White"/>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+        </Grid>
+    </DockPanel>
+</UserControl>

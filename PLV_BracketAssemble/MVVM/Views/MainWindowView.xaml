@@ -1,0 +1,47 @@
+﻿<Window x:Class="PLV_BracketAssemble.MVVM.Views.MainWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:PLV_BracketAssemble.MVVM.ViewModels"
+        mc:Ignorable="d"
+        Title="MainWindowView"
+        WindowState="Maximized"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="True"
+        d:Height="1080" d:Width="1920"
+        d:DataContext="{d:DesignInstance Type=viewModels:MainWindowViewModel}"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing">
+
+    <Border Background="#f6f8fa"
+            BorderThickness="2"
+            BorderBrush="Gray">
+        <Grid>
+            <!-- Grid rows and columns define -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+
+            <!-- HEADER -->
+            <ContentControl Content="{Binding HeaderVM}"
+                            Grid.ColumnSpan="2"
+                            MouseLeftButtonDown="HeaderVM_MouseLeftButtonDown"/>
+
+            <ContentControl Grid.Row="1"
+                            Content="{Binding ShowVM}"/>
+
+            <!-- FOOTER -->
+            <ContentControl Grid.Row="2"
+                            Grid.ColumnSpan="2"
+                            Content="{Binding FooterVM}"/>
+        </Grid>
+
+        <!-- Make sure all contents inside the box -->
+
+    </Border>
+</Window>

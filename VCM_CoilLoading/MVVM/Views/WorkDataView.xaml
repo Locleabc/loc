@@ -1,0 +1,356 @@
+﻿<UserControl x:Class="VCM_CoilLoading.MVVM.Views.WorkDataView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VCM_CoilLoading.MVVM.Views"
+             xmlns:define="clr-namespace:VCM_CoilLoading.Define"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <Style TargetType="{x:Type TextBox}">
+            <Style.Setters>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type TextBox}">
+                            <Border BorderBrush="Black"
+                                    BorderThickness="1"
+                                    Background="{TemplateBinding Background}">
+                                <Grid>
+                                    <Border HorizontalAlignment="Left"
+                                            VerticalAlignment="Top"
+                                            Width="Auto"
+                                            Height="Auto"
+                                            BorderThickness="1"
+                                            BorderBrush="Black"
+                                            Margin="-1 -1 0 0">
+                                        <TextBlock Background="Gainsboro"
+                                                   Padding="5 0"
+                                                   Text="{TemplateBinding Tag}"/>
+                                    </Border>
+
+                                    <TextBlock Text="{TemplateBinding Text}"
+                                               VerticalAlignment="Bottom"
+                                               HorizontalAlignment="Right"
+                                               Margin="0 0 2 0"/>
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="Background" Value="WhiteSmoke"/>
+            </Style.Setters>
+
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="TextBox.TextChanged">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation FillBehavior="Stop" 
+                                            Storyboard.TargetProperty="(TextBox.Foreground).(SolidColorBrush.Color)" 
+                                            From="DarkBlue" To="Blue" Duration="0:0:0.3"/>
+                            <ColorAnimation BeginTime="0:0:0.3" FillBehavior="Stop" 
+                                            Storyboard.TargetProperty="(TextBox.Foreground).(SolidColorBrush.Color)" 
+                                            From="Blue" To="DarkBlue" Duration="0:0:0.3"/>
+                            <ColorAnimation BeginTime="0:0:6" FillBehavior="Stop" 
+                                            Storyboard.TargetProperty="(TextBox.Foreground).(SolidColorBrush.Color)" 
+                                            From="DarkBlue" To="Blue" Duration="0:0:0.3"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <Border BorderBrush="Black"
+            BorderThickness="1">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.7*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Count"
+                   VerticalContentAlignment="Center"
+                   HorizontalContentAlignment="Center"
+                   FontWeight="Bold"
+                   Style="{x:Null}"
+                   BorderBrush="Black"
+                   BorderThickness="1"
+                   Background="WhiteSmoke"
+                   FontSize="14"
+                   ToolTip="Count Data"/>
+
+            <Label Content="T/T"
+                   VerticalContentAlignment="Center"
+                   HorizontalContentAlignment="Center"
+                   FontWeight="Bold"
+                   Style="{x:Null}"
+                   BorderBrush="Black"
+                   BorderThickness="1"
+                   Grid.Row="1"
+                   Background="WhiteSmoke"
+                   FontSize="14"
+                   ToolTip="Takt Time Data"/>
+
+            <TextBox Text="{Binding Source={x:Static define:Datas.WorkData}, Path=CountData.Total, StringFormat='{}{0:0.###} EA'}"
+                     Tag="Total"
+                     Grid.Column="1"/>
+
+            <TextBox Text="{Binding Source={x:Static define:Datas.WorkData}, Path=CountData.OK, StringFormat='{}{0:0.###} EA'}"
+                     Tag="OK"
+                     Grid.Column="2"/>
+
+            <TextBox Text="{Binding Source={x:Static define:Datas.WorkData}, Path=CountData.PickNG, StringFormat='{}{0:0.###} EA'}"
+                     Tag="PickNG"
+                     Grid.Column="3"
+                     Grid.Row="0">
+                <TextBox.Style>
+                    <Style TargetType="{x:Type TextBox}"
+                           BasedOn="{StaticResource {x:Type TextBox}}">
+                        <Style.Triggers>
+                            <EventTrigger RoutedEvent="TextBox.TextChanged">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation FillBehavior="Stop" 
+                                                        Storyboard.TargetProperty="(TextBox.Foreground).(SolidColorBrush.Color)" 
+                                                        From="DarkRed" To="Red" Duration="0:0:0.3"/>
+                                        <ColorAnimation BeginTime="0:0:0.3" FillBehavior="Stop" 
+                                                        Storyboard.TargetProperty="(TextBox.Foreground).(SolidColorBrush.Color)" 
+                                                        From="Red" To="DarkRed" Duration="0:0:0.3"/>
+                                        <ColorAnimation BeginTime="0:0:6" FillBehavior="Stop" 
+                                                        Storyboard.TargetProperty="(TextBox.Foreground).(SolidColorBrush.Color)" 
+                                                        From="DarkRed" To="Red" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+
+            <TextBox Text="{Binding Source={x:Static define:Datas.WorkData}, Path=CountData.PlaceNG, StringFormat='{}{0:0.###} EA'}"
+                     Tag="PlaceNG"
+                     Grid.Column="4"
+                     Grid.Row="0">
+                <TextBox.Style>
+                    <Style TargetType="{x:Type TextBox}"
+                           BasedOn="{StaticResource {x:Type TextBox}}">
+                        <Style.Triggers>
+                            <EventTrigger RoutedEvent="TextBox.TextChanged">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation FillBehavior="Stop" 
+                                                        Storyboard.TargetProperty="(TextBox.Foreground).(SolidColorBrush.Color)" 
+                                                        From="DarkRed" To="Red" Duration="0:0:0.3"/>
+                                        <ColorAnimation BeginTime="0:0:0.3" FillBehavior="Stop" 
+                                                        Storyboard.TargetProperty="(TextBox.Foreground).(SolidColorBrush.Color)" 
+                                                        From="Red" To="DarkRed" Duration="0:0:0.3"/>
+                                        <ColorAnimation BeginTime="0:0:6" FillBehavior="Stop" 
+                                                        Storyboard.TargetProperty="(TextBox.Foreground).(SolidColorBrush.Color)" 
+                                                        From="DarkRed" To="Red" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+
+            <TextBox Tag="LoadNG"
+                     Grid.Column="5"
+                     Grid.Row="0">
+                <TextBox.Text>
+                    <MultiBinding StringFormat="{}{0:0} / {1:0} EA">
+                        <Binding Source="{x:Static define:Datas.WorkData}"
+                                 Path="CountData.LoadVisionNG[0]"
+                                 Mode="OneWay"/>
+
+                        <Binding Source="{x:Static define:Datas.WorkData}"
+                                 Path="CountData.LoadVisionNG[1]"
+                                 Mode="OneWay"/>
+                    </MultiBinding>
+                </TextBox.Text>
+                <TextBox.Style>
+                    <Style TargetType="{x:Type TextBox}"
+                           BasedOn="{StaticResource {x:Type TextBox}}">
+                        <Style.Triggers>
+                            <EventTrigger RoutedEvent="TextBox.TextChanged">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation FillBehavior="Stop" 
+                                                        Storyboard.TargetProperty="(TextBox.Foreground).(SolidColorBrush.Color)" 
+                                                        From="DarkRed" To="Red" Duration="0:0:0.3"/>
+                                        <ColorAnimation BeginTime="0:0:0.3" FillBehavior="Stop" 
+                                                        Storyboard.TargetProperty="(TextBox.Foreground).(SolidColorBrush.Color)" 
+                                                        From="Red" To="DarkRed" Duration="0:0:0.3"/>
+                                        <ColorAnimation BeginTime="0:0:6" FillBehavior="Stop" 
+                                                        Storyboard.TargetProperty="(TextBox.Foreground).(SolidColorBrush.Color)" 
+                                                        From="DarkRed" To="Red" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+
+            <TextBox Tag="BottomNG"
+                     Grid.Column="6"
+                     Grid.Row="0">
+                <TextBox.Text>
+                    <MultiBinding StringFormat="{}{0:0} / {1:0} EA">
+                        <Binding Source="{x:Static define:Datas.WorkData}"
+                                 Path="CountData.UnderVisionNG[0]"
+                                 Mode="OneWay"/>
+
+                        <Binding Source="{x:Static define:Datas.WorkData}"
+                                 Path="CountData.UnderVisionNG[1]"
+                                 Mode="OneWay"/>
+                    </MultiBinding>
+                </TextBox.Text>
+                <TextBox.Style>
+                    <Style TargetType="{x:Type TextBox}"
+                           BasedOn="{StaticResource {x:Type TextBox}}">
+                        <Style.Triggers>
+                            <EventTrigger RoutedEvent="TextBox.TextChanged">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation FillBehavior="Stop" 
+                                                        Storyboard.TargetProperty="(TextBox.Foreground).(SolidColorBrush.Color)" 
+                                                        From="DarkRed" To="Red" Duration="0:0:0.3"/>
+                                        <ColorAnimation BeginTime="0:0:0.3" FillBehavior="Stop" 
+                                                        Storyboard.TargetProperty="(TextBox.Foreground).(SolidColorBrush.Color)" 
+                                                        From="Red" To="DarkRed" Duration="0:0:0.3"/>
+                                        <ColorAnimation BeginTime="0:0:6" FillBehavior="Stop" 
+                                                        Storyboard.TargetProperty="(TextBox.Foreground).(SolidColorBrush.Color)" 
+                                                        From="DarkRed" To="Red" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+
+            <TextBox Tag="UnLoadNG"
+                     Grid.Column="7"
+                     Grid.Row="0">
+                <TextBox.Text>
+                    <MultiBinding StringFormat="{}{0:0} / {1:0} EA">
+                        <Binding Source="{x:Static define:Datas.WorkData}"
+                                 Path="CountData.UnloadVisionNG[0]"
+                                 Mode="OneWay"/>
+
+                        <Binding Source="{x:Static define:Datas.WorkData}"
+                                 Path="CountData.UnloadVisionNG[1]"
+                                 Mode="OneWay"/>
+                    </MultiBinding>
+                </TextBox.Text>
+                <TextBox.Style>
+                    <Style TargetType="{x:Type TextBox}"
+                           BasedOn="{StaticResource {x:Type TextBox}}">
+                        <Style.Triggers>
+                            <EventTrigger RoutedEvent="TextBox.TextChanged">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation FillBehavior="Stop" 
+                                                        Storyboard.TargetProperty="(TextBox.Foreground).(SolidColorBrush.Color)" 
+                                                        From="DarkRed" To="Red" Duration="0:0:0.3"/>
+                                        <ColorAnimation BeginTime="0:0:0.3" FillBehavior="Stop" 
+                                                        Storyboard.TargetProperty="(TextBox.Foreground).(SolidColorBrush.Color)" 
+                                                        From="Red" To="DarkRed" Duration="0:0:0.3"/>
+                                        <ColorAnimation BeginTime="0:0:6" FillBehavior="Stop" 
+                                                        Storyboard.TargetProperty="(TextBox.Foreground).(SolidColorBrush.Color)" 
+                                                        From="DarkRed" To="Red" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+
+            <TextBox Text="{Binding Source={x:Static define:Datas.WorkData}, Path=TaktTime.Total, StringFormat='{}{0:0.000} s'}"
+                     Tag="Total"
+                     Grid.Row="1"
+                     Grid.Column="1"/>
+
+            <TextBox Text="{Binding Source={x:Static define:Datas.WorkData}, Path=TaktTime.Pick, StringFormat='{}{0:0.000} s'}"
+                     Tag="Pick"
+                     Grid.Column="2"
+                     Grid.Row="1"/>
+
+            <TextBox Text="{Binding Source={x:Static define:Datas.WorkData}, Path=TaktTime.Vision, StringFormat='{}{0:0.000} s'}"
+                     Tag="Vision"
+                     Grid.Column="3"
+                     Grid.Row="1"/>
+
+            <TextBox Text="{Binding Source={x:Static define:Datas.WorkData}, Path=TaktTime.Place, StringFormat='{}{0:0.000} s'}"
+                     Tag="Place"
+                     Grid.Column="4"
+                     Grid.Row="1"/>
+
+            <TextBox Tag="LoadVision"
+                     Grid.Column="5"
+                     Grid.Row="1">
+                <TextBox.Text>
+                    <MultiBinding StringFormat="{}{0:0.000} / {1:0.000} s">
+                        <Binding Source="{x:Static define:Datas.WorkData}"
+                                 Path="TaktTime.LoadVision[0].ProcessTime"
+                                 Mode="OneWay"/>
+
+                        <Binding Source="{x:Static define:Datas.WorkData}"
+                                 Path="TaktTime.LoadVision[1].ProcessTime"
+                                 Mode="OneWay"/>
+                    </MultiBinding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBox Tag="BotVision"
+                     Grid.Column="6"
+                     Grid.Row="1">
+                <TextBox.Text>
+                    <MultiBinding StringFormat="{}{0:0.000} / {1:0.000} s">
+                        <Binding Source="{x:Static define:Datas.WorkData}"
+                                 Path="TaktTime.BotVision[0].ProcessTime"
+                                 Mode="OneWay"/>
+
+                        <Binding Source="{x:Static define:Datas.WorkData}"
+                                 Path="TaktTime.BotVision[1].ProcessTime"
+                                 Mode="OneWay"/>
+                    </MultiBinding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBox Tag="UnloadVision"
+                     Grid.Column="7"
+                     Grid.Row="2">
+                <TextBox.Text>
+                    <MultiBinding StringFormat="{}{0:0.000} / {1:0.000} s">
+                        <Binding Source="{x:Static define:Datas.WorkData}"
+                                 Path="TaktTime.UnloadVision[0].ProcessTime"
+                                 Mode="OneWay"/>
+
+                        <Binding Source="{x:Static define:Datas.WorkData}"
+                                 Path="TaktTime.UnloadVision[1].ProcessTime"
+                                 Mode="OneWay"/>
+                    </MultiBinding>
+                </TextBox.Text>
+            </TextBox>
+        </Grid>
+    </Border>
+</UserControl>

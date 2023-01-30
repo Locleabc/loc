@@ -1,0 +1,264 @@
+﻿<UserControl x:Class="TopVision.Views.VisionProcessView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TopVision.Views"
+             xmlns:viewModels="clr-namespace:TopVision.ViewModels"
+             d:DataContext="{d:DesignInstance Type={x:Type viewModels:VisionProcessViewModel}}"
+             DataContextChanged="Root_DataContextChanged"
+             mc:Ignorable="d" 
+             Name="Root"
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TopVision;component/Generic.xaml"/>
+                <ResourceDictionary Source="/TopUI;component/Themes/Generic.xaml"/>
+
+                <ResourceDictionary>
+                    <Style TargetType="{x:Type Path}">
+                        <Setter Property="HorizontalAlignment"
+                                Value="Center"/>
+                        <Setter Property="VerticalAlignment"
+                                Value="Center"/>
+                        <Setter Property="StrokeThickness"
+                                Value="0"/>
+                    </Style>
+
+                    <Style TargetType="GroupBox">
+                        <Style.Triggers>
+                            <Trigger Property="IsEnabled"
+                         Value="False">
+                                <Setter Property="Foreground"
+                            Value="#959DA5"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ResourceDictionary>
+
+                <ResourceDictionary>
+                    <Style TargetType="ItemsControl">
+                        <Setter Property="ItemTemplate">
+                            <Setter.Value>
+                                <DataTemplate>
+                                    <Grid Margin="0 5 0 0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="25"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="25"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Button Style="{StaticResource ButtonNakedStyle}"
+                                                Width="24"
+                                                Height="24"
+                                                Command="{Binding Path=DataContext.ProcessMoveUpCommand, ElementName=Root}"
+                                                CommandParameter="{Binding}">
+                                            <Path Data="{StaticResource ExpandLessPath}"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  Fill="Gray"/>
+                                        </Button>
+
+                                        <Button Style="{StaticResource ButtonNakedStyle}"
+                                                Width="24"
+                                                Height="24"
+                                                Grid.Row="1"
+                                                Command="{Binding Path=DataContext.ProcessMoveDownCommand, ElementName=Root}"
+                                                CommandParameter="{Binding}">
+                                            <Path Data="{StaticResource ExpandMorePath}"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  Fill="Gray"/>
+                                        </Button>
+
+                                        <Button Content="{Binding DisplayName, Mode=OneWay}"
+                                                Grid.Column="1"
+                                                Height="50"
+                                                Grid.RowSpan="2"
+                                                Command="{Binding Path=DataContext.ProcessSelectCommand, ElementName=Root}"
+                                                CommandParameter="{Binding}"/>
+
+                                        <Button Style="{StaticResource ButtonNakedStyle}"
+                                                Width="24"
+                                                Height="24"
+                                                Grid.Column="2"
+                                                Grid.Row="0"
+                                                Command="{Binding Path=DataContext.ProcessDeleteCommand, ElementName=Root}"
+                                                CommandParameter="{Binding}">
+                                            <Path Data="{StaticResource TrashBinPath}"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  Fill="Red"/>
+                                        </Button>
+
+                                        <Button Style="{StaticResource ButtonNakedStyle}"
+                                                Width="24"
+                                                Height="24"
+                                                Grid.Column="2"
+                                                Grid.Row="1"
+                                                Command="{Binding Path=DataContext.ProcessChangeCommand, ElementName=Root}"
+                                                CommandParameter="{Binding}">
+                                            <Path Data="{StaticResource SwapHorizPath}"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  Fill="#1a73e8"/>
+                                        </Button>
+                                    </Grid>
+                                </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="2.5*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <Button DockPanel.Dock="Top"
+                    Content="{DynamicResource str_InputImage}"
+                    Height="40"
+                    Grid.Row="0"
+                    Command="{Binding InputImageShowCommand}"/>
+
+            <GroupBox Header="{DynamicResource str_PreProcessedImage}"
+                      DockPanel.Dock="Top"
+                      Grid.Row="1">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <ItemsControl ItemsSource="{Binding MainProcess.PreProcessors}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+
+                        <Button Style="{StaticResource ButtonNakedStyle}"
+                                Width="30"
+                                Height="30"
+                                Grid.ColumnSpan="2"
+                                Grid.Row="1"
+                                Command="{Binding AddPreProcessCommand}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                            <Path Data="{StaticResource AddSymbolPath}"
+                                   Fill="#1a73e8"/>
+                        </Button>
+                    </StackPanel>
+                </ScrollViewer>
+            </GroupBox>
+
+            <Button DockPanel.Dock="Top"
+                    Height="40"
+                    Margin="0 5 0 0"
+                    Content="{DynamicResource str_PreProcessedImage}"
+                    Grid.Row="2"
+                    Command="{Binding PreProcessedImageShowCommand}"/>
+
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <!--Blank space-->
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <GroupBox Header="{DynamicResource str_MainProcess}">
+                    <StackPanel>
+                        <ItemsControl ItemsSource="{Binding MainProcessDumbList}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </StackPanel>
+                </GroupBox>
+                
+                <GroupBox Header="{DynamicResource str_SiblingProcessors}"
+                          Grid.Column="2">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel>
+                            <ItemsControl ItemsSource="{Binding MainProcess.SiblingProcessors}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Vertical"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+
+                            <Button Style="{StaticResource ButtonNakedStyle}"
+                                    Width="30"
+                                    Height="30"
+                                    Grid.ColumnSpan="2"
+                                    Grid.Row="1"
+                                    Command="{Binding AddSiblingProcessCommand}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                                <Path Data="{StaticResource AddSymbolPath}"
+                                      Fill="#1a73e8"/>
+                            </Button>
+                        </StackPanel>
+                    </ScrollViewer>
+                </GroupBox>
+            </Grid>
+
+            <Button DockPanel.Dock="Bottom"
+                    Height="40"
+                    Margin="0 5 0 0"
+                    Content="Teach"
+                    Grid.Row="4"
+                    Command="{Binding TeachingCommand}"/>
+
+            <Button DockPanel.Dock="Bottom"
+                    Height="40"
+                    Margin="0 5 0 0"
+                    Content="{DynamicResource str_ResultImage}"
+                    Grid.Row="5"
+                    Command="{Binding OutputImageShowCommand}"/>
+        </Grid>
+
+        <Grid Grid.Column="1"
+              ClipToBounds="True">
+            <AdornerDecorator>
+                <Image Grid.Column="1"
+                       Name="DisplayImage"
+                       Source="{Binding DisplayImage, Converter={StaticResource MatToImageSourceConverter}}"
+                       SizeChanged="DisplayImage_SizeChanged"/>
+            </AdornerDecorator>
+
+            <Canvas Height="{Binding ElementName=DisplayImage, Path=ActualHeight}"
+                    Width="{Binding ElementName=DisplayImage, Path=ActualWidth}"
+                    Name="AdornerCanvas"/>
+        </Grid>
+
+        <ContentControl Margin="5 0 0 0"
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        Content="{Binding SelectedVisionProcess.Parameter}"/>
+    </Grid>
+</UserControl>

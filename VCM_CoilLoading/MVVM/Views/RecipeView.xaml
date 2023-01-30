@@ -1,0 +1,198 @@
+﻿<UserControl x:Class="VCM_CoilLoading.MVVM.Views.RecipeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VCM_CoilLoading.MVVM.Views"
+             xmlns:viewModels="clr-namespace:VCM_CoilLoading.MVVM.ViewModels"
+             xmlns:controls="clr-namespace:TopUI.Controls;assembly=TopUI"
+             xmlns:define="clr-namespace:VCM_CoilLoading.Define"
+             d:DataContext="{d:DesignInstance Type=viewModels:RecipeViewModel}"
+             mc:Ignorable="d"
+             Loaded="RecipeView_Loaded"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+
+        <TabControl x:Name="Recipe_MainTab"
+                    Background="{x:Null}">
+            <TabItem Header="Global"
+                     Style="{StaticResource TabItemUnderMarkStyle}">
+                <Grid Margin="5"
+                  IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning, UpdateSourceTrigger=PropertyChanged}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel>
+                        <CheckBox Content="Skip Load Vision"
+                                  IsChecked="{Binding Source={x:Static define:CDef.GlobalRecipe}, Path=SkipLoadVision, UpdateSourceTrigger=PropertyChanged}"
+                                  Tag="Check to disable Load Upper Vision"/>
+
+                        <CheckBox Content="Skip Under Vision"
+                                  IsChecked="{Binding Source={x:Static define:CDef.GlobalRecipe}, Path=SkipUnderVision, UpdateSourceTrigger=PropertyChanged}"
+                                  Tag="Check to disable Under Vision"/>
+
+                        <CheckBox Content="Skip Unload Vision"
+                                  IsChecked="{Binding Source={x:Static define:CDef.GlobalRecipe}, Path=SkipUnloadVision, UpdateSourceTrigger=PropertyChanged}"
+                                  Tag="Check to disable Load Upper Vision"/>
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Row="1"
+                                Grid.ColumnSpan="2">
+                        <CheckBox Content="MES Use"
+                                  HorizontalAlignment="Left"
+                                  VerticalAlignment="Top"
+                                  Tag="Check to enable MES"
+                                  IsChecked="{Binding Source={x:Static define:CDef.GlobalRecipe}, Path=UseMES, UpdateSourceTrigger=PropertyChanged}"/>
+                        
+                        <TextBox Style="{StaticResource TextBoxWithLeftDescriptionStyle}"
+                             Tag="LinkAgent Path"
+                             Text="{Binding Source={x:Static define:CDef.GlobalRecipe}, Path=FileThatRunWithTheApplication,UpdateSourceTrigger=PropertyChanged}"
+                             VerticalAlignment="Top"
+                             Grid.Column="1"
+                             Grid.Row="1"/>
+                    </StackPanel>
+                    
+                    <ComboBox ItemsSource="{Binding Source={x:Static define:CDef.Cultures}, Mode=OneWay}"
+                          Tag="Language"
+                          Grid.Column="1"
+                          DisplayMemberPath="Name"
+                          Height="40"
+                          VerticalAlignment="Top"
+                          Margin="5 5 0 0"
+                          SelectedIndex="{Binding Source={x:Static define:CDef.GlobalRecipe}, Path=SelectedCulture, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+            </TabItem>
+
+
+            <TabItem Style="{StaticResource TabItemUnderMarkStyle}"
+                     Header="{DynamicResource str_Common}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel x:Name="CommonRecipe_StackPanel"
+                                IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}">
+
+                        <!--Recipe will be auto generated in Code behind-->
+
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem Style="{StaticResource TabItemUnderMarkStyle}"
+                     Header="Picker">
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel x:Name="PickerRecipe_StackPanel"
+                                IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}">
+
+                        <!--Recipe will be auto generated in Code behind-->
+
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            
+            <TabItem Style="{StaticResource TabItemUnderMarkStyle}"
+                     Header="{DynamicResource str_UnderVision}"
+                     Width="120">
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel x:Name="UnderVisionRecipe_StackPanel"
+                                IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}">
+
+                        <!--Recipe will be auto generated in Code behind-->
+
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            
+            <TabItem Style="{StaticResource TabItemUnderMarkStyle}"
+                     Header="{DynamicResource str_UpperVision}" Width="120">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel x:Name="UpperVisionRecipe_StackPanel"
+                                IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}">
+
+                        <!--Recipe will be auto generated in Code behind-->
+
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+
+        <Separator Grid.Row="1"/>
+
+        <TabControl Grid.Row="2"
+                    Background="{x:Null}"
+                    BorderThickness="0"
+                    SelectedIndex="{Binding SelectedIndex, ElementName=Recipe_MainTab, Mode=OneWay}">
+            <TabItem Style="{StaticResource ImageBoxTabItem}" Visibility="Collapsed">
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled"
+                              VerticalAlignment="Top">
+                    <UniformGrid Columns="2"
+                                 IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}">
+                    </UniformGrid>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem Style="{StaticResource ImageBoxTabItem}"
+                     Visibility="Collapsed">
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled"
+                              VerticalAlignment="Top">
+                    <UniformGrid Columns="2"
+                                 Name="CommonRecipeOption_UniformGrid"
+                                 IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}">
+                    </UniformGrid>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem Style="{StaticResource ImageBoxTabItem}"
+                     Visibility="Collapsed">
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled"
+                              VerticalAlignment="Top">
+                    <UniformGrid Columns="2"
+                                 Name="PickerRecipeOption_UniformGrid"
+                                 IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}">
+                    </UniformGrid>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem Style="{StaticResource ImageBoxTabItem}"
+                     Visibility="Collapsed">
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled"
+                              VerticalAlignment="Top">
+                    <UniformGrid Columns="2"
+                                 Name="UnderVisionRecipeOption_UniformGrid"
+                                 IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}">
+                    </UniformGrid>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem Style="{StaticResource ImageBoxTabItem}"
+                     Visibility="Collapsed">
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled"
+                              VerticalAlignment="Top">
+                    <UniformGrid Columns="2"
+                                 Name="UpperVisionRecipeOption_UniformGrid"
+                                 IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}">
+                    </UniformGrid>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</UserControl>

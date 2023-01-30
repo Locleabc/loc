@@ -1,0 +1,536 @@
+﻿<UserControl x:Class="PLV_BracketAssemble.MVVM.Views.ManualControlMotionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:controls="clr-namespace:TopUI.Controls;assembly=TopUI"
+             xmlns:define="clr-namespace:PLV_BracketAssemble.Define"
+             xmlns:viewModels="clr-namespace:PLV_BracketAssemble.MVVM.ViewModels"
+             xmlns:local="clr-namespace:PLV_BracketAssemble.MVVM.Views"
+             d:DataContext="{d:DesignInstance Type=viewModels:ManualControlMotionViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="435" d:DesignWidth="1770">
+
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Label}"
+               x:Key="Label_header">
+
+            <Setter Property="VerticalContentAlignment"
+                    Value="Center"/>
+
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Center"/>
+
+            <Setter Property="BorderBrush"
+                    Value="Black"/>
+
+            <Setter Property="BorderThickness"
+                    Value="1"/>
+
+            <Setter Property="FontWeight"
+                    Value="SemiBold"/>
+
+            <Setter Property="Background"
+                    Value="#FFDDDDDD"/>
+
+            <Setter Property="FontSize"
+                    Value="16"/>
+        </Style>
+
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Width"
+                    Value="50"/>
+
+            <Setter Property="Height"
+                    Value="50"/>
+
+            <Setter Property="Cursor"
+                    Value="Hand"/>
+
+            <Setter Property="Foreground"
+                    Value="Black"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderThickness="1"
+                                Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background}"
+                                BorderBrush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}"
+                                RenderTransformOrigin="0.5,0.5"
+                                Name="ButtonBorder">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="1*"/>
+                                </Grid.RowDefinitions>
+                            
+                                <Border Grid.Row="0">
+                                    <Border.Background>
+                                        <LinearGradientBrush >
+                                            <GradientStop Color="#08C0C0C0"
+                                                          Offset="0"/>
+
+                                            <GradientStop Color="#88C0C0C0"
+                                                          Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                </Border>
+                                <Path Data="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Content}"
+                                      Fill="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}"
+                                      Stretch="Uniform"
+                                      Stroke="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}"
+                                      StrokeThickness="1"
+                                      Margin="10"
+                                      Grid.RowSpan="2"/>
+                            </Grid>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed"
+                                     Value="True">
+                                <Setter Property="RenderTransform"
+                                        TargetName="ButtonBorder">
+                                    <Setter.Value>
+                                        <TransformGroup>
+                                            <ScaleTransform ScaleX="0.99"
+                                                            ScaleY="0.99"/>
+                                        </TransformGroup>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled"
+                         Value="False">
+                    <Setter Property="Foreground"
+                            Value="#959DA5"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid Grid.Row="1"
+          Grid.ColumnSpan="2"
+          IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning, UpdateSourceTrigger=PropertyChanged}">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="442"/>
+            <ColumnDefinition />
+            <ColumnDefinition Width="460"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--Semi Auto-->
+        <Label Content="Semi Auto"
+               Style="{StaticResource Label_header}"/>
+        <Border BorderBrush="Black"
+                    BorderThickness="0.5"
+                    Grid.Row="1">
+            <UniformGrid Rows="4">
+                <Button Style="{StaticResource ButtonGlassStyle}"
+                        Content="Pick"
+                        Margin="20"/>
+
+                <Button Style="{StaticResource ButtonGlassStyle}"
+                        Content="Pre Align"
+                        Margin="20"/>
+
+                <Button Style="{StaticResource ButtonGlassStyle}"
+                        Content="Under Vision"
+                        Margin="20"/>
+
+                <Button Style="{StaticResource ButtonGlassStyle}"
+                        Content="Place"
+                        Margin="20"/>
+            </UniformGrid>
+        </Border>
+        
+        <!--Jog Control-->
+        <Label Content="JOG"
+               Grid.Column="1"
+               Style="{StaticResource Label_header}"/>
+        <Border BorderBrush="Black"
+                BorderThickness="0.5"
+                Grid.Column="1"
+                Grid.Row="1">
+            <DockPanel Margin="2">
+                <controls:ValueSlider Width="110"
+                                      DockPanel.Dock="Left"
+                                      Background="#FFDDDDDD"
+                                      HorizontalAlignment="Left"
+                                      Header="Speed"
+                                      Unit="%"
+                                      TickFrequency="10"
+                                      Value="{Binding Percent_Velocity,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                <Grid VerticalAlignment="Bottom"
+                      Margin="2 0 0 0">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Button Content="{Binding ModeControlToString}"
+                            Style="{StaticResource ButtonGlassStyle}"
+                            Height="40"
+                            Margin="0 0 0 5"
+                            Command="{Binding ChangeModeControl}"/>
+
+                    <TextBox Text="{Binding PositionControl,StringFormat='{}{0:0.###}'}"
+                             IsReadOnly="{Binding IsModeJogControl}"
+                             Height="40"
+                             Grid.Row="1"
+                             Background="#FFDDDDDD"
+                             BorderBrush="Black"/>
+                </Grid>
+            </DockPanel>
+        </Border>
+
+        <!--Tray X-->
+        <Label Content="TRAY X"
+               Grid.Column="2"
+               Style="{StaticResource Label_header}"/>
+        <Border BorderBrush="Black"
+                BorderThickness="0.5"
+                Grid.Column="2"
+                Grid.Row="1">
+            <Grid Margin="2 0 2 2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="330"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
+                <!--Update Position X Axis-->
+                <Grid Grid.ColumnSpan="2"
+                      VerticalAlignment="Top"
+                      HorizontalAlignment="Right"
+                      Width="300"
+                      Height="30">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="3.5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Current Position"
+                           Style="{StaticResource Label_header}"/>
+                    <Label Content="X"
+                           Style="{StaticResource Label_header}"
+                           Grid.Column="1"/>
+                    <Label Grid.Column="2"
+                           Style="{StaticResource Label_header}"
+                           HorizontalContentAlignment="Right">
+                        <TextBlock Text="{Binding Source={x:Static define:CDef.AllAxis},Path=XAxis.Status.ActualPosition,StringFormat='{}{0:0.###} mm'}"/>
+                    </Label>
+                </Grid>
+
+
+                <!--Control X Axis-->
+                <StackPanel VerticalAlignment="Bottom"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal"
+                            Grid.Column="1"
+                            Grid.Row="1">
+                    <Button PreviewMouseLeftButtonDown="ManualButton_PreviewMouseLeftButtonDown"
+                            PreviewMouseLeftButtonUp="ManualButton_PreviewMouseLeftButtonUp"
+                            Content="{StaticResource LefttArrowControlButton}"
+                            Command="{Binding AxisControlButtonCommand}"
+                            CommandParameter="XAxis_Left"
+                            Name="XAxis_Left"/>
+
+                    <Button Content="{StaticResource RightArrowControlButton}"
+                            Margin="2 0 0 0"
+                            PreviewMouseLeftButtonDown="ManualButton_PreviewMouseLeftButtonDown"
+                            PreviewMouseLeftButtonUp="ManualButton_PreviewMouseLeftButtonUp"
+                            Command="{Binding AxisControlButtonCommand}"
+                            CommandParameter="XAxis_Right"
+                            Name="XAxis_Right"/>
+                </StackPanel>
+                
+                <!--Move Position X Axis-->
+                <UniformGrid Columns="2"
+                             Rows="5"
+                             Width="330"
+                             Grid.Row="1">
+                    <controls:OptionSelector Description="Change Position"
+                                             ExtraButtonClickCommand="{Binding MovePositionButtonCommand}"
+                                             CommandParameter="Tray_ChangePosition"
+                                             IsOn="{Binding Is_Tray_Change_Position}"/>
+                    <Grid/>
+
+                    <controls:OptionSelector Description="Picker 1 Pick First Pos"
+                                             ExtraButtonClickCommand="{Binding MovePositionButtonCommand}"
+                                             CommandParameter="Tray_Piker1PickFirstPosition"
+                                             IsOn="{Binding Is_Tray_Picker1_Pick_First_Position}"/>
+
+                    <controls:OptionSelector Description="Picker 2 Pick First Pos"
+                                             ExtraButtonClickCommand="{Binding MovePositionButtonCommand}"
+                                             CommandParameter="Tray_Piker2PickFirstPosition"
+                                             IsOn="{Binding Is_Tray_Picker2_Pick_First_Position}"/>
+                    <Grid/>
+                    <Grid/>
+                    <Grid/>
+                    <Grid/>
+                    <controls:OptionSelector Description="Picker 1 Place First Pos"
+                                             ExtraButtonClickCommand="{Binding MovePositionButtonCommand}"
+                                             CommandParameter="Tray_Piker1PlaceFirstPosition"
+                                             IsOn="{Binding Is_Tray_Picker1_Place_First_Position}"/>
+
+                    <controls:OptionSelector Description="Picker 2 Place First Pos"
+                                             ExtraButtonClickCommand="{Binding MovePositionButtonCommand}"
+                                             CommandParameter="Tray_Piker2PlaceFirstPosition"
+                                             IsOn="{Binding Is_Tray_Picker2_Place_First_Position}"/>
+
+                </UniformGrid>
+            </Grid>
+
+        </Border>
+        
+        <!--Head XX-Y-->
+        <Label Content="HEAD XX-Y"
+                Grid.Column="3"
+                Style="{StaticResource Label_header}"/>
+        <Border BorderBrush="Black"
+                BorderThickness="0.5"
+                Grid.Column="3"
+                Grid.Row="1">
+            <Grid Margin="2 0 2 2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="330"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <!--Update Position XX-Y Axis-->
+                <Grid Grid.ColumnSpan="2"
+                      VerticalAlignment="Top"
+                      HorizontalAlignment="Right"
+                      Width="300"
+                      Height="60">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="3.5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Current Position"
+                           Grid.RowSpan="2"
+                           Style="{StaticResource Label_header}"/>
+                    <Label Content="XX"
+                           Style="{StaticResource Label_header}"
+                           Grid.Column="1"/>
+
+                    <Label Content="Y"
+                           Style="{StaticResource Label_header}"
+                           Grid.Row="1"
+                           Grid.Column="1"/>
+
+                    <Label Grid.Column="2"
+                           Style="{StaticResource Label_header}"
+                           HorizontalContentAlignment="Right">
+                        <TextBlock Text="{Binding Source={x:Static define:CDef.AllAxis},Path=XXAxis.Status.ActualPosition,StringFormat='{}{0:0.###} mm'}"/>
+                    </Label>
+
+                    <Label Grid.Column="2"
+                           Grid.Row="1"
+                           Style="{StaticResource Label_header}"
+                           HorizontalContentAlignment="Right">
+                        <TextBlock Text="{Binding Source={x:Static define:CDef.AllAxis},Path=YAxis.Status.ActualPosition,StringFormat='{}{0:0.###} mm'}"/>
+                    </Label>
+                </Grid>
+
+                <!--Control XX-Y Axis-->
+                <Grid VerticalAlignment="Bottom"
+                      HorizontalAlignment="Right"
+                      Grid.Column="1"
+                      Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Button Content="{StaticResource LefttArrowControlButton}"
+                            Grid.Row="1"
+                            VerticalAlignment="Bottom"
+                            PreviewMouseLeftButtonDown="ManualButton_PreviewMouseLeftButtonDown"
+                            PreviewMouseLeftButtonUp="ManualButton_PreviewMouseLeftButtonUp"
+                            Command="{Binding AxisControlButtonCommand}"
+                            CommandParameter="XXAxis_Left"
+                            Name="XXAxis_Left"/>
+                    <Button Content="{StaticResource RightArrowControlButton}"
+                            Grid.Column="2"
+                            Grid.Row="1"
+                            VerticalAlignment="Bottom"
+                            PreviewMouseLeftButtonDown="ManualButton_PreviewMouseLeftButtonDown"
+                            PreviewMouseLeftButtonUp="ManualButton_PreviewMouseLeftButtonUp"
+                            Command="{Binding AxisControlButtonCommand}"
+                            CommandParameter="XXAxis_Right"
+                            Name="XXAxis_Right"/>
+
+                    <Button Content="{StaticResource UpArrowControlButton}"
+                            Grid.Column="1"
+                            PreviewMouseLeftButtonDown="ManualButton_PreviewMouseLeftButtonDown"
+                            PreviewMouseLeftButtonUp="ManualButton_PreviewMouseLeftButtonUp"
+                            Command="{Binding AxisControlButtonCommand}"
+                            CommandParameter="YAxis_Forward"
+                            Name="YAxis_Forward"/>
+                    <Button Content="{StaticResource DowntArrowControlButton}"
+                            Margin="2,2,2,0"
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            PreviewMouseLeftButtonDown="ManualButton_PreviewMouseLeftButtonDown"
+                            PreviewMouseLeftButtonUp="ManualButton_PreviewMouseLeftButtonUp"
+                            Command="{Binding AxisControlButtonCommand}"
+                            CommandParameter="YAxis_Backward"
+                            Name="YAxis_Backward"/>
+                </Grid>
+
+                <!--Move Position XX-Y Axis-->
+                <UniformGrid Columns="2"
+                             Rows="5"
+                             Grid.Row="1"
+                             Width="330">
+                    <controls:OptionSelector Description="Change Position"
+                                             ExtraButtonClickCommand="{Binding MovePositionButtonCommand}"
+                                             CommandParameter="Head_ChangePosition"
+                                             IsOn="{Binding Is_Head_Change_Position}"/>
+                    <Grid/>
+                    
+                    <controls:OptionSelector Description="Picker 1 Pick First Pos"
+                                             ExtraButtonClickCommand="{Binding MovePositionButtonCommand}"
+                                             CommandParameter="Picker1_PickFirstPosition"
+                                             IsOn="{Binding Is_Head_Picker1_Pick_First_Position}"/>
+                    <controls:OptionSelector Description="Picker 2 Pick First Pos"
+                                             ExtraButtonClickCommand="{Binding MovePositionButtonCommand}"
+                                             CommandParameter="Picker2_PickFirstPosition"
+                                             IsOn="{Binding Is_Head_Picker2_Pick_First_Position}"/>
+
+                    <controls:OptionSelector Description="Pre Align Pos"
+                                             ExtraButtonClickCommand="{Binding MovePositionButtonCommand}"
+                                             CommandParameter="Head_PreAlignPosition"
+                                             IsOn="{Binding Is_Head_PreAlign_Position}"/>
+                    
+                    <Grid/>
+
+                    <controls:OptionSelector Description="Picker 1 Under VS Pos"
+                                             ExtraButtonClickCommand="{Binding MovePositionButtonCommand}"
+                                             CommandParameter="Picker1_UnderVisionPosition"
+                                             IsOn="{Binding Is_Head_Picker1_UnderVision_Position}"/>
+                    <controls:OptionSelector Description="Picker 2 Under VS Pos"
+                                             ExtraButtonClickCommand="{Binding MovePositionButtonCommand}"
+                                             CommandParameter="Picker2_UnderVisionPosition"
+                                             IsOn="{Binding Is_Head_Picker2_UnderVision_Position}"/>
+                   
+                    <controls:OptionSelector Description="Picker 1 Place First Pos"
+                                             ExtraButtonClickCommand="{Binding MovePositionButtonCommand}"
+                                             CommandParameter="Picker1_PlaceFirstPosition"
+                                             IsOn="{Binding Is_Head_Picker1_Place_First_Position}"/>
+                    <controls:OptionSelector Description="Picker 2 Place First Pos"
+                                             ExtraButtonClickCommand="{Binding MovePositionButtonCommand}"
+                                             CommandParameter="Picker2_PlaceFirstPosition"
+                                             IsOn="{Binding Is_Head_Picker2_Place_First_Position}"/>
+                </UniformGrid>
+            </Grid>
+        </Border>
+        
+        <!--Picker Cylinder-->
+        <Label Content="PICKER CYLINDERS"
+               Grid.Column="4"
+               Style="{StaticResource Label_header}"
+               Grid.ColumnSpan="2"
+               Margin="0 0 0 -0.5"/>
+        
+        <Grid Grid.Column="4"
+              Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+                
+            <Border BorderBrush="Black"
+                    BorderThickness="0.5"
+                    Grid.RowSpan="2"/>
+            <Border BorderBrush="Black"
+                    BorderThickness="0.5"
+                    Grid.RowSpan="2"
+                    Grid.Column="1"/>
+            <!--Picker1_label-->
+            <Label Style="{StaticResource Label_header}"
+                    Content="Picker 1"
+                    Margin="-1 -1 -0.5 0"/>
+            <!--Picker2_label-->
+            <Label Style="{StaticResource Label_header}"
+                    Content="Picker 2"
+                    Grid.Column="1"
+                    Margin="-0.5 -1 0 0"/>
+            
+            <!--Update Stattus Picker 1-->
+            <UniformGrid Margin="0 40 65 0"
+                         Rows="5"
+                         Grid.Row="1">
+                <Label/>
+                <Label/>
+                <controls:OptionSelector Description="Picker 1 Up"
+                                         ExtraButtonClickCommand="{Binding ControlPickerButtonCommand}"
+                                         CommandParameter="Picker1_Up"
+                                         IsOn="{Binding PickerCylinder1.IsBackward}"/>
+                <controls:OptionSelector Description="Picker 1 Down"
+                                         ExtraButtonClickCommand="{Binding ControlPickerButtonCommand}"
+                                         CommandParameter="Picker1_Down"
+                                         IsOn="{Binding PickerCylinder1.IsForward}"/>
+                <controls:OptionSelector Description="Picker 1 Vacuum"
+                                         ExtraButtonClickCommand="{Binding ControlPickerButtonCommand}"
+                                         CommandParameter="Picker1_Vacuum"
+                                         IsOn="{Binding PickerCylinder1.IsVacuumOn}"/>
+            </UniformGrid>
+            <!--Update Stattus Picker 2-->
+            <UniformGrid Margin="0 40 65 0"
+                         Rows="5"
+                         Grid.Column="1"
+                         Grid.Row="1">
+                <Label/>
+                <Label/>
+                <controls:OptionSelector Description="Picker 2 Up"
+                                         ExtraButtonClickCommand="{Binding ControlPickerButtonCommand}"
+                                         CommandParameter="Picker2_Up"
+                                         IsOn="{Binding PickerCylinder2.IsBackward}"/>
+                <controls:OptionSelector Description="Picker 2 Down"
+                                         ExtraButtonClickCommand="{Binding ControlPickerButtonCommand}"
+                                         CommandParameter="Picker2_Down"
+                                         IsOn="{Binding PickerCylinder2.IsForward}"/>
+                <controls:OptionSelector Description="Picker 2 Vacuum"
+                                         ExtraButtonClickCommand="{Binding ControlPickerButtonCommand}"
+                                         CommandParameter="Picker2_Vacuum"
+                                         IsOn="{Binding PickerCylinder2.IsVacuumOn}"/>
+            </UniformGrid>
+        </Grid>
+    </Grid>
+</UserControl>

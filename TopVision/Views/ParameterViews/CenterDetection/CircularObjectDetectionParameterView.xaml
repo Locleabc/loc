@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="TopVision.Views.ParameterViews.CircularObjectDetectionParameterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TopVision.Views.ParameterViews"
+             xmlns:algths="clr-namespace:TopVision.Algorithms"
+             d:DataContext="{d:DesignInstance Type={x:Type algths:CircularObjectDetectionParameter}}"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TopVision;component/Generic.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <DockPanel Grid.IsSharedSizeScope="True">
+        <Label Content="{DynamicResource str_CircleDetectionParameter}"
+               DockPanel.Dock="Top"
+               Style="{StaticResource LabelParameterViewHeader}"/>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <Expander Header="ROIs"
+                          IsExpanded="True">
+                    <ItemsControl Style="{StaticResource CRectangleItemsControlStyle}"
+                                  ItemsSource="{Binding ROIs}"
+                                  Margin="20 0"/>
+                </Expander>
+                
+                <TextBox Style="{StaticResource TextBoxWithLeftDescriptionStyle}"
+                         Tag="Radius"
+                         Text="{Binding Radius, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:0.###}}"/>
+
+                <TextBox Style="{StaticResource TextBoxWithLeftDescriptionStyle}"
+                         Tag="Higher Canny Value"
+                         Text="{Binding CannyVal, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <TextBox Style="{StaticResource TextBoxWithLeftDescriptionStyle}"
+                         Tag="Accumulator"
+                         Text="{Binding Accumulator, UpdateSourceTrigger=PropertyChanged}"
+                         ToolTip="Giá trị càng nhỏ thì càng bắt được nhiều Ball, nhưng độ chính xác giảm"/>
+                
+
+                <TextBox Style="{StaticResource TextBoxWithLeftDescriptionStyle}"
+                         Tag="Radius Threshold"
+                         Text="{Binding RadiusThreshold, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <CheckBox Content="Enable Angle Detection"
+                          Margin="20 5"
+                          IsChecked="{Binding EnableAngleDetection}"/>
+                
+                <Expander Header="Arc Ring"
+                          Visibility="{Binding EnableAngleDetection, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          IsExpanded="True">
+                    <StackPanel Orientation="Vertical">
+                        <TextBox Tag="{DynamicResource str_Threshold}"
+                                 Text="{Binding Threshold, UpdateSourceTrigger=PropertyChanged}"
+                                 FontSize="12"
+                                 FontWeight="SemiBold"
+                                 Grid.Column="1"
+                                 Style="{StaticResource TextBoxWithLeftDescriptionStyle}"/>
+
+                        <ContentControl Content="{Binding ArcRing}"
+                                        Style="{StaticResource CArcRingContentControlStyle}"/>
+                    </StackPanel>
+                </Expander>
+
+                <CheckBox Content="Enable Multile Circle Detection"
+                          Margin="20 5"
+                          IsChecked="{Binding EnableMultipleCircleDetection}"/>
+
+                <TextBox Style="{StaticResource TextBoxWithLeftDescriptionStyle}"
+                         Visibility="{Binding EnableMultipleCircleDetection, Converter={StaticResource BooleanToVisibilityConverter}}"
+                         Tag="Number of circle to detect"
+                         Text="{Binding NumberOfCircleToDetect, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <local:VisionParameterBaseView DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
+                                               ThresholdVisibility="Collapsed"
+                                               ROIVisibility="Collapsed"
+                                               ThetaAdjustVisibility="Collapsed"
+                                               OffsetLimitVisibility="Visible"/>
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
+</UserControl>

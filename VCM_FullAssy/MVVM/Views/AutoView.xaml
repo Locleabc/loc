@@ -1,0 +1,231 @@
+﻿<UserControl x:Class="VCM_FullAssy.MVVM.Views.AutoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:VCM_FullAssy.MVVM.Views"
+             xmlns:viewModels="clr-namespace:VCM_FullAssy.MVVM.ViewModels"
+             xmlns:controls="clr-namespace:TopUI.Controls;assembly=TopUI"
+             xmlns:logging="clr-namespace:TopCom.LOG;assembly=TopCom"
+             xmlns:define="clr-namespace:VCM_FullAssy.Define"
+             xmlns:UIDefine="clr-namespace:TopUI.Define;assembly=TopUI"
+             d:DataContext="{d:DesignInstance Type=viewModels:AutoViewModel}"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type TextBlock}"
+               x:Key="TextBlockTrayNameStyle">
+            <Style.Setters>
+                <Setter Property="VerticalAlignment"
+                        Value="Top"/>
+
+                <Setter Property="HorizontalAlignment"
+                        Value="Center"/>
+
+                <Setter Property="FontWeight"
+                        Value="Bold"/>
+
+                <Setter Property="FontSize"
+                        Value="12"/>
+
+                <Setter Property="Foreground"
+                        Value="Gray"/>
+            </Style.Setters>
+        </Style>
+    </UserControl.Resources>
+
+    <DockPanel>
+        <ContentControl Content="{Binding WorkDataVM}"
+                        DockPanel.Dock="Top"
+                        Margin="0 10"
+                        Height="80"/>
+
+        <controls:LogDisplayer DockPanel.Dock="Bottom"
+                               Height="170"
+                               LogSource="{Binding Notification, Source={x:Static logging:UILog.Appender}}"/>
+
+        <UniformGrid DockPanel.Dock="Bottom"
+                     Height="80"
+                     Columns="5"
+                     IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}">
+            <Button Margin="5 10"
+                    Content="Reset Count Data"
+                    Command="{Binding ResetCountDataCommand}"/>
+
+            <Button Margin="5 10"
+                    Content="Reset Lefts Tray"
+                    Command="{Binding ResetLeftTrayCommand}"/>
+
+            <Button Margin="5 10"
+                    Content="Reset Rights Tray"
+                    Command="{Binding ResetRightTrayCommand}"/>
+
+            <Button Margin="5 10"
+                    Content="Left Trays Change"
+                    Command="{Binding LeftTrayChangeCommand}"/>
+
+            <Button Margin="5 10"
+                    Content="Right Trays Change"
+                    Command="{Binding RightTrayChangeCommand}"/>
+        </UniformGrid>
+
+        <Grid Margin="0 5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            
+            <!--Height="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth, Converter={StaticResource PercentageConverter}, ConverterParameter=0.625}"-->
+            <Grid x:Name="TrayGrid"
+                  Height="432"
+                  Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <!--Space-->
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="22"/>
+                    <RowDefinition/>
+                    <!--Space-->
+                    <RowDefinition Height="10"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="22"/>
+                </Grid.RowDefinitions>
+
+                <controls:Tray TrayInfo="{Binding Source={x:Static define:CTray.UnloadTray2}}"
+                               Grid.Column="0"
+                               IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}"
+                               Background="Black"
+                               BorderBrush="Gray"
+                               BorderThickness="1"
+                               Grid.Row="1"/>
+
+                <controls:Tray TrayInfo="{Binding Source={x:Static define:CTray.LoadTray2}}"
+                               Grid.Column="1"
+                               IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}"
+                               Background="Black"
+                               BorderBrush="Gray"
+                               BorderThickness="1"
+                               Grid.Row="1"/>
+
+                <controls:Tray TrayInfo="{Binding Source={x:Static define:CTray.LoadTray4}}"
+                               Grid.Column="3"
+                               IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}"
+                               Background="Black"
+                               BorderBrush="Gray"
+                               BorderThickness="1"
+                               Grid.Row="1"/>
+
+                <controls:Tray TrayInfo="{Binding Source={x:Static define:CTray.UnloadTray4}}"
+                               Grid.Column="4"
+                               IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}"
+                               Background="Black"
+                               BorderBrush="Gray"
+                               BorderThickness="1"
+                               Grid.Row="1"/>
+
+                <controls:Tray TrayInfo="{Binding Source={x:Static define:CTray.UnloadTray1}}"
+                               Grid.Column="0"
+                               Grid.Row="3"
+                               IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}"
+                               Background="Black"
+                               BorderBrush="Gray"
+                               BorderThickness="1"/>
+
+                <controls:Tray TrayInfo="{Binding Source={x:Static define:CTray.LoadTray1}}"
+                               Grid.Column="1"
+                               Grid.Row="3"
+                               IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}"
+                               Background="Black"
+                               BorderBrush="Gray"
+                               BorderThickness="1"/>
+
+                <controls:Tray TrayInfo="{Binding Source={x:Static define:CTray.LoadTray3}}"
+                               Grid.Column="3" 
+                               Grid.Row="3"
+                               IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}"
+                               Background="Black"
+                               BorderBrush="Gray"
+                               BorderThickness="1"/>
+
+                <controls:Tray TrayInfo="{Binding Source={x:Static define:CTray.UnloadTray3}}"
+                               Grid.Column="4"
+                               Grid.Row="3"
+                               IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning}"
+                               Background="Black"
+                               BorderBrush="Gray"
+                               BorderThickness="1"/>
+
+                <TextBlock Text="Rear Unload Tray"
+                           Style="{StaticResource TextBlockTrayNameStyle}"/>
+
+                <TextBlock Grid.Column="1"
+                           Text="Rear Load Tray"
+                           Style="{StaticResource TextBlockTrayNameStyle}"/>
+
+                <TextBlock Grid.Column="4"
+                           Text="Rear Unload Tray"
+                           Style="{StaticResource TextBlockTrayNameStyle}"/>
+
+                <TextBlock Grid.Column="3"
+                           Text="Rear Load Tray"
+                           Style="{StaticResource TextBlockTrayNameStyle}"/>
+
+                <TextBlock Grid.Row="4"
+                           Text="Front Unload Tray"
+                           Style="{StaticResource TextBlockTrayNameStyle}"/>
+
+                <TextBlock Grid.Row="4"
+                           Grid.Column="1"
+                           Text="Front Load Tray"
+                           Style="{StaticResource TextBlockTrayNameStyle}"/>
+
+                <TextBlock Grid.Row="4"
+                           Grid.Column="4"
+                           Text="Front Unload Tray"
+                           Style="{StaticResource TextBlockTrayNameStyle}"/>
+
+                <TextBlock Grid.Row="4"
+                           Grid.Column="3"
+                           Text="Front Load Tray"
+                           Style="{StaticResource TextBlockTrayNameStyle}"/>
+
+            </Grid>
+
+            <Grid Grid.Row="2"
+                  Margin="0 5">
+                <ItemsControl ItemsSource="{Binding Source={x:Static UIDefine:CColors.CellColor}}">
+                    <!-- ItemsPanelTemplate -->
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal">
+                            </StackPanel>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal"
+                                        Width="Auto">
+                                <Border Width="25"
+                                        Height="25"
+                                        CornerRadius="12.5"
+                                        Background="{Binding Value}"/>
+                                
+                                <Label Margin="0 0 8 0"
+                                       VerticalAlignment="Center"
+                                       Content="{Binding Key}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+        </Grid>
+    </DockPanel>
+</UserControl>

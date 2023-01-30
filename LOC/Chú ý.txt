@@ -1,0 +1,14 @@
+﻿Chưa hiểu chỗ TerminateView và TerminateViewModel
+Những phần chưa dùng sẽ có chú thích là "Chú ý"
+Những phần đã dùng nhưng chưa hiểu sẽ chú thích là "Chưa hiểu"
+Những Phần chưa hiểu cần test thì sẽ chú thích là "cần test"
+	1. Chưa hiểu phần App.xaml.cs
+	2. chưa hiểu Code Behind của MainTabControlView
+------------------------------Đã thiết kế xong MessageView. Chưa hiểu phần DataContextChanged và Clossing-----------------------------
+------------------------------Đã thiết kế xong HeaderView. Chưa hiểu phần ExitCommand dùng để Terminate-----------------------------
+------------------------------Đã thiết kế xong FooterView. Chưa hiểu phần thư viện Controls.Footer -----------------------------
+------------------------------Đã thiết kế xong TerminateView. Chưa hiểu -----------------------------
+------------------------------Chưa thiết kế xong MainTabControl. Chưa hiểu -----------------------------
+------------------------------Chưa thiết kế xong InitViewModel. Cần đọc lại -----------------------------
+------------------------------Chưa thiết kế xong TrayView. Cần đọc lại nhiều, Chưa hiểu phần OnOffButton -----------------------------
+Tại sao không thay "Binding Path=DataContext.Tray.RowCount, ElementName=Root"              bằng           "Binding Tray.RowCount"

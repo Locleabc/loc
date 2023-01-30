@@ -1,0 +1,521 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\OpenCvSharp4.runtime.win.4.5.3.20211228\build\net461\OpenCvSharp4.runtime.win.props" Condition="Exists('..\packages\OpenCvSharp4.runtime.win.4.5.3.20211228\build\net461\OpenCvSharp4.runtime.win.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A1A645B9-5AE8-46A2-8143-7FC7E452E655}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <RootNamespace>TopVision</RootNamespace>
+    <AssemblyName>TopVision</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;!SHAREWARE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;SHAREWARE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Simulation|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Simulation\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;SIMULATION</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Simulation|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Simulation\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;SIMULATION</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Simulation|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Simulation\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;SIMULATION</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Basler.Pylon, Version=1.2.0.0, Culture=neutral, PublicKeyToken=e389355f398382ab, processorArchitecture=AMD64" />
+    <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.12\lib\net45\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenCvSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenCvSharp4.4.5.3.20211207\lib\net461\OpenCvSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenCvSharp.Extensions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenCvSharp4.4.5.3.20211207\lib\net461\OpenCvSharp.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenCvSharp.WpfExtensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenCvSharp4.WpfExtensions.4.5.3.20211207\lib\net461\OpenCvSharp.WpfExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Common, Version=4.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Drawing.Common.5.0.2\lib\net461\System.Drawing.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Adorners\CircleResizeDragAdorner.cs" />
+    <Compile Include="Adorners\RectangleResizeDragAdorner.cs" />
+    <Compile Include="Algorithms\1.Preprocessing\AdaptiveThreshold.cs" />
+    <Compile Include="Algorithms\1.Preprocessing\Dilate.cs" />
+    <Compile Include="Algorithms\1.Preprocessing\Masking.cs" />
+    <Compile Include="Algorithms\1.Preprocessing\NoiseFilter.cs" />
+    <Compile Include="Algorithms\1.Preprocessing\Erode.cs" />
+    <Compile Include="Algorithms\1.Preprocessing\Binarization.cs" />
+    <Compile Include="Algorithms\1.Preprocessing\Bitwise.cs" />
+    <Compile Include="Algorithms\1.Preprocessing\CannyEdge.cs" />
+    <Compile Include="Algorithms\1.Preprocessing\ColorConvertToGray.cs" />
+    <Compile Include="Algorithms\1.Preprocessing\Smooth.cs" />
+    <Compile Include="Algorithms\2.TemplateMatching\AdvancedTemplateMatching.cs" />
+    <Compile Include="Algorithms\3.CenterDetection\CircleDetection.cs" />
+    <Compile Include="Algorithms\3.CenterDetection\FourLinesDetection.cs" />
+    <Compile Include="Algorithms\3.CenterDetection\ContourDetection.cs" />
+    <Compile Include="Algorithms\3.CenterDetection\CircularObjectDetection.cs" />
+    <Compile Include="Algorithms\4.AngleDetection\BoundaryLineAngleDetection.cs" />
+    <Compile Include="Algorithms\99.Ref\GenerateROIs.cs" />
+    <Compile Include="Algorithms\1.Preprocessing\Histogram.cs" />
+    <Compile Include="Algorithms\1.Preprocessing\SetIgnoreRegions.cs" />
+    <Compile Include="Algorithms\1.Preprocessing\SetRegions.cs" />
+    <Compile Include="Algorithms\1.Preprocessing\SetInspectRegions.cs" />
+    <Compile Include="Algorithms\2.TemplateMatching\MultiTemplateMatching.cs" />
+    <Compile Include="Algorithms\2.TemplateMatching\SingleTemplateMatching.cs" />
+    <Compile Include="Algorithms\99.Ref\MultiContourCenterDetection.cs" />
+    <Compile Include="Algorithms\4.AngleDetection\DirectDetection.cs" />
+    <Compile Include="Algorithms\99.Ref\RotationObjectDetection.cs" />
+    <Compile Include="Algorithms\99.Ref\DrawBestMatchRectangle.cs" />
+    <Compile Include="Converters\MatToImageSourceConverter.cs" />
+    <Compile Include="Grabbers\CameraBase.cs" />
+    <Compile Include="Grabbers\CameraBaslerGigE.cs" />
+    <Compile Include="Grabbers\CCameraConfig.cs" />
+    <Compile Include="Grabbers\CGrabResult.cs" />
+    <Compile Include="Grabbers\ECameraWorkState.cs" />
+    <Compile Include="Grabbers\ICamera.cs" />
+    <Compile Include="Helpers\ConvertHelpers.cs" />
+    <Compile Include="Helpers\DrawHelpers.cs" />
+    <Compile Include="Helpers\ResultCalculator.cs" />
+    <Compile Include="Helpers\ROIsHelper.cs" />
+    <Compile Include="Helpers\TaskHelpers.cs" />
+    <Compile Include="Helpers\Validators.cs" />
+    <Compile Include="Interfaces\ICannyDetection.cs" />
+    <Compile Include="Interfaces\ICircleDetection.cs" />
+    <Compile Include="Interfaces\ICoutourDetection.cs" />
+    <Compile Include="Models\CArcRing.cs" />
+    <Compile Include="Models\COutputMatOption.cs" />
+    <Compile Include="Models\CCircle.cs" />
+    <Compile Include="Models\CPoint2f.cs" />
+    <Compile Include="Models\CPoint.cs" />
+    <Compile Include="Enum.cs" />
+    <Compile Include="Grabbers\GrabDefine.cs" />
+    <Compile Include="Lights\ILightController.cs" />
+    <Compile Include="Lights\LightControllerBase.cs" />
+    <Compile Include="Lights\LightControllerDLS.cs" />
+    <Compile Include="Models\Process\IVisionParameter.cs" />
+    <Compile Include="Models\Process\IVisionProcess.cs" />
+    <Compile Include="Models\Process\IVisionResult.cs" />
+    <Compile Include="Models\Process\IXYOffset.cs" />
+    <Compile Include="Models\Offset\IOffset.cs" />
+    <Compile Include="Models\Offset\IThetaOffset.cs" />
+    <Compile Include="Models\Offset\XYOffsetBase.cs" />
+    <Compile Include="Models\Offset\XYTOffset.cs" />
+    <Compile Include="Models\Process\VisionParameterBase.cs" />
+    <Compile Include="Models\Process\VisionProcessBase.cs" />
+    <Compile Include="Models\Process\VisionResultBase.cs" />
+    <Compile Include="Models\CRectangle.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Resources\Colors.cs" />
+    <Compile Include="ViewModels\TemplateMaskingViewMModel.cs" />
+    <Compile Include="ViewModels\TemplateMaskingWindowViewModel.cs" />
+    <Compile Include="ViewModels\VisionProcessViewModel.cs" />
+    <Compile Include="Views\ParameterViews\AngleDetectionViews\DirectDetectionParameterView.xaml.cs">
+      <DependentUpon>DirectDetectionParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ParameterViews\CenterDetection\CircleDetectionParameterView.xaml.cs">
+      <DependentUpon>CircleDetectionParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ParameterViews\CenterDetection\FourLinesDetectionParameterView.xaml.cs">
+      <DependentUpon>FourLinesDetectionParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ParameterViews\CenterDetection\ContourDetectionParameterView.xaml.cs">
+      <DependentUpon>ContourDetectionParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ParameterViews\CenterDetection\CircularObjectDetectionParameterView.xaml.cs">
+      <DependentUpon>CircularObjectDetectionParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ParameterViews\LineDetection\BoundaryLineAngleDetectionParameterView.xaml.cs">
+      <DependentUpon>BoundaryLineAngleDetectionParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ParameterViews\PreProcessingViews\AdaptiveThresholdParameterView.xaml.cs">
+      <DependentUpon>AdaptiveThresholdParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ParameterViews\PreProcessingViews\DilateParameterView.xaml.cs">
+      <DependentUpon>DilateParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ParameterViews\PreProcessingViews\MaskingParameterView.xaml.cs">
+      <DependentUpon>MaskingParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ParameterViews\PreProcessingViews\NoiseFilterParameterView.xaml.cs">
+      <DependentUpon>NoiseFilterParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ParameterViews\PreProcessingViews\ErodeParameterView.xaml.cs">
+      <DependentUpon>ErodeParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ParameterViews\PreProcessingViews\BinarizationParameterView.xaml.cs">
+      <DependentUpon>BinarizationParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ParameterViews\PreProcessingViews\BitwiseParameterView.xaml.cs">
+      <DependentUpon>BitwiseParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ParameterViews\PreProcessingViews\CannyEdgeParameterView.xaml.cs">
+      <DependentUpon>CannyEdgeParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ParameterViews\PreProcessingViews\ColorConvertToGrayParameterView.xaml.cs">
+      <DependentUpon>ColorConvertToGrayParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ParameterViews\PreProcessingViews\HistogramParameterView.xaml.cs">
+      <DependentUpon>HistogramParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ParameterViews\PreProcessingViews\SetRegionsParameterView.xaml.cs">
+      <DependentUpon>SetRegionsParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ParameterViews\PreProcessingViews\SetInspectRegionsParameterView.xaml.cs">
+      <DependentUpon>SetInspectRegionsParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ParameterViews\PreProcessingViews\SetIgnoreRegionsParameterView.xaml.cs">
+      <DependentUpon>SetIgnoreRegionsParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ParameterViews\PreProcessingViews\SmoothParameterView.xaml.cs">
+      <DependentUpon>SmoothParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ParameterViews\TemplateMatchingViews\AdvancedTemplateMatchingParameterView.xaml.cs">
+      <DependentUpon>AdvancedTemplateMatchingParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ParameterViews\TemplateMatchingViews\MultiTemplateMatchingParameterView.xaml.cs">
+      <DependentUpon>MultiTemplateMatchingParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ParameterViews\TemplateMatchingViews\SingleTemplateMatchingParameterView.xaml.cs">
+      <DependentUpon>SingleTemplateMatchingParameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ParameterViews\VisionParameterBaseView.xaml.cs">
+      <DependentUpon>VisionParameterBaseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TemplateMaskingView.xaml.cs">
+      <DependentUpon>TemplateMaskingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TemplateMaskingWindowView.xaml.cs">
+      <DependentUpon>TemplateMaskingWindowView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VisionProcessView.xaml.cs">
+      <DependentUpon>VisionProcessView.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Algorithms\Readme.md" />
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TopCommon\TopCom.csproj">
+      <Project>{6D8355D2-D6C9-476E-8288-6F5E5F6D83C5}</Project>
+      <Name>TopCom</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TopUI\TopUI.csproj">
+      <Project>{4766859d-f0d0-417e-acb3-ba0e2cda4246}</Project>
+      <Name>TopUI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Adorners\CircleBorderThumbStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Adorners\RectangleBorderThumbStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Adorners\ResizeThumbStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Style\CheckBoxWithLeftDescriptionStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Style\CArcRingContentControlStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Style\CRectangleContentControlStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Style\CPointContentControlStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Style\CCircleContentControlStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Style\LabelParameterViewHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Style\ListViewVisionProcessHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Style\CCircleItemsControlStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Style\CRectangleItemsControlStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\MenuContext.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Style\TextBoxWithLeftDescriptionStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ParameterViews\AngleDetectionViews\DirectDetectionParameterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ParameterViews\CenterDetection\CircleDetectionParameterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ParameterViews\CenterDetection\FourLinesDetectionParameterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ParameterViews\CenterDetection\ContourDetectionParameterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ParameterViews\CenterDetection\CircularObjectDetectionParameterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ParameterViews\LineDetection\BoundaryLineAngleDetectionParameterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ParameterViews\PreProcessingViews\AdaptiveThresholdParameterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ParameterViews\PreProcessingViews\DilateParameterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ParameterViews\PreProcessingViews\MaskingParameterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ParameterViews\PreProcessingViews\NoiseFilterParameterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ParameterViews\PreProcessingViews\ErodeParameterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ParameterViews\PreProcessingViews\BinarizationParameterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ParameterViews\PreProcessingViews\BitwiseParameterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ParameterViews\PreProcessingViews\CannyEdgeParameterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ParameterViews\PreProcessingViews\ColorConvertToGrayParameterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ParameterViews\PreProcessingViews\HistogramParameterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ParameterViews\PreProcessingViews\SetRegionsParameterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ParameterViews\PreProcessingViews\SetInspectRegionsParameterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ParameterViews\PreProcessingViews\SetIgnoreRegionsParameterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ParameterViews\PreProcessingViews\SmoothParameterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ParameterViews\TemplateMatchingViews\AdvancedTemplateMatchingParameterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ParameterViews\TemplateMatchingViews\MultiTemplateMatchingParameterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ParameterViews\TemplateMatchingViews\SingleTemplateMatchingParameterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ParameterViews\VisionParameterBaseView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\TemplateMaskingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TemplateMaskingWindowView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\VisionProcessView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\OpenCvSharp4.runtime.win.4.5.3.20211228\build\net461\OpenCvSharp4.runtime.win.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\OpenCvSharp4.runtime.win.4.5.3.20211228\build\net461\OpenCvSharp4.runtime.win.props'))" />
+  </Target>
+</Project>

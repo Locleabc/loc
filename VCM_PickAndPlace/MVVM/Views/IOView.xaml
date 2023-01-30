@@ -1,0 +1,171 @@
+﻿<UserControl x:Class="VCM_PickAndPlace.MVVM.Views.IOView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VCM_PickAndPlace.MVVM.Views"
+             xmlns:define="clr-namespace:VCM_PickAndPlace.Define"
+             xmlns:controls="clr-namespace:TopUI.Controls;assembly=TopUI"
+             mc:Ignorable="d" 
+             d:DesignHeight="900" d:DesignWidth="800">
+
+    <Grid IsEnabled="{Binding Source={x:Static define:CDef.RootProcess}, Path=IsMachineNotRunning, UpdateSourceTrigger=PropertyChanged}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+
+        <GroupBox Header="Virtual Output"
+                  BorderThickness="2"
+                  FontWeight="Bold"
+                  FontSize="18"
+                  Visibility="{Binding Source={x:Static define:CDef.IsSimulationMode}, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <UniformGrid Columns="3"
+                         Margin="15 0">
+                <controls:OptionSelector Description="Virtual EMS SW"
+                                     IsOn="{Binding Input.SimulationInputValue[6], Source={x:Static define:CDef.IO1}, Mode=TwoWay}"
+                                     IsHoldingButton="True"/>
+
+                <controls:OptionSelector Description="Virtual Power"
+                                     IsOn="{Binding Input.SimulationInputValue[7], Source={x:Static define:CDef.IO1}, Mode=TwoWay}"
+                                     IsHoldingButton="True"/>
+
+                <controls:OptionSelector Description="Virtual Start SW"
+                                     IsOn="{Binding Input.SimulationInputValue[8], Source={x:Static define:CDef.IO1}, Mode=TwoWay}"
+                                     IsHoldingButton="True"/>
+
+                <controls:OptionSelector Description="Virtual Stop SW"
+                                     IsOn="{Binding Input.SimulationInputValue[9], Source={x:Static define:CDef.IO1}, Mode=TwoWay}"
+                                     IsHoldingButton="True"/>
+
+                <controls:OptionSelector Description="Virtual OK SW"
+                                     IsOn="{Binding Input.SimulationInputValue[10], Source={x:Static define:CDef.IO1}, Mode=TwoWay}"
+                                     IsHoldingButton="True"/>
+
+                <controls:OptionSelector Description="Virtual Home SW"
+                                     IsOn="{Binding Input.SimulationInputValue[11], Source={x:Static define:CDef.IO1}, Mode=TwoWay}"
+                                     IsHoldingButton="True"/>
+
+                <controls:OptionSelector Description="Virtual Main CDA SW"
+                                     IsOn="{Binding Input.SimulationInputValue[12], Source={x:Static define:CDef.IO1}, Mode=TwoWay}"
+                                     IsHoldingButton="True"/>
+
+                <controls:OptionSelector Description="Virtual Head 1 VAC"
+                                     IsOn="{Binding Input.SimulationInputValue[13], Source={x:Static define:CDef.IO1}, Mode=TwoWay}"
+                                     IsHoldingButton="True"/>
+
+                <controls:OptionSelector Description="Virtual Head 2 VAC"
+                                     IsOn="{Binding Input.SimulationInputValue[14], Source={x:Static define:CDef.IO1}, Mode=TwoWay}"
+                                     IsHoldingButton="True"/>
+            </UniformGrid>
+        </GroupBox>
+
+        <GroupBox Header="Input Signal"
+                  Grid.Row="1"
+                  BorderThickness="2"
+                  FontWeight="Bold"
+                  FontSize="18">
+            <UniformGrid Columns="3"
+                         Margin="10 0">
+                <controls:OptionSelector Description="EMS SW"
+                                     IsInputOnly="True"
+                                     IsOn="{Binding Input.EMS_SW, Source={x:Static define:CDef.IO}, Mode=OneWay}"/>
+
+                <controls:OptionSelector Description="Power"
+                                         IsInputOnly="True"
+                                         IsOn="{Binding Input.MainPower, Source={x:Static define:CDef.IO}, Mode=OneWay}"/>
+
+                <controls:OptionSelector Description="Start SW"
+                                         IsInputOnly="True"
+                                         IsOn="{Binding Input.StartSW, Source={x:Static define:CDef.IO}, Mode=OneWay}"/>
+
+                <controls:OptionSelector Description="Stop SW"
+                                         IsInputOnly="True"
+                                         IsOn="{Binding Input.StopSW, Source={x:Static define:CDef.IO}, Mode=OneWay}"/>
+
+                <controls:OptionSelector Description="OK SW"
+                                         IsInputOnly="True"
+                                         IsOn="{Binding Input.OKSW, Source={x:Static define:CDef.IO}, Mode=OneWay}"/>
+
+                <controls:OptionSelector Description="Home SW"
+                                         IsInputOnly="True"
+                                         IsOn="{Binding Input.HomeSW, Source={x:Static define:CDef.IO}, Mode=OneWay}"/>
+
+                <controls:OptionSelector Description="Main CDA SW"
+                                         IsInputOnly="True"
+                                         IsOn="{Binding Input.MainCDA, Source={x:Static define:CDef.IO}, Mode=OneWay}"/>
+
+                <controls:OptionSelector Description="Head 1 VAC"
+                                         IsInputOnly="True"
+                                         IsOn="{Binding Input.Head1_VAC, Source={x:Static define:CDef.IO}, Mode=OneWay}"/>
+
+                <controls:OptionSelector Description="Head 2 VAC"
+                                         IsInputOnly="True"
+                                         IsOn="{Binding Input.Head2_VAC, Source={x:Static define:CDef.IO}, Mode=OneWay}"/>
+            </UniformGrid>
+        </GroupBox>
+
+        <GroupBox Header="Output Signal"
+                  Grid.Row="2"
+                  BorderThickness="2"
+                  FontWeight="Bold"
+                  FontSize="18">
+            <UniformGrid Columns="3"
+                         Margin="10 0">
+
+                <controls:OptionSelector Description="{DynamicResource str_TowerLampRed}"
+                                     IsOn="{Binding Output.TowerLampRed, Source={x:Static define:CDef.IO}, Mode=TwoWay}"/>
+
+                <controls:OptionSelector Description="{DynamicResource str_TowerLampYellow}"
+                                     IsOn="{Binding Output.TowerLampYellow, Source={x:Static define:CDef.IO}, Mode=TwoWay}"/>
+
+                <controls:OptionSelector Description="{DynamicResource str_TowerLampGreen}"
+                                     IsOn="{Binding Output.TowerLampGreen, Source={x:Static define:CDef.IO}, Mode=TwoWay}"/>
+
+                <controls:OptionSelector Description="{DynamicResource str_Buzzer1}"
+                                     IsOn="{Binding Output.Buzzer1, Source={x:Static define:CDef.IO}, Mode=TwoWay}"/>
+
+                <controls:OptionSelector Description="{DynamicResource str_Buzzer2}"
+                                     IsOn="{Binding Output.Buzzer2, Source={x:Static define:CDef.IO}, Mode=TwoWay}"/>
+
+                <controls:OptionSelector Description="{DynamicResource str_Ionizersol}"
+                                     IsOn="{Binding Output.IonizerSol, Source={x:Static define:CDef.IO}, Mode=TwoWay}"/>
+
+                <controls:OptionSelector Description="{DynamicResource str_LightUpper}"
+                                     IsOn="{Binding Output.LightUpper, Source={x:Static define:CDef.IO}, Mode=TwoWay}"/>
+
+                <controls:OptionSelector Description="{DynamicResource str_LightUnder}"
+                                     IsOn="{Binding Output.LightUnder, Source={x:Static define:CDef.IO}, Mode=TwoWay}"/>
+
+                <controls:OptionSelector Description="Light Inspect"
+                                     IsOn="{Binding Output.LightInspect, Source={x:Static define:CDef.IO}, Mode=TwoWay}"/>
+                
+                <controls:OptionSelector Description="{DynamicResource str_StartLamp}"
+                                     IsOn="{Binding Output.StartLamp, Source={x:Static define:CDef.IO}, Mode=TwoWay}"/>
+
+                <controls:OptionSelector Description="{DynamicResource str_StopLamp}"
+                                     IsOn="{Binding Output.StopLamp, Source={x:Static define:CDef.IO}, Mode=TwoWay}"/>
+
+                <controls:OptionSelector Description="{DynamicResource str_OkLamp}"
+                                     IsOn="{Binding Output.OKLamp, Source={x:Static define:CDef.IO}, Mode=TwoWay}"/>
+
+                <controls:OptionSelector Description="{DynamicResource str_HomeLamp}"
+                                     IsOn="{Binding Output.HomeLamp, Source={x:Static define:CDef.IO}, Mode=TwoWay}"/>
+
+                <controls:OptionSelector Description="{DynamicResource str_Head1VAC}"
+                                     IsOn="{Binding Output.Head1VAC, Source={x:Static define:CDef.IO}, Mode=TwoWay}"/>
+
+                <controls:OptionSelector Description="{DynamicResource str_Head1Purge}"
+                                     IsOn="{Binding Output.Head1Purge, Source={x:Static define:CDef.IO}, Mode=TwoWay}"/>
+
+                <controls:OptionSelector Description="{DynamicResource str_Head2VAC}"
+                                     IsOn="{Binding Output.Head2VAC, Source={x:Static define:CDef.IO}, Mode=TwoWay}"/>
+
+                <controls:OptionSelector Description="{DynamicResource str_Head2Purge}"
+                                     IsOn="{Binding Output.Head2Purge, Source={x:Static define:CDef.IO}, Mode=TwoWay}"/>
+
+            </UniformGrid>
+        </GroupBox>
+    </Grid>
+</UserControl>

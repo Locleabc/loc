@@ -1,0 +1,275 @@
+﻿<UserControl x:Class="TopUI.Controls.SingleRecipe"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TopUI.Controls"
+             x:Name="root" FontSize="14"
+             mc:Ignorable="d" 
+             Height="40" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <Style x:Key="LableNullOrNot"
+               TargetType="Label">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsNullSpace, ElementName=root}"
+                             Value="True">
+                    <Setter Property="Content"
+                            Value=" "/>
+                    <Setter Property="Foreground"
+                            Value="Transparent"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"
+                              SharedSizeGroup="Recipe_Index"/>
+            
+            <ColumnDefinition Width="3*"
+                              SharedSizeGroup="Recipe_Description"/>
+            
+            <ColumnDefinition Width="1"
+                              SharedSizeGroup="Recipe_Axis"/>
+            
+            <ColumnDefinition Width="1.1*"
+                              SharedSizeGroup="Recipe_Value"/>
+        </Grid.ColumnDefinitions>
+
+        <!--INDEX-->
+        <Border Grid.Column="0" BorderBrush="#333333">
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsHeader, ElementName=root}"
+                                     Value="True">
+                            <Setter Property="BorderThickness"
+                                    Value="0.5"/>
+                        </DataTrigger>
+                        
+                        <DataTrigger Binding="{Binding IsHeader, ElementName=root}"
+                                     Value="False">
+                            <Setter Property="BorderThickness"
+                                    Value="0.5 0 0.5 0.5"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+        </Border>
+        <Label
+            HorizontalAlignment="Center" VerticalAlignment="Center"
+            Grid.Column="0">
+            <Label.Style>
+                <Style TargetType="Label">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsNullSpace, ElementName=root}"
+                                     Value="True">
+                            <Setter Property="Content"
+                                    Value=""/>
+                        </DataTrigger>
+                        
+                        <DataTrigger Binding="{Binding IsNullSpace, ElementName=root}"
+                                     Value="False">
+                            <Setter Property="Content"
+                                    Value="{Binding Index, ElementName=root}"/>
+                        </DataTrigger>
+                        
+                        <DataTrigger Binding="{Binding IsHeader, ElementName=root}"
+                                     Value="True">
+                            <Setter Property="Content"
+                                    Value="Index"/>
+                            
+                            <Setter Property="FontWeight"
+                                    Value="Bold"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Label.Style>
+        </Label>
+
+        <!--DESCRIPTION-->
+        <Border Grid.Column="1" BorderBrush="#333333">
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsHeader, ElementName=root}"
+                                     Value="True">
+                            <Setter Property="BorderThickness"
+                                    Value="0 0.5 0.5 0.5"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsHeader, ElementName=root}"
+                                     Value="False">
+                            <Setter Property="BorderThickness"
+                                    Value="0 0 0.5 0.5"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+        </Border>
+        <Label HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               Grid.Column="1">
+            <Label.Style>
+                <Style TargetType="Label">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsNullSpace, ElementName=root}"
+                                     Value="True">
+                            <Setter Property="Content"
+                                    Value=""/>
+                        </DataTrigger>
+                        
+                        <DataTrigger Binding="{Binding IsNullSpace, ElementName=root}"
+                                     Value="False">
+                            <Setter Property="Content"
+                                    Value="{Binding Description, ElementName=root}"/>
+                        </DataTrigger>
+                        
+                        <DataTrigger Binding="{Binding IsHeader, ElementName=root}"
+                                     Value="True">
+                            <Setter Property="Content"
+                                    Value="Description"/>
+                            <Setter Property="FontWeight"
+                                    Value="Bold"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Label.Style>
+        </Label>
+
+        <!--AXIS-->
+        <Border Grid.Column="2"
+                BorderBrush="#333333">
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsHeader, ElementName=root}"
+                                     Value="True">
+                            <Setter Property="BorderThickness" Value="0 0.5 0.5 0.5"/>
+                        </DataTrigger>
+                        
+                        <DataTrigger Binding="{Binding IsHeader, ElementName=root}"
+                                     Value="False">
+                            <Setter Property="BorderThickness"
+                                    Value="0 0 0.5 0.5"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+        </Border>
+        <Label  HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Grid.Column="2">
+            <Label.Style>
+                <Style TargetType="Label">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsNullSpace, ElementName=root}"
+                                     Value="True">
+                            <Setter Property="Content"
+                                    Value=""/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsNullSpace, ElementName=root}"
+                                     Value="False">
+                            <Setter Property="Content"
+                                    Value="{Binding TargetAxis, ElementName=root}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsHeader, ElementName=root}"
+                                     Value="True">
+                            <Setter Property="Content"
+                                    Value="Axis"/>
+                            
+                            <Setter Property="FontWeight"
+                                    Value="Bold"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Label.Style>
+        </Label>
+
+        <!--VALUE-->
+        <StackPanel Grid.Column="3"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Background="Transparent">
+            <Label VerticalAlignment="Center">
+                <Label.Style>
+                    <Style TargetType="Label">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsNullSpace, ElementName=root}"
+                                         Value="True">
+                                <Setter Property="Content"
+                                        Value=""/>
+                            </DataTrigger>
+                            
+                            <DataTrigger Binding="{Binding IsNullSpace, ElementName=root}"
+                                         Value="False">
+                                <Setter Property="Content"
+                                        Value="{Binding Value, ElementName=root, Mode=TwoWay}"/>
+                            </DataTrigger>
+                            
+                            <DataTrigger Binding="{Binding IsHeader, ElementName=root}"
+                                         Value="True">
+                                <Setter Property="Content"
+                                        Value="Value"/>
+                                
+                                <Setter Property="FontWeight"
+                                        Value="Bold"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
+
+            <Label VerticalAlignment="Center">
+                <Label.Style>
+                    <Style TargetType="Label">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsNullSpace, ElementName=root}"
+                                         Value="True">
+                                <Setter Property="Content"
+                                        Value=""/>
+                            </DataTrigger>
+                            
+                            <DataTrigger Binding="{Binding IsNullSpace, ElementName=root}"
+                                         Value="False">
+                                <Setter Property="Content"
+                                        Value="{Binding Unit, ElementName=root, Mode=TwoWay}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsHeader, ElementName=root}"
+                                         Value="True">
+                                <Setter Property="Content"
+                                        Value=""/>
+                                <Setter Property="Visibility"
+                                        Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
+        </StackPanel>
+        <Border Grid.Column="3"
+                BorderBrush="#333333"
+                MouseDown="LabelValue_MouseDown"
+                Background="Transparent"
+                Cursor="Hand">
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsHeader, ElementName=root}"
+                                     Value="True">
+                            <Setter Property="BorderThickness"
+                                    Value="0 0.5 0.5 0.5"/>
+                        </DataTrigger>
+                        
+                        <DataTrigger Binding="{Binding IsHeader, ElementName=root}"
+                                     Value="False">
+                            <Setter Property="BorderThickness"
+                                    Value="0 0 0.5 0.5"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+        </Border>
+    </Grid>
+</UserControl>

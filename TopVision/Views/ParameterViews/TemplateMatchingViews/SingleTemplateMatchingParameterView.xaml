@@ -1,0 +1,135 @@
+﻿<UserControl x:Class="TopVision.Views.ParameterViews.SingleTemplateMatchingParameterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TopVision.Views.ParameterViews"
+             xmlns:algths="clr-namespace:TopVision.Algorithms"
+             d:DataContext="{d:DesignInstance Type={x:Type algths:SingleTemplateMatchingParameter}}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TopVision;component/Generic.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <DockPanel Grid.IsSharedSizeScope="True">
+        <Label Content="{DynamicResource str_SingleTemplateMatchingParameter}"
+               DockPanel.Dock="Top"
+               Style="{StaticResource LabelParameterViewHeader}"/>
+        
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <Expander Header="Set Template Image"
+                          IsExpanded="True">
+
+                    <Expander.Resources>
+                        <Style TargetType="{x:Type Label}">
+                            <Style.Setters>
+                                <Setter Property="FontWeight"
+                                        Value="Bold"/>
+                                <Setter Property="HorizontalAlignment"
+                                        Value="Center"/>
+                                <Setter Property="VerticalAlignment"
+                                        Value="Center"/>
+                            </Style.Setters>
+                        </Style>
+                    </Expander.Resources>
+
+                    <StackPanel>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="X"
+                               Grid.Row="0"
+                               Grid.Column="0"/>
+                            <Label Content="Y"
+                               Grid.Row="0"
+                               Grid.Column="1"/>
+                            <Label Content="Width"
+                               Grid.Row="0"
+                               Grid.Column="2"/>
+                            <Label Content="Height"
+                               Grid.Row="0"
+                               Grid.Column="3"/>
+
+                            <TextBox Grid.Row="1"
+                                 Grid.Column="0"
+                                 Margin="5 0"
+                                 IsReadOnly="True"
+                                 Text="{Binding TemplateTechingRectangle.X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBox Grid.Row="1"
+                                 Grid.Column="1"
+                                 Margin="5 0"
+                                 IsReadOnly="True"
+                                 Text="{Binding TemplateTechingRectangle.Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBox Grid.Row="1"
+                                 Grid.Column="2"
+                                 Margin="5 0"
+                                 IsReadOnly="True"
+                                 Text="{Binding TemplateTechingRectangle.Width, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBox Grid.Row="1"
+                                 Grid.Column="3"
+                                 Margin="5 0"
+                                 IsReadOnly="True"
+                                 Text="{Binding TemplateTechingRectangle.Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                            <Button Grid.Row="0"
+                                Grid.Column="4"
+                                Command="{Binding SetTemplateImageCommand}"
+                                Content="Set template Image"
+                                Margin="5 2"/>
+
+                            <Button Grid.Row="1"
+                                Grid.Column="4"
+                                Command="{Binding DisplayTemplateImageCommand}"
+                                Content="Show template Image"
+                                Margin="5 2"/>
+                        </Grid>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <CheckBox Content="Use Masking"
+                                      Tag="Enable this to create ignored masking region"
+                                      FontSize="12"
+                                      FontWeight="SemiBold"
+                                      IsChecked="{Binding UseMasking}"/>
+
+                            <Button Visibility="{Binding UseMasking, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                    Grid.Column="1"
+                                    Command="{Binding CreateMaskingCommand}"
+                                    Content="Create Masking"
+                                    Margin="5 5"/>
+                        </Grid>
+                    </StackPanel>
+                </Expander>
+
+                <TextBox Text="{Binding Scale, UpdateSourceTrigger=PropertyChanged}"
+                         Tag="{DynamicResource str_Scale}"
+                         Style="{StaticResource TextBoxWithLeftDescriptionStyle}"/>
+
+                <local:VisionParameterBaseView DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
+                                               UseInputImageVisibility="Visible"
+                                               ThetaAdjustVisibility="Collapsed"
+                                               OffsetLimitVisibility="Visible"/>
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
+</UserControl>
