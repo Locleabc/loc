@@ -33,8 +33,8 @@ namespace LOC.Define
         {
             get
             {
-                return File.ReadAllText("BuiltInfo.txt");
-                //return "5.5.5.5";
+                //return File.ReadAllText("BuiltInfo.txt");
+                return "5.5.5.5";
             }
         }
     }

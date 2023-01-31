@@ -12,7 +12,7 @@ namespace LOC.Define
         {
             get
             {
-                return Cdef.CurrentRecipeFolder + @"\Vision\UNDER";
+                return CDef.CurrentRecipeFolder + @"\Vision\UNDER";
             }
         }
 

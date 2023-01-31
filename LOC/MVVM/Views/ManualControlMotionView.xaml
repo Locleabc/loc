@@ -1,0 +1,146 @@
+﻿<UserControl x:Class="LOC.MVVM.Views.ManualControlMotionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LOC.MVVM.Views"
+             xmlns:viewmodel="clr-namespace:LOC.MVVM.ViewModels"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=viewmodel:ManualControlMotionViewModel}">
+
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Label}"
+               x:Key="Label_header">
+
+            <Setter Property="VerticalContentAlignment"
+                    Value="Center"/>
+
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Center"/>
+
+            <Setter Property="BorderBrush"
+                    Value="Black"/>
+
+            <Setter Property="BorderThickness"
+                    Value="1"/>
+
+            <Setter Property="FontWeight"
+                    Value="SemiBold"/>
+
+            <Setter Property="Background"
+                    Value="#FFDDDDDD"/>
+
+            <Setter Property="FontSize"
+                    Value="16"/>
+        </Style>
+
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Width"
+                    Value="50"/>
+
+            <Setter Property="Height"
+                    Value="50"/>
+
+            <Setter Property="Cursor"
+                    Value="Hand"/>
+
+            <Setter Property="Foreground"
+                    Value="Black"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderThickness="1"
+                                Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background}"
+                                BorderBrush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}"
+                                RenderTransformOrigin="0.5,0.5"
+                                Name="ButtonBorder">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="1*"/>
+                                </Grid.RowDefinitions>
+
+                                <Border Grid.Row="0">
+                                    <Border.Background>
+                                        <LinearGradientBrush >
+                                            <GradientStop Color="#08C0C0C0"
+                                                          Offset="0"/>
+
+                                            <GradientStop Color="#88C0C0C0"
+                                                          Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                </Border>
+                                <Path Data="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Content}"
+                                      Fill="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}"
+                                      Stretch="Uniform"
+                                      Stroke="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}"
+                                      StrokeThickness="1"
+                                      Margin="10"
+                                      Grid.RowSpan="2"/>
+                            </Grid>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed"
+                                     Value="True">
+                                <Setter Property="RenderTransform"
+                                        TargetName="ButtonBorder">
+                                    <Setter.Value>
+                                        <TransformGroup>
+                                            <ScaleTransform ScaleX="0.99"
+                                                            ScaleY="0.99"/>
+                                        </TransformGroup>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled"
+                         Value="False">
+                    <Setter Property="Foreground"
+                            Value="#959DA5"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Semi Auto"
+               Style="{StaticResource Label_header}"/>
+
+        <Label Content="JOG"
+               Style="{StaticResource Label_header}"
+               Grid.Column="1"/>
+
+        <Label Content="TRAY X"
+               Style="{StaticResource Label_header}"
+               Grid.Column="2"/>
+
+        <Label Content="HEAD XX-Y"
+               Style="{StaticResource Label_header}"
+               Grid.Column="3"/>
+
+        <Label Content="CYLINDERS"
+               Style="{StaticResource Label_header}"
+               Grid.Column="4"/>
+        
+        
+    </Grid>
+</UserControl>

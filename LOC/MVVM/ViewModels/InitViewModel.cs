@@ -125,7 +125,7 @@ namespace LOC.MVVM.ViewModels
 
                 if (string.IsNullOrEmpty(InitReturnMessage) == false)
                 {
-                    Cdef.messageViewModel.Show(InitReturnMessage + "\nCheck Log for more infomation!",
+                    CDef.messageViewModel.Show(InitReturnMessage + "\nCheck Log for more infomation!",
                                                isAlarm: true,
                                                caption: "ERROR");
                 }
@@ -134,7 +134,7 @@ namespace LOC.MVVM.ViewModels
                     TopCom.LOG.UILog.Info("Machine turned on successed");
                 }
 
-                Cdef.mainViewModel.SwitchToMainTabControl();// cần test
+                CDef.mainViewModel.SwitchToMainTabControl();// cần test
             });
 
             initTask.Start();

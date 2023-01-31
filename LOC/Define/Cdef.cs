@@ -10,11 +10,12 @@ using System.Threading.Tasks;
 using System.Xml;
 using TopCom;
 using TopCom.Models;
+using TopMotion.IO;
 using Formatting = Newtonsoft.Json.Formatting;
 
 namespace LOC.Define
 {
-    public class Cdef
+    public class CDef
     {
         public const string RecipeInfoFile = "recipe.json";
 
@@ -24,6 +25,22 @@ namespace LOC.Define
 
         public static MainView mainView= new MainView();
         public static MainViewModel mainViewModel = new MainViewModel();
+
+        public static CIO IO { get; set; } = new CIO();
+        public static IIOBoard IO_X { get; set; } = new IOBoardPlusR("XAxis IO", 1, 0);
+        public static IIOBoard IO_Y { get; set; } = new IOBoardPlusR("YAxis IO", 1, 1);
+        public static IIOBoard IO_XX { get; set; } = new IOBoardPlusR("XXAxis IO", 1, 2);
+
+        public static IIOInput In_DIO3 { get; set; } = new IOInputDIOPlusR("DIO3 Input", 1, 5);
+        /// <summary>
+        /// Using same COM1 PORT -> no need to Connect
+        /// </summary>
+        public static IIOOutput Out_DIO4 { get; set; } = new IOOutputDIOPlusR("DIO4 Output", 1, 6);
+
+        /// <summary>
+        /// Tester Turn Axis COM2 PORT -> NEED to Connect on Motion Init
+        /// </summary>
+        public static IIOBoard IO_Tester { get; set; } = new IOBoardPlusR("Tester IO", 2, 0, new List<int> { 7, 8 });
 
 
         public static string CurrentRecipeFolder

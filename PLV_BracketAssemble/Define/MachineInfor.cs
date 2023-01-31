@@ -46,7 +46,8 @@ namespace PLV_BracketAssemble.Define
         {
             get
             {
-                return File.ReadAllText("BuiltInfo.txt");
+                //return File.ReadAllText("BuiltInfo.txt");
+                return "0.0.0.0";
             }
         }
     }

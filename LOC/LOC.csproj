@@ -64,7 +64,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Define\Cdef.cs" />
+    <Compile Include="Define\CDef.cs" />
+    <Compile Include="Define\CHeadStatus.cs" />
+    <Compile Include="Define\CInput.cs" />
+    <Compile Include="Define\CIO.cs" />
+    <Compile Include="Define\COutput.cs" />
     <Compile Include="Define\LocalFolders.cs" />
     <Compile Include="Define\MachineInfo.cs" />
     <Compile Include="MVVM\ViewModels\AutoViewModel.cs" />
@@ -73,6 +77,7 @@
     <Compile Include="MVVM\ViewModels\InitViewModel.cs" />
     <Compile Include="MVVM\ViewModels\MainTabControlViewModel.cs" />
     <Compile Include="MVVM\ViewModels\MainViewModel.cs" />
+    <Compile Include="MVVM\ViewModels\ManualControlMotionViewModel.cs" />
     <Compile Include="MVVM\ViewModels\ManualViewModel.cs" />
     <Compile Include="MVVM\ViewModels\MessageViewModel.cs" />
     <Compile Include="MVVM\ViewModels\RecipeViewModel.cs" />
@@ -98,6 +103,9 @@
     </Compile>
     <Compile Include="MVVM\Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\ManualControlMotionView.xaml.cs">
+      <DependentUpon>ManualControlMotionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\Views\ManualView.xaml.cs">
       <DependentUpon>ManualView.xaml</DependentUpon>
@@ -175,6 +183,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MVVM\Views\ManualControlMotionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\Views\ManualView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -219,6 +231,10 @@
     <ProjectReference Include="..\TopCommon\TopCom.csproj">
       <Project>{6D8355D2-D6C9-476E-8288-6F5E5F6D83C5}</Project>
       <Name>TopCom</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TopMotion\TopMotion.csproj">
+      <Project>{94E7157C-D050-44FC-96EE-C114D7524594}</Project>
+      <Name>TopMotion</Name>
     </ProjectReference>
     <ProjectReference Include="..\TopUI\TopUI.csproj">
       <Project>{4766859d-f0d0-417e-acb3-ba0e2cda4246}</Project>

@@ -30,11 +30,11 @@ namespace LOC
             string AssociatedFilePath = CheckAssociatedFile(e);
             PreventMultipleApplicationLaunch();
 
-            Cdef.mainView.DataContext = Cdef.mainViewModel;
-            Cdef.mainView.Show();
+            CDef.mainView.DataContext = CDef.mainViewModel;
+            CDef.mainView.Show();
 
-            Cdef.massageView.DataContext = Cdef.messageViewModel;
-            Cdef.massageView.Show();
+            CDef.massageView.DataContext = CDef.messageViewModel;
+            CDef.massageView.Show();
         }
         private string CheckAssociatedFile(StartupEventArgs e)
         {

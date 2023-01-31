@@ -21,14 +21,14 @@ namespace LOC.MVVM.ViewModels
             {
                 return new RelayCommand((o) =>
                 {
-                    Cdef.messageViewModel.ShowDialog((string)Application.Current.FindResource("str_PushExitButton"));
+                    CDef.messageViewModel.ShowDialog((string)Application.Current.FindResource("str_PushExitButton"));
 
-                    if (Cdef.messageViewModel.Result == false)
+                    if (CDef.messageViewModel.Result == false)
                     {
                         return;
                     }
 
-                    Cdef.mainViewModel.SwitchToTerminate();
+                    CDef.mainViewModel.SwitchToTerminate();
                 });
             }
         }

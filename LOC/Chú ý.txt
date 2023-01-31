@@ -10,5 +10,6 @@ Những Phần chưa hiểu cần test thì sẽ chú thích là "cần test"
 ------------------------------Đã thiết kế xong TerminateView. Chưa hiểu -----------------------------
 ------------------------------Chưa thiết kế xong MainTabControl. Chưa hiểu -----------------------------
 ------------------------------Chưa thiết kế xong InitViewModel. Cần đọc lại -----------------------------
+------------------------------Chưa thiết kế xong AutoView.-----------------------------
 ------------------------------Chưa thiết kế xong TrayView. Cần đọc lại nhiều, Chưa hiểu phần OnOffButton -----------------------------
 Tại sao không thay "Binding Path=DataContext.Tray.RowCount, ElementName=Root"              bằng           "Binding Tray.RowCount"

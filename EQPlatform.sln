@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.4.33205.214
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TopCom", "TopCommon\TopCom.csproj", "{6D8355D2-D6C9-476E-8288-6F5E5F6D83C5}"
 EndProject
@@ -18,8 +18,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VCM_PickAndPlace", "VCM_PickAndPlace\VCM_PickAndPlace.csproj", "{26359E86-1AA6-45F1-A925-BC468D5DA25B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisionToolBox", "VisionToolBox\VisionToolBox.csproj", "{3983C77C-82AE-43B1-B99C-2E19012DFFF5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTestApp", "ConsoleTestApp\ConsoleTestApp.csproj", "{2EF31BBF-C0A5-402F-AB21-1971C1C8AD9C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PLV_BracketAssemble", "PLV_BracketAssemble\PLV_BracketAssemble.csproj", "{67FFD5E3-7BF7-4B92-A063-6757CC01EA9C}"
 EndProject
@@ -182,24 +180,6 @@ Global
 		{3983C77C-82AE-43B1-B99C-2E19012DFFF5}.Simulation|x64.Build.0 = Simulation|x64
 		{3983C77C-82AE-43B1-B99C-2E19012DFFF5}.Simulation|x86.ActiveCfg = Simulation|x86
 		{3983C77C-82AE-43B1-B99C-2E19012DFFF5}.Simulation|x86.Build.0 = Simulation|x86
-		{2EF31BBF-C0A5-402F-AB21-1971C1C8AD9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2EF31BBF-C0A5-402F-AB21-1971C1C8AD9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2EF31BBF-C0A5-402F-AB21-1971C1C8AD9C}.Debug|x64.ActiveCfg = Debug|x64
-		{2EF31BBF-C0A5-402F-AB21-1971C1C8AD9C}.Debug|x64.Build.0 = Debug|x64
-		{2EF31BBF-C0A5-402F-AB21-1971C1C8AD9C}.Debug|x86.ActiveCfg = Debug|x86
-		{2EF31BBF-C0A5-402F-AB21-1971C1C8AD9C}.Debug|x86.Build.0 = Debug|x86
-		{2EF31BBF-C0A5-402F-AB21-1971C1C8AD9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2EF31BBF-C0A5-402F-AB21-1971C1C8AD9C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2EF31BBF-C0A5-402F-AB21-1971C1C8AD9C}.Release|x64.ActiveCfg = Release|x64
-		{2EF31BBF-C0A5-402F-AB21-1971C1C8AD9C}.Release|x64.Build.0 = Release|x64
-		{2EF31BBF-C0A5-402F-AB21-1971C1C8AD9C}.Release|x86.ActiveCfg = Release|x86
-		{2EF31BBF-C0A5-402F-AB21-1971C1C8AD9C}.Release|x86.Build.0 = Release|x86
-		{2EF31BBF-C0A5-402F-AB21-1971C1C8AD9C}.Simulation|Any CPU.ActiveCfg = Debug|Any CPU
-		{2EF31BBF-C0A5-402F-AB21-1971C1C8AD9C}.Simulation|Any CPU.Build.0 = Debug|Any CPU
-		{2EF31BBF-C0A5-402F-AB21-1971C1C8AD9C}.Simulation|x64.ActiveCfg = Debug|x64
-		{2EF31BBF-C0A5-402F-AB21-1971C1C8AD9C}.Simulation|x64.Build.0 = Debug|x64
-		{2EF31BBF-C0A5-402F-AB21-1971C1C8AD9C}.Simulation|x86.ActiveCfg = Release|x86
-		{2EF31BBF-C0A5-402F-AB21-1971C1C8AD9C}.Simulation|x86.Build.0 = Release|x86
 		{67FFD5E3-7BF7-4B92-A063-6757CC01EA9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{67FFD5E3-7BF7-4B92-A063-6757CC01EA9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67FFD5E3-7BF7-4B92-A063-6757CC01EA9C}.Debug|x64.ActiveCfg = Debug|x64
