@@ -119,7 +119,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="0.2*"/>
-            <RowDefinition/>
+            <RowDefinition Height="0.8*"/>
         </Grid.RowDefinitions>
 
         <Label Content="Semi Auto"
@@ -140,7 +140,38 @@
         <Label Content="CYLINDERS"
                Style="{StaticResource Label_header}"
                Grid.Column="4"/>
-        
+        <Grid Grid.Row="1">
+            <Border BorderBrush="Black">
+                <UniformGrid Rows="4">
+                    <Button Content="PICK"
+                            Margin="20"
+                            Command="{Binding}"
+                            Style="{DynamicResource ButtonGlassStyle}"/>
+
+                    <Button Content="PRE ALIGN"
+                            Margin="20"
+                            Command="{Binding}"
+                            Style="{DynamicResource ButtonGlassStyle}"/>
+
+                    <Button Content="UNDER VISION"
+                            Margin="20"
+                            Command="{Binding}"
+                            Style="{DynamicResource ButtonGlassStyle}"/>
+
+                    <Button Content="PLACE"
+                            Margin="20"
+                            Command="{Binding}"
+                            Style="{DynamicResource ButtonGlassStyle}"/>
+                </UniformGrid>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Column="1"
+              Grid.Row="1">
+            <Border BorderBrush="Black">
+                
+            </Border>
+        </Grid>
         
     </Grid>
 </UserControl>

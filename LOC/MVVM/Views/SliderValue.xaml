@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="LOC.MVVM.Views.SliderValue"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LOC.MVVM.Views"
+             mc:Ignorable="d" 
+             Name="Root"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Style TargetType="Label">
+            <Setter Property="HorizontalAlignment"
+                    Value="Center"/>
+            <Setter Property="VerticalAlignment"
+                    Value="Center"/>
+            <Setter Property="Width"
+                    Value="50"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="{Binding ElementName=Root, Path= Header}"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Slider Minimum="{Binding ElementName=Root, Path=MinValue}"
+                    Maximum="{Binding ElementName=Root, Path=MaxValue}"
+                    Value="{Binding ElementName=Root, Path= Value}"
+                    Orientation="Vertical"
+                    HorizontalAlignment="Center"
+                    Name="Slider"/>
+
+            <Grid Grid.Column="1">
+                <UniformGrid Columns="1">
+                    <Label Content="100 %"
+                           Background="White"/>
+                    <Label Content="75 %"
+                           Background="White"/>
+                    <Label Content="50 %"
+                           Background="White"/>
+                    <Label Content="25 %"
+                           Background="White"/>
+                    <Label Content="0 %"
+                           Background="White"/>
+                </UniformGrid>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Content="{Binding ElementName= Slider, Path=Value}"/>
+            <Label/>
+        </Grid>
+    </Grid>
+</UserControl>
