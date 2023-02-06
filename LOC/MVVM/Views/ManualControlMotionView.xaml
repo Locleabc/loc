@@ -168,9 +168,23 @@
 
         <Grid Grid.Column="1"
               Grid.Row="1">
-            <Border BorderBrush="Black">
-                
-            </Border>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+                <Border BorderBrush="Black">
+                    <local:SliderValue  Header="Speed"
+                                        Unit="%"/>
+                </Border>
+            <StackPanel Orientation="Vertical"
+                        VerticalAlignment="Bottom"
+                        Grid.Column="1">
+                <Button Content="{Binding ContentBT}"
+                        Style="{DynamicResource ButtonGlassStyle}"
+                        Command="{Binding BTCommand}"
+                        />
+                <TextBox Text="hâha"/>
+            </StackPanel>
         </Grid>
         
     </Grid>

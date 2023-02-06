@@ -29,6 +29,14 @@
                 <views:AutoView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewModels:RecipeViewModel}">
+                <views:RecipeView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:ManualControlMotionViewModel}">
+                <views:ManualControlMotionView/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewModels:InitViewModel}">
                 <views:InitView/>
             </DataTemplate>

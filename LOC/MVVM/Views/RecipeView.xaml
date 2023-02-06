@@ -20,7 +20,10 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        
-        
+
+        <local:ManualControlMotionView Grid.Row="1"
+                                       Grid.ColumnSpan="4"
+                                       Content="{Binding ManualControlMotionVM}"/>
+
     </Grid>
 </UserControl>

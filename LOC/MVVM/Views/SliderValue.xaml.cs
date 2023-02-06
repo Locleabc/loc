@@ -55,6 +55,36 @@ namespace LOC.MVVM.Views
             set { SetValue(ValueProperty, value); }
         }
         public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register(nameof(Value), typeof(int), typeof(SliderValue), new PropertyMetadata(10));
+            DependencyProperty.Register(nameof(Value), typeof(string), typeof(SliderValue), new PropertyMetadata("10"));
+
+        public string Unit
+        {
+            get { return (string)GetValue(UnitProperty); }
+            set { SetValue(UnitProperty, value); }
+        }
+        public static readonly DependencyProperty UnitProperty =
+            DependencyProperty.Register(nameof(Unit), typeof(string), typeof(SliderValue), new PropertyMetadata(""));
+
+        private void Label_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            switch((sender as Label).Name)
+            {
+                case "lb0":
+                    Value = "0";
+                    break;
+                case "lb25":
+                    Value = "25";
+                    break;
+                case "lb50":
+                    Value = "50";
+                    break;
+                case "lb75":
+                    Value = "75";
+                    break;
+                case "lb100":
+                    Value = "100";
+                    break;
+            }
+        }
     }
 }

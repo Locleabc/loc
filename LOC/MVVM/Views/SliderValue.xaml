@@ -16,13 +16,26 @@
             <Setter Property="Width"
                     Value="50"/>
         </Style>
+        <Style TargetType="Border">
+            <Setter Property="BorderThickness"
+                    Value="1"/>
+            <Setter Property="Background"
+                    Value="Transparent"/>
+            <Setter Property="BorderBrush"
+                    Value="Black"/>
+        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="0.1*"/>
             <RowDefinition/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="0.1*"/>
         </Grid.RowDefinitions>
+
+        <Border Margin="0 1 0 -1"/>
+        <Border Grid.Row="1"/>
+        <Border Grid.Row="2"
+                Margin="0 -1 0 1"/>
 
         <Label Content="{Binding ElementName=Root, Path= Header}"/>
 
@@ -37,21 +50,63 @@
                     Value="{Binding ElementName=Root, Path= Value}"
                     Orientation="Vertical"
                     HorizontalAlignment="Center"
-                    Name="Slider"/>
+                    IsSnapToTickEnabled="True"
+                    Name="Slider"
+                    Margin="0 20"/>
 
             <Grid Grid.Column="1">
-                <UniformGrid Columns="1">
-                    <Label Content="100 %"
-                           Background="White"/>
-                    <Label Content="75 %"
-                           Background="White"/>
-                    <Label Content="50 %"
-                           Background="White"/>
-                    <Label Content="25 %"
-                           Background="White"/>
-                    <Label Content="0 %"
-                           Background="White"/>
-                </UniformGrid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label  Content="100 %"
+                        Name="lb100"
+                        Grid.Row="0"
+                        HorizontalAlignment="Left"
+                        Background="White"
+                        BorderBrush="Black"
+                        BorderThickness="1"
+                        Cursor="Hand" 
+                        MouseLeftButtonDown="Label_MouseLeftButtonDown"/>
+                <Label  Content="75 %"
+                        Name="lb75"
+                        Grid.Row="1"
+                        HorizontalAlignment="Left"
+                        Background="White"
+                        BorderBrush="Black"
+                        BorderThickness="1"
+                        Cursor="Hand" 
+                        MouseLeftButtonDown="Label_MouseLeftButtonDown"/>
+                <Label  Content="50 %"
+                        Name="lb50"
+                        Grid.Row="2"
+                        HorizontalAlignment="Left"
+                        Background="White"
+                        BorderBrush="Black"
+                        BorderThickness="1"
+                        Cursor="Hand" 
+                        MouseLeftButtonDown="Label_MouseLeftButtonDown"/>
+                <Label  Content="25 %"
+                        Name="lb25"
+                        Grid.Row="3"
+                        HorizontalAlignment="Left"
+                        Background="White"
+                        BorderBrush="Black"
+                        BorderThickness="1"
+                        Cursor="Hand" 
+                        MouseLeftButtonDown="Label_MouseLeftButtonDown"/>
+                <Label  Content="0 %"
+                        Name="lb0"
+                        Grid.Row="4"
+                        HorizontalAlignment="Left"
+                        Background="White"
+                        BorderBrush="Black"
+                        BorderThickness="1"
+                        Cursor="Hand" 
+                        MouseLeftButtonDown="Label_MouseLeftButtonDown"/>
             </Grid>
         </Grid>
 
@@ -60,8 +115,12 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Label Content="{Binding ElementName= Slider, Path=Value}"/>
-            <Label/>
+            <Label Content="{Binding ElementName= Slider, Path=Value}"
+                   HorizontalAlignment="Right"
+                   HorizontalContentAlignment="Right"/>
+            <Label Grid.Column="1"
+                   Content="{Binding ElementName=Root, Path= Unit}"
+                   HorizontalAlignment="Left"/>
         </Grid>
     </Grid>
 </UserControl>
