@@ -84,6 +84,11 @@ namespace PLV_BracketAssemble.MVVM.Views
         {
             if (!(this.DataContext as ManualControlMotionViewModel).IsModeJogControl) return;
 
+            if (!CDef.AllAxis.XAxis.Status.IsMotionDone || !CDef.AllAxis.XXAxis.Status.IsMotionDone || !CDef.AllAxis.YAxis.Status.IsMotionDone)
+            {
+                return;
+            }
+
             switch ((sender as Button).Name)
             {
                 case "XAxis_Left":

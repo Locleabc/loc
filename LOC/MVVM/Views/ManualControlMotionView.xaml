@@ -179,11 +179,12 @@
             <StackPanel Orientation="Vertical"
                         VerticalAlignment="Bottom"
                         Grid.Column="1">
-                <Button Content="{Binding ContentBT}"
+                <Button Content="{Binding ModeToString}"
                         Style="{DynamicResource ButtonGlassStyle}"
-                        Command="{Binding BTCommand}"
+                        Command="{Binding ChangeModeControl}"
                         />
-                <TextBox Text="hâha"/>
+                <TextBox Text="{Binding INCPosition}"
+                         IsEnabled="{Binding IsModeJogControl}"/>
             </StackPanel>
         </Grid>
         

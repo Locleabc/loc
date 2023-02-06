@@ -265,12 +265,6 @@ namespace PLV_BracketAssemble.MVVM.ViewModels
             {
                 return new RelayCommand((o) =>
                 {
-                    if (IsModeJogControl) return;
-                    
-                    //If Motion is moving => return
-                    if (!X_Axis.Status.IsMotionDone || !XX_Axis.Status.IsMotionDone || !Y_Axis.Status.IsMotionDone) return;
-                    
-                    //Check Picker Status
                     if (!PickerCylinder1.IsBackward && !PickerCylinder2.IsBackward)
                     {
                         CDef.MessageViewModel.Show("Please Both Piker Cylinder Up", caption: "Warning");
@@ -287,6 +281,14 @@ namespace PLV_BracketAssemble.MVVM.ViewModels
                         CDef.MessageViewModel.Show("Please Picker 2 Up", caption: "Warning");
                         return;
                     }
+
+                    if (IsModeJogControl) return;
+                    
+                    //If Motion is moving => return
+                    if (!X_Axis.Status.IsMotionDone || !XX_Axis.Status.IsMotionDone || !Y_Axis.Status.IsMotionDone) return;
+                    
+                    //Check Picker Status
+                    
 
                     switch ((string)o)
                     {
